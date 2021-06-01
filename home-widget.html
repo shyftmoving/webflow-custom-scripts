@@ -1,0 +1,653 @@
+<style>
+      .home-widget__inner-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
+        margin: 0 auto;
+      }
+      .home-widget__inner-wrapper input,
+      .home-widget__inner-wrapper input:focus {
+        border: none;
+        outline: none;
+        display: block;
+        font-weight: 500;
+      }
+      .home-widget__moving--title {
+        margin-bottom: 6px;
+        display: inline-block;
+        font-weight: 700;
+      }
+      .home-widget__moving-go--button {
+        height: 45px;
+        width: 45px;
+        background-color: #ff005c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .home-widget__moving-go--button-complete {
+        background-color: #1be07f;
+      }
+      .home-widget__moving-go--button img {
+        width: 18px;
+        height: 15px;
+      }
+      .home-widget__moving-icon--title {
+        width: 14px;
+        height: 14px;
+        margin-right: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        position: relative;
+        top: 1px;
+      }
+      .home-widget__moving-icon--move {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
+      }
+      .home-widget__moving-icon--date {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f702efef3a9145320d_Calendar-icon.svg');
+      }
+      .home-widget__moving-icon--size {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f74b6b2e27b3d526c7_Home-icon.svg');
+      }
+      .home-widget__moving-from--wrapper,
+      .home-widget__moving-to--wrapper,
+      .home-widget__moving-date--wrapper {
+        border-right: 1px solid #abb7e1;
+      }
+      .home-widget__inner-items {
+        margin: 0 auto;
+        width: fit-content;
+        position: relative;
+      }
+      .home-widget__moving-date--modal,
+      .home-widget__moving-size--modal {
+        background-color: #fff;
+        min-height: 400px;
+        position: absolute;
+        top: 80px;
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .home-widget__moving-size--modal {
+        width: 560px;
+        right: 8px;
+        z-index: 3;
+      }
+      .home-widget__moving-date--modal-inner {
+        display: flex;
+        justify-content: center;
+      }
+      .home-widget__modal-btn {
+        background-color: #ff005c;
+        border-radius: 20px;
+        padding: 16px 32px;
+        color: #fff;
+        text-align: center;
+        margin-top: 32px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .home-widget__modal-btn:hover {
+        background-color: #bd0045;
+      }
+      .home-widget__checkbox-wrapper {
+        width: 100%;
+        margin-top: 32px;
+        display: flex;
+        justify-content: center;
+      }
+      .vc-container {
+        border: none !important;
+      }
+      .vc-highlight {
+        background-color: #0e30a5 !important;
+      }
+      .vc-day-content:focus {
+        background-color: #0e30a5 !important;
+      }
+      .home-widget__radio-wrapper {
+        display: flex;
+      }
+      .home-widget__radio-wrapper .b-contain {
+        margin-right: 32px;
+      }
+      input.modal__moving-vehicle,
+      input.modal__moving-vehicle:focus {
+        border: 1px solid #d8d8d8;
+        border-radius: 6px;
+        background-color: #f9f9f9;
+        margin-bottom: 24px;
+        line-height: 1.4;
+        height: 32px;
+        padding: 4px 12px;
+      }
+      /* Checkbox and radio */
+      .b-contain *,
+      .b-contain *::before,
+      .b-contain *::after {
+        box-sizing: content-box !important;
+      }
+
+      .b-contain input {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+      }
+
+      .b-contain span {
+        line-height: 1.54;
+        font-size: 1rem;
+        font-family: inherit;
+      }
+
+      .b-contain {
+        display: table;
+        position: relative;
+        padding-left: 2rem;
+        cursor: pointer;
+        margin-bottom: 1.2rem;
+      }
+
+      .b-contain input[type='checkbox'] ~ .b-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.5rem;
+        width: 1.5rem;
+        background: rgba(241, 245, 248, 1);
+        transition: background 250ms;
+        border: none;
+        border-radius: 0.125rem;
+      }
+
+      .b-contain input[type='radio'] ~ .b-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.5rem;
+        width: 1.5rem;
+        background: rgba(241, 245, 248, 1);
+        transition: background 250ms;
+        border: none;
+        border-radius: 2rem;
+      }
+
+      .b-contain input[type='checkbox'] ~ .b-input::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 0.6rem;
+        top: 0.2rem;
+        width: 0.25rem;
+        height: 0.6rem;
+        border: solid rgba(255, 255, 255, 1);
+        border-width: 0 4px 4px 0;
+        transition: background 250ms;
+        transform: rotate(45deg);
+      }
+
+      .b-contain input[type='radio'] ~ .b-input::after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 0.5rem;
+        top: 0.51rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 2rem;
+        background: rgba(255, 255, 255, 1);
+        transition: background 250ms;
+      }
+
+      .b-contain input:disabled ~ .b-input::after {
+        border-color: rgba(135, 149, 161, 1);
+      }
+
+      .b-contain input:checked ~ .b-input::after {
+        display: block;
+      }
+
+      .b-contain:hover input ~ .b-input,
+      .b-contain input:focus ~ .b-input {
+        background: rgb(231, 238, 243);
+      }
+
+      .b-contain input:focus ~ .b-input {
+        box-shadow: 0 0 0 2px rgba(52, 144, 220, 0.5);
+      }
+
+      .b-contain input:checked ~ .b-input {
+        background: rgba(14, 48, 165, 1);
+        border-color: rgba(0, 130, 243, 1);
+      }
+
+      .b-contain input[type='checkbox']:disabled ~ .b-input {
+        background: rgba(241, 245, 248, 1);
+        border-color: rgba(184, 194, 204, 1);
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .b-contain input[type='radio']:disabled ~ .b-input {
+        background: rgba(241, 245, 248, 1);
+        border-color: rgba(184, 194, 204, 1);
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .b-contain input[type='radio']:disabled ~ .b-input::after {
+        background: rgba(135, 149, 161, 1);
+      }
+
+      .b-contain input:checked:focus ~ .b-input,
+      .b-contain:hover input:not([disabled]):checked ~ .b-input {
+        background: rgba(14, 48, 165, 1);
+        border-color: rgba(82, 110, 255, 1);
+      }
+
+      .b-contain .b-input::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 3rem;
+        height: 3rem;
+        margin-left: -0.85rem;
+        margin-top: -0.85rem;
+        background: rgba(0, 130, 243, 1);
+        border-radius: 2rem;
+        opacity: 0.6;
+        z-index: 99999;
+        transform: scale(0);
+      }
+
+      @keyframes b-ripple {
+        0% {
+          transform: scale(0);
+        }
+
+        20% {
+          transform: scale(1);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes b-ripple-duplicate {
+        0% {
+          transform: scale(0);
+        }
+
+        30% {
+          transform: scale(1);
+        }
+
+        60% {
+          transform: scale(1);
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1);
+        }
+      }
+
+      .b-contain input + .b-input::before {
+        animation: b-ripple 250ms ease-out;
+      }
+
+      .b-contain input:checked + .b-input::before {
+        animation-name: b-ripple-duplicate;
+      }
+
+      .b-contain .b-input::before {
+        visibility: hidden;
+      }
+
+      .b-contain input:focus + .b-input::before {
+        visibility: visible;
+      }
+
+      .b-contain:first-child .b-input::before {
+        visibility: hidden;
+      }
+      /* radio as text */
+      .move-size__selector--wrapper {
+        list-style-type: none;
+        margin: 0 0 26px 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .move-size__selector--wrapper li {
+        margin: 0 16px 12px 0;
+        width: 150px;
+        height: 40px;
+        position: relative;
+      }
+
+      .move-size__selector--wrapper label,
+      .move-size__selector--wrapper input {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      .move-size__selector--wrapper input[type='radio'] {
+        opacity: 0.01;
+        z-index: 100;
+      }
+
+      .move-size__selector--wrapper input[type='radio']:checked + label,
+      .Checked + label {
+        background: #0e30a5;
+        color: #fff;
+      }
+
+      .move-size__selector--wrapper label {
+        border: 1px solid #ccc;
+        cursor: pointer;
+        z-index: 2;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .move-size__selector--wrapper label:hover {
+        background: #eaedff;
+      }
+      .home-widget__moving-size--modal h5 {
+        margin: 10px 0 10px 16px;
+        color: rgba(135, 149, 161, 1);
+        font-weight: 500;
+      }
+      .modal-required__text {
+        color:rgba(135, 149, 161, .6)
+      }
+    </style>
+
+<div id="home-widget" class="home-widget__inner-wrapper">
+      <div class="home-widget__moving-from--wrapper">
+        <div class="home-widget__inner-items">
+          <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
+          <div class="home-widget__moving--title">Moving from</div>
+          <input
+            v-model="movingFrom"
+            @input="dataComplete"
+            type="text"
+            name="moving-from"
+            id="moving-from"
+            placeholder="Please select"
+            ref="origin"
+          />
+        </div>
+      </div>
+      <div class="home-widget__moving-to--wrapper">
+        <div class="home-widget__inner-items">
+          <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
+          <div class="home-widget__moving--title">Moving to</div>
+          <input
+            v-model="movingTo"
+            @input="dataComplete"
+            type="text"
+            name="moving-to"
+            id="moving-to"
+            placeholder="Please select"
+            ref="destination"
+          />
+        </div>
+      </div>
+      <div class="home-widget__moving-date--wrapper">
+        <div class="home-widget__inner-items">
+          <div class="home-widget__moving-icon--title home-widget__moving-icon--date"></div>
+          <div class="home-widget__moving--title">Moving date</div>
+          <input
+            v-model="movingDate"
+            @click="showDateModal = !showDateModal"
+            type="text"
+            name="moving-date"
+            id="moving-date"
+            placeholder="Select Date"
+            readonly
+          />
+        </div>
+        <!-- Modal -->
+        <div v-if="showDateModal" class="home-widget__moving-date--modal">
+          <div class="home-widget__moving-date--modal-inner">
+            <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" />
+          </div>
+          <div class="home-widget__checkbox-wrapper">
+            <label class="b-contain">
+              <span>I'm flexibile</span>
+              <input @click="movingDateFlexible = !movingDateFlexible" type="checkbox" />
+              <div class="b-input"></div>
+            </label>
+          </div>
+          <div @click="endDateModal" class="home-widget__modal-btn">OK</div>
+        </div>
+        <!-- Modal END-->
+      </div>
+      <div class="home-widget__moving-size--wrapper">
+        <div class="home-widget__inner-items">
+          <div class="home-widget__moving-icon--title home-widget__moving-icon--size"></div>
+          <div class="home-widget__moving--title">Move size</div>
+          <input
+            v-model="movingSize.moveObjects"
+            @click="showSizeModal = !showSizeModal"
+            type="text"
+            name="moving-size"
+            id="moving-size"
+            placeholder="Please select"
+            readonly
+          />
+        </div>
+        <!-- Modal -->
+        <div v-if="showSizeModal" class="home-widget__moving-size--modal">
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <div class="home-widget__radio-wrapper">
+            <label class="b-contain">
+              <span>Apartment</span>
+              <input type="radio" name="moveType" value="Apartment" v-model="movingSize.moveType" />
+              <div class="b-input"></div>
+            </label>
+            <label class="b-contain">
+              <span>House</span>
+              <input type="radio" name="moveType" value="House" v-model="movingSize.moveType" />
+              <div class="b-input"></div>
+            </label>
+          </div>
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="boxes"
+                name="move-size__selector"
+                value="Just a few boxes"
+              />
+              <label for="boxes">Just a few boxes</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="studio"
+                name="move-size__selector"
+                value="Studio"
+              />
+              <label for="studio">Studio</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="1bedroom"
+                name="move-size__selector"
+                value="1 bedroom"
+              />
+              <label for="1bedroom">1 bedroom</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="2bedroom"
+                name="move-size__selector"
+                value="2 bedrooms"
+              />
+              <label for="2bedroom">2 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="3bedroom"
+                name="move-size__selector"
+                value="3 bedrooms"
+              />
+              <label for="3bedroom">3 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="4bedroom"
+                name="move-size__selector"
+                value="4+ bedrooms"
+              />
+              <label for="4bedroom">4+ bedrooms</label>
+            </li>
+          </ul>
+          <label class="b-contain">
+            <span>I’m moving my vehicle</span>
+            <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <input
+            v-if="movingVehicle"
+            v-model="movingSize.moveVehicle"
+            type="text"
+            class="modal__moving-vehicle"
+            placeholder="Make, model, year"
+          />
+          <label class="b-contain">
+            <span>I’m moving with my pets</span>
+            <input v-model="movingSize.movePets" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need storage</span>
+            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
+        </div>
+        <!-- Modal END-->
+      </div>
+      <div class="home-widget__moving-go--wrapper">
+        <div
+          @click="goToQuote"
+          class="home-widget__moving-go--button"
+          :class="{'home-widget__moving-go--button-complete': completed}"
+        >
+          <img
+            src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
+            alt="white arrow right"
+          />
+        </div>
+      </div>
+    </div>
+
+<!-- --------------- Google Maps------------------------- -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmXPM19Ep9PXLuA9f7-XbVJEwMMrVsWqQ&libraries=places"></script>
+<!-- --------------- Vue dev distributiuon------------------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/v-calendar"></script>
+    <!-- --------------- Vue code------------------------- -->
+    <script>
+      var app = new Vue({
+        el: '#home-widget',
+        components: {},
+        data: {
+          completed: false,
+          movingFrom: '',
+          movingTo: '',
+          movingDate: null,
+          movingDateFlexible: false,
+          movingSize: {
+            moveType: '',
+            moveObjects: '',
+            moveVehicle: '',
+            movePets: false,
+            moveStorage: false
+          },
+          showDateModal: false,
+          showSizeModal: false,
+          movingVehicle: false,
+          modelConfig: {
+            type: 'string',
+            mask: 'MM/DD/YYYY'
+          }
+        },
+        methods: {
+          goToQuote: function () {
+            if (this.completed) {
+              localStorage.movingFrom = this.movingFrom
+              localStorage.movingTo = this.movingTo
+              localStorage.movingDate = this.movingDate
+              localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
+              localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
+              window.location.href = '/get-quote'
+            }
+          },
+          dataComplete: function () {
+            if (
+              this.movingFrom &&
+              this.movingTo &&
+              this.movingDate &&
+              this.movingSize.moveType &&
+              this.movingSize.moveObjects
+            ) {
+              return (this.completed = true)
+            }
+          },
+          endDateModal: function () {
+            this.showDateModal = false
+            this.dataComplete()
+          },
+          endSizeModal: function () {
+            this.showSizeModal = false
+            this.dataComplete()
+          }
+        },
+        mounted() {
+          for (let ref in this.$refs) {
+            const autocomplete = new google.maps.places.Autocomplete(this.$refs[ref], {
+              fields: ['formatted_address']
+            });
+            autocomplete.addListener("place_changed", () => {
+              const place = autocomplete.getPlace();
+              this.$refs[ref].value = place.formatted_address;
+              console.log(this.$refs[ref]);
+            })
+          }
+        }
+      })
+    </script>
