@@ -39,6 +39,7 @@
         border-radius: 20px;
         margin: 16px;
         padding: 12px;
+        cursor: pointer;
       }
       .questions-answers__single--text {
         color: #fff;
@@ -99,6 +100,7 @@
           <div class="quiestion-answers__wrapper">
             <div
               v-for="(answers, index) in questions[questionIndex].answers"
+              @click="markAnswer(answers, index)"
               class="questions-answers__single--wrapper"
             >
               <div class="questions-answers__single--text">{{answers.text}}</div>
@@ -577,6 +579,9 @@
             if (this.questionIndex > 0) {
               this.questionIndex--
             }
+          },
+          markAnswer: function (answers, index) {
+            console.log(answers)
           }
         }
       })
