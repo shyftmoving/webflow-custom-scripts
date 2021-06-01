@@ -635,16 +635,16 @@
       }
     },
     mounted() {
-      for (let ref in this.$refs) {
-        const autocomplete = new google.maps.places.Autocomplete(this.$refs[ref], {
-          fields: ['formatted_address']
-        })
-        autocomplete.addListener('place_changed', () => {
-          const place = autocomplete.getPlace()
-          this.$refs[ref].value = place.formatted_address
-          console.log(this.$refs[ref])
-        })
-      }
+      this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
+      this.origin.addListener('place_changed', () => {
+        let placeOrigin = this.origin.getPlace()
+        this.movingFrom = placeOrigin.formatted_address
+      })
+      this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
+      this.destination.addListener('place_changed', () => {
+        let placeDestination = this.destination.getPlace()
+        this.movingTo = placeDestination.formatted_address
+      })
     }
   })
 </script>
