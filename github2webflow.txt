@@ -1,0 +1,1 @@
+<div id="ajaxContent"></div><script> var Webflow = Webflow || []; Webflow.push(function() { $.get('YOUR RAW HTML GITHUB FILE LINK HERE', function(data) { $('#ajaxContent').append(data); }); }); </script>
