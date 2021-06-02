@@ -98,6 +98,7 @@
     -webkit-align-items: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
+    padding: 32px;
   }
 
   .get-quote__move-details.lower-setion {
@@ -114,6 +115,7 @@
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
+    padding: 32px;
   }
 
   .get-quote__frame {
@@ -186,6 +188,13 @@
   </div>
 </div>
 
+<!-- --------------- Vue dev distributiuon------------------------- -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script
+  type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaoOKYF3YYhGYDja1DJbwYNBcwVIK46g0"
+></script>
+
 <!-- --------------- Vue code------------------------- -->
 <script>
   var app = new Vue({
@@ -199,17 +208,23 @@
     },
     methods: {},
     mounted() {
+      var directionsService = new google.maps.DirectionsService()
       let directionsRenderer = new google.maps.DirectionsRenderer()
       let mapOptions = {
-        zoom: 7,
-        origin: 'Chicago, IL',
-        destination: 'Los Angeles, CA',
-        provideRouteAlternatives: false,
-        travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.IMPERIAL
       }
       let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
       directionsRenderer.setMap(map)
+      let request = {
+        origin: this.movingFrom,
+        destination: this.movingTo,
+        travelMode: 'DRIVING'
+      }
+      directionsService.route(request, function (result, status) {
+        if (status == 'OK') {
+          directionsRenderer.setDirections(result)
+        }
+      })
     }
   })
 </script>
