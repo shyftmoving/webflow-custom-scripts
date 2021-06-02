@@ -1,3 +1,12 @@
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- --------------- Google Maps------------------------- -->
+<script
+  type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmXPM19Ep9PXLuA9f7-XbVJEwMMrVsWqQ&libraries=places"
+></script>
+<script src="https://unpkg.com/v-calendar"></script>
+
 <style>
   .home-widget__inner-wrapper {
     display: grid;
@@ -68,7 +77,6 @@
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
     background-color: #fff;
-    min-height: 400px;
     position: absolute;
     top: 80px;
     border-radius: 20px;
@@ -78,7 +86,7 @@
     justify-content: center;
   }
   .home-widget__moving-size--modal {
-    width: 560px;
+    width: 860px;
     right: 8px;
     z-index: 3;
   }
@@ -86,22 +94,29 @@
     display: flex;
     justify-content: center;
   }
+  .home-modal__widget--last-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
   .home-widget__modal-btn {
     background-color: #ff005c;
     border-radius: 20px;
-    padding: 16px 32px;
+    padding: 10px 44px;
     color: #fff;
     text-align: center;
-    margin-top: 32px;
+    margin: 16px auto 0 auto;
     cursor: pointer;
     transition: all 0.2s;
+    max-width: 50px;
   }
   .home-widget__modal-btn:hover {
     background-color: #bd0045;
   }
   .home-widget__checkbox-wrapper {
-    width: 100%;
-    margin-top: 32px;
+    width: auto;
     display: flex;
     justify-content: center;
   }
@@ -116,6 +131,7 @@
   }
   .home-widget__radio-wrapper {
     display: flex;
+    flex-direction: column;
   }
   .home-widget__radio-wrapper .b-contain {
     margin-right: 32px;
@@ -331,6 +347,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
   .move-size__selector--wrapper li {
@@ -375,12 +392,34 @@
     background: #eaedff;
   }
   .home-widget__moving-size--modal h5 {
-    margin: 10px 0 10px 16px;
+    margin: 10px 0;
     color: rgba(135, 149, 161, 1);
     font-weight: 500;
   }
   .modal-required__text {
     color: rgba(135, 149, 161, 0.6);
+  }
+  .home-widget__moving-size--inner {
+    display: flex;
+  }
+  .home-widget__moving-size--column03 {
+    min-width: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8px;
+  }
+  .home-widget__moving-size--column01,
+  .home-widget__moving-size--column02 {
+    border-right: 1px solid #dedede;
+  }
+  .home-widget__moving-size--column02 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .vc-weeks {
+    min-width: 300px !important;
   }
 </style>
 
@@ -434,14 +473,16 @@
       <div class="home-widget__moving-date--modal-inner">
         <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" />
       </div>
-      <div class="home-widget__checkbox-wrapper">
-        <label class="b-contain">
-          <span>I'm flexibile</span>
-          <input @click="movingDateFlexible = !movingDateFlexible" type="checkbox" />
-          <div class="b-input"></div>
-        </label>
+      <div class="home-modal__widget--last-row">
+        <div class="home-widget__checkbox-wrapper">
+          <label class="b-contain">
+            <span>I'm flexibile</span>
+            <input @click="movingDateFlexible = !movingDateFlexible" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+        </div>
+        <div @click="endDateModal" class="home-widget__modal-btn">OK</div>
       </div>
-      <div @click="endDateModal" class="home-widget__modal-btn">OK</div>
     </div>
     <!-- Modal END-->
   </div>
@@ -461,98 +502,112 @@
     </div>
     <!-- Modal -->
     <div v-if="showSizeModal" class="home-widget__moving-size--modal">
-      <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-      <div class="home-widget__radio-wrapper">
-        <label class="b-contain">
-          <span>Apartment</span>
-          <input type="radio" name="moveType" value="Apartment" v-model="movingSize.moveType" />
-          <div class="b-input"></div>
-        </label>
-        <label class="b-contain">
-          <span>House</span>
-          <input type="radio" name="moveType" value="House" v-model="movingSize.moveType" />
-          <div class="b-input"></div>
-        </label>
+      <div class="home-widget__moving-size--inner">
+        <div class="home-widget__moving-size--column01">
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <div class="home-widget__radio-wrapper">
+            <label class="b-contain">
+              <span>Apartment</span>
+              <input type="radio" name="moveType" value="Apartment" v-model="movingSize.moveType" />
+              <div class="b-input"></div>
+            </label>
+            <label class="b-contain">
+              <span>House</span>
+              <input type="radio" name="moveType" value="House" v-model="movingSize.moveType" />
+              <div class="b-input"></div>
+            </label>
+          </div>
+        </div>
+        <div class="home-widget__moving-size--column02">
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="boxes"
+                name="move-size__selector"
+                value="Just a few boxes"
+              />
+              <label for="boxes">Just a few boxes</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="studio"
+                name="move-size__selector"
+                value="Studio"
+              />
+              <label for="studio">Studio</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="1bedroom"
+                name="move-size__selector"
+                value="1 bedroom"
+              />
+              <label for="1bedroom">1 bedroom</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="2bedroom"
+                name="move-size__selector"
+                value="2 bedrooms"
+              />
+              <label for="2bedroom">2 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="3bedroom"
+                name="move-size__selector"
+                value="3 bedrooms"
+              />
+              <label for="3bedroom">3 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="4bedroom"
+                name="move-size__selector"
+                value="4+ bedrooms"
+              />
+              <label for="4bedroom">4+ bedrooms</label>
+            </li>
+          </ul>
+        </div>
+        <div class="home-widget__moving-size--column03">
+          <label class="b-contain">
+            <span>I’m moving my vehicle</span>
+            <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <input
+            v-if="movingVehicle"
+            v-model="movingSize.moveVehicle"
+            type="text"
+            class="modal__moving-vehicle"
+            placeholder="Make, model, year"
+          />
+          <label class="b-contain">
+            <span>I’m moving with my pets</span>
+            <input v-model="movingSize.movePets" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need storage</span>
+            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+        </div>
       </div>
-      <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-      <ul class="move-size__selector--wrapper">
-        <li>
-          <input
-            v-model="movingSize.moveObjects"
-            type="radio"
-            id="boxes"
-            name="move-size__selector"
-            value="Just a few boxes"
-          />
-          <label for="boxes">Just a few boxes</label>
-        </li>
-        <li>
-          <input v-model="movingSize.moveObjects" type="radio" id="studio" name="move-size__selector" value="Studio" />
-          <label for="studio">Studio</label>
-        </li>
-        <li>
-          <input
-            v-model="movingSize.moveObjects"
-            type="radio"
-            id="1bedroom"
-            name="move-size__selector"
-            value="1 bedroom"
-          />
-          <label for="1bedroom">1 bedroom</label>
-        </li>
-        <li>
-          <input
-            v-model="movingSize.moveObjects"
-            type="radio"
-            id="2bedroom"
-            name="move-size__selector"
-            value="2 bedrooms"
-          />
-          <label for="2bedroom">2 bedrooms</label>
-        </li>
-        <li>
-          <input
-            v-model="movingSize.moveObjects"
-            type="radio"
-            id="3bedroom"
-            name="move-size__selector"
-            value="3 bedrooms"
-          />
-          <label for="3bedroom">3 bedrooms</label>
-        </li>
-        <li>
-          <input
-            v-model="movingSize.moveObjects"
-            type="radio"
-            id="4bedroom"
-            name="move-size__selector"
-            value="4+ bedrooms"
-          />
-          <label for="4bedroom">4+ bedrooms</label>
-        </li>
-      </ul>
-      <label class="b-contain">
-        <span>I’m moving my vehicle</span>
-        <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
-        <div class="b-input"></div>
-      </label>
-      <input
-        v-if="movingVehicle"
-        v-model="movingSize.moveVehicle"
-        type="text"
-        class="modal__moving-vehicle"
-        placeholder="Make, model, year"
-      />
-      <label class="b-contain">
-        <span>I’m moving with my pets</span>
-        <input v-model="movingSize.movePets" value="true" type="checkbox" />
-        <div class="b-input"></div>
-      </label>
-      <label class="b-contain">
-        <span>I need storage</span>
-        <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
-        <div class="b-input"></div>
-      </label>
       <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
     </div>
     <!-- Modal END-->
