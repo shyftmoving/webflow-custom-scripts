@@ -593,6 +593,16 @@
         </div>
         <div class="home-widget__moving-size--column03">
           <label class="b-contain">
+            <span>I’m moving with my pets</span>
+            <input v-model="movingSize.movePets" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need storage</span>
+            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
             <span>I’m moving my vehicle</span>
             <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
             <div class="b-input"></div>
@@ -604,16 +614,6 @@
             class="modal__moving-vehicle"
             placeholder="Make, model, year"
           />
-          <label class="b-contain">
-            <span>I’m moving with my pets</span>
-            <input v-model="movingSize.movePets" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
-          <label class="b-contain">
-            <span>I need storage</span>
-            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
         </div>
       </div>
       <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
