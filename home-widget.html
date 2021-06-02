@@ -401,7 +401,6 @@
     display: flex;
   }
   .home-widget__moving-size--column03 {
-    min-width: 210px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -412,10 +411,15 @@
     border-right: 1px solid #dedede;
     text-align: left;
   }
+  .home-widget__moving-size--column01,
+  .home-widget__moving-size--column03 {
+    width: 25%;
+  }
   .home-widget__moving-size--column02 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50%;
   }
   .vc-weeks {
     min-width: 300px !important;
