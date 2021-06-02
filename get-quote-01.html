@@ -1,0 +1,201 @@
+<style>
+      .get-quote__details-selected-items {
+        margin-right: 14px;
+        margin-bottom: 14px;
+        padding: 6px 16px 6px 44px;
+        background-repeat: no-repeat;
+        background-position: 12px center;
+        border: 1px solid #d6d6d6;
+        border-radius: 20px;
+        font-weight: 600;
+      }
+      .lower-details__type {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b4de33abd46ae2bd21e89a_get-quote-icons-home.svg');
+      }
+      .lower-details__objects {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b4de33abd46ae2bd21e89a_get-quote-icons-home.svg');
+      }
+      .lower-details__vehicles {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b4de330b9c873e5102da08_get-quote-icons-car.svg');
+      }
+      .lower-details__pets {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b4de332064b124030f9e6f_get-quote-icons-pets.svg');
+      }
+      .lower-details__storage {
+        background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b4de332064b124030f9e6f_get-quote-icons-pets.svg');
+      }
+      .image-35 {
+        position: relative;
+        top: 2px;
+        display: inline-block;
+        margin-right: 6px;
+        -webkit-align-self: flex-start;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+      }
+
+      .div-block-34 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 12px;
+        padding-right: 22px;
+      }
+
+      .div-block-61 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin-bottom: 12px;
+      }
+
+      .div-block-35 {
+        margin-top: 11px;
+        padding-top: 18px;
+        border-top: 1px solid #d6d6d6;
+      }
+
+      .get-quote__details-selected-location {
+        color: #0e30a8;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .get-quote__details-selected-location.title {
+        display: inline-block;
+        color: #000;
+      }
+
+      .get-quote__details-selected-location.date-value {
+        display: inline-block;
+        margin-left: 8px;
+      }
+
+      .image-36 {
+        border-radius: 20px;
+      }
+
+      .get-quote__move-details {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+      }
+
+      .get-quote__move-details.lower-setion {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+      }
+
+      .get-quote__frame {
+        width: 48%;
+        padding-right: 0px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 0 40px 50px -20px rgba(14, 48, 168, 0.4);
+      }
+    </style>
+
+<div id="move-details" class="get-quote__move-details--wrapper">
+      <div class="get-quote__move-details">
+        <div class="div-block-34">
+          <img
+            src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg"
+            loading="lazy"
+            width="15"
+            alt=""
+            class="image-35"
+          />
+          <div>
+            <div class="get-quote__details-selected-location title">Moving from:</div>
+            <div class="get-quote__details-selected-location">{{movingFrom}}</div>
+          </div>
+        </div>
+        <div class="div-block-61">
+          <img
+            src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg"
+            loading="lazy"
+            width="15"
+            alt=""
+            class="image-35"
+          />
+          <div>
+            <div class="get-quote__details-selected-location title">Moving to:</div>
+            <div class="get-quote__details-selected-location">{{movingTo}}</div>
+          </div>
+        </div>
+        <div class="div-block-61">
+          <img
+            src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f702efef3a9145320d_Calendar-icon.svg"
+            loading="lazy"
+            width="15"
+            alt=""
+            class="image-35"
+          />
+          <div>
+            <div class="get-quote__details-selected-location title">Moving date:</div>
+            <div class="get-quote__details-selected-location date-value">{{movingDate}}</div>
+            <div v-if="movingDateFlexible" class="get-quote__details-selected-location date-value">
+             (flexibile)
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="div-block-35">
+        <div class="get-quote__move-details lower-setion">
+          <div class="get-quote__details-selected-items lower-details__type">{{movingSize.moveType}}</div>
+          <div class="get-quote__details-selected-items lower-details__objects">{{movingSize.moveObjects}}</div>
+          <div v-if="movingSize.moveVehicle" class="get-quote__details-selected-items lower-details__vehicles">
+            {{movingSize.moveVehicle}}
+          </div>
+          <div v-if="movingSize.movePets" class="get-quote__details-selected-items lower-details__pets">Pet(s)</div>
+          <div v-if="movingSize.moveStorage" class="get-quote__details-selected-items lower-details__storage">
+            Storage
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------- Vue code------------------------- -->
+    <script>
+      var app = new Vue({
+        el: '#move-details',
+        data: {
+          movingFrom: localStorage.movingFrom,
+          movingTo: localStorage.movingTo,
+          movingDate: localStorage.movingDate,
+          movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
+          movingSize: JSON.parse(localStorage.movingSize)
+        },
+        methods: {}
+      })
+    </script>
