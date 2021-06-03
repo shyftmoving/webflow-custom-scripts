@@ -451,7 +451,7 @@
       height: auto;
     }
     .home-widget__inner-wrapper {
-      max-width: 300px;
+      width: 300px;
       grid-template-columns: 1fr;
       background-color: #fff;
       border-radius: 8px;
@@ -493,6 +493,11 @@
     }
     .home-widget__moving-from--wrapper {
       border-right: none;
+    }
+  }
+  @media (max-width: 991px) {
+    .home-widget__inner-wrapper {
+      max-width: 100vw;
     }
   }
 </style>
