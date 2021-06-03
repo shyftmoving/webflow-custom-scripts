@@ -706,10 +706,12 @@
         this.dataComplete()
       },
       showDateModalHandler: function () {
-        ;(this.showSizeModal = false), (this.showDateModal = !showDateModal)
+        this.showSizeModal = false
+        this.showDateModal = !showDateModal
       },
       showSizeModalHandler: function () {
-        ;(this.showDateModal = false), (this.showSizeModal = !showSizeModal)
+        this.showDateModal = false
+        this.showSizeModal = !showSizeModal
       }
     },
     mounted() {
