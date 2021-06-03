@@ -484,7 +484,7 @@
       <div class="home-widget__moving--title">Moving date</div>
       <input
         v-model="movingDate"
-        @click="showDateModal = !showDateModal"
+        @click="showDateModalHandler"
         type="text"
         name="moving-date"
         id="moving-date"
@@ -516,7 +516,7 @@
       <div class="home-widget__moving--title">Move size</div>
       <input
         v-model="movingSize.moveObjects"
-        @click="showSizeModal = !showSizeModal"
+        @click="showSizeModalHandler"
         type="text"
         name="moving-size"
         id="moving-size"
@@ -704,6 +704,12 @@
       endSizeModal: function () {
         this.showSizeModal = false
         this.dataComplete()
+      },
+      showDateModalHandler: function () {
+        ;(this.showSizeModal = false), (this.showDateModal = !showDateModal)
+      },
+      showSizeModalHandler: function () {
+        ;(this.showDateModal = false), (this.showSizeModal = !showSizeModal)
       }
     },
     mounted() {

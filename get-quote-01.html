@@ -211,8 +211,7 @@
       directionsRenderer.setMap(map)
       let request = {
         origin: this.movingFrom,
-        destination: this.movingTo,
-        travelMode: 'DRIVING'
+        destination: this.movingTo
       }
       directionsService.route(request, function (result, status) {
         if (status == 'OK') {
