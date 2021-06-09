@@ -210,6 +210,7 @@
       var directionsService = new google.maps.DirectionsService()
       let directionsRenderer = new google.maps.DirectionsRenderer()
       let mapOptions = {
+        travelMode: 'DRIVING',
         unitSystem: google.maps.UnitSystem.IMPERIAL
       }
       let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
