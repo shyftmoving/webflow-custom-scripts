@@ -259,24 +259,20 @@
     opacity: 0.6;
     cursor: not-allowed;
   }
-
   .b-contain input[type='radio']:disabled ~ .b-input {
     background: rgba(241, 245, 248, 1);
     border-color: rgba(184, 194, 204, 1);
     opacity: 0.6;
     cursor: not-allowed;
   }
-
   .b-contain input[type='radio']:disabled ~ .b-input::after {
     background: rgba(135, 149, 161, 1);
   }
-
   .b-contain input:checked:focus ~ .b-input,
   .b-contain:hover input:not([disabled]):checked ~ .b-input {
     background: rgba(14, 48, 165, 1);
     border-color: rgba(82, 110, 255, 1);
   }
-
   .b-contain .b-input::before {
     content: '';
     display: block;
@@ -293,7 +289,6 @@
     z-index: 99999;
     transform: scale(0);
   }
-
   @keyframes b-ripple {
     0% {
       transform: scale(0);
@@ -308,7 +303,6 @@
       transform: scale(1);
     }
   }
-
   @keyframes b-ripple-duplicate {
     0% {
       transform: scale(0);
@@ -327,23 +321,18 @@
       transform: scale(1);
     }
   }
-
   .b-contain input + .b-input::before {
     animation: b-ripple 250ms ease-out;
   }
-
   .b-contain input:checked + .b-input::before {
     animation-name: b-ripple-duplicate;
   }
-
   .b-contain .b-input::before {
     visibility: hidden;
   }
-
   .b-contain input:focus + .b-input::before {
     visibility: visible;
   }
-
   .b-contain:first-child .b-input::before {
     visibility: hidden;
   }
@@ -356,14 +345,12 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-
   .move-size__selector--wrapper li {
     margin: 0 16px 12px 0;
     width: 150px;
     height: 40px;
     position: relative;
   }
-
   .move-size__selector--wrapper label,
   .move-size__selector--wrapper input {
     display: block;
@@ -373,18 +360,15 @@
     right: 0;
     bottom: 0;
   }
-
   .move-size__selector--wrapper input[type='radio'] {
     opacity: 0.01;
     z-index: 100;
   }
-
   .move-size__selector--wrapper input[type='radio']:checked + label,
   .Checked + label {
     background: #0e30a5;
     color: #fff;
   }
-
   .move-size__selector--wrapper label {
     border: 1px solid #ccc;
     cursor: pointer;
@@ -516,8 +500,6 @@
   }
   @media (min-width: 992px) {
     .widgetOnTop .pac-container {
-      position: fixed !important;
-      top: 124px !important;
       z-index: 99 !important;
     }
   }
