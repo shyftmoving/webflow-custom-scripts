@@ -1,0 +1,22 @@
+<script id="rendered-js">
+  $(document).ready(function () {
+    var input = $('#contact-phone-number')
+    input.keypress(function (e) {
+      //if the letter is not digit don't type anything
+      if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        return false
+      }
+    })
+    input.intlTelInput({
+      utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/9.0.6/js/utils.js'
+    })
+    input.on('change', function () {
+      var formatedNumber = input.intlTelInput('getNumber')
+      input.val(formatedNumber)
+    })
+  })
+
+  $('#book-your-spot').submit(function (event) {
+    $('#time-left').css('display', 'none')
+  })
+</script>
