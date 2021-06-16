@@ -244,11 +244,14 @@
           center: new google.maps.LatLng(0, 0)
         }
         let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
-        const marker = new google.maps.Marker({
+        const marker1 = new google.maps.Marker({
           position: this.movingFromCoord,
           map: failsafeMap
         })
-        console.log(this.movingFromCoord)
+        const marker2 = new google.maps.Marker({
+          position: this.movingToCoord,
+          map: failsafeMap
+        })
       }
     },
     mounted() {
