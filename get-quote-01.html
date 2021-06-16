@@ -228,7 +228,7 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination !!!!!!')
+              console.log('no destination !!!!!!!!!!!!!')
               console.log(result)
             }
           })
@@ -236,7 +236,7 @@
       }
     },
     mounted() {
-      this.displayDirections()
+      const showMap = await this.displayDirections()
     }
   })
 </script>
