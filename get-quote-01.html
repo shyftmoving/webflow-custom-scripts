@@ -223,18 +223,20 @@
           destination: this.movingTo,
           travelMode: 'DRIVING'
         }
-        directionsService.route(request, function (result, status) {
-          if (status == 'OK') {
-            directionsRenderer.setDirections(result)
-          } else {
-            console.log('no destination !!!!!!')
-            console.log(result)
-          }
-        })
+        return new Promise((resolve) =>
+          directionsService.route(request, function (result, status) {
+            if (status == 'OK') {
+              directionsRenderer.setDirections(result)
+            } else {
+              console.log('no destination !!!!!!')
+              console.log(result)
+            }
+          })
+        )
       }
     },
     mounted() {
-      await this.displayDirections()
+      this.displayDirections()
     }
   })
 </script>
