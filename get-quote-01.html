@@ -228,7 +228,7 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination 4444')
+              console.log('no destination 5555')
             }
           })
         } catch (err) {
@@ -237,13 +237,16 @@
       },
       displayFailsafeMap: async function () {
         let mapOptions = {
-          origin: this.movingFrom,
-          destination: this.movingTo,
           zoom: 1,
-          center: new google.maps.LatLng(-34.397, 150.644)
+          minZoom: 1,
+          center: new google.maps.LatLng(0, 0)
         }
         let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
-        console.log('failsafemap 4444')
+        const marker = new google.maps.Marker({
+          position: this.movingFrom,
+          map: failsafeMap
+        })
+        console.log('failsafemap 5555')
       }
     },
     mounted() {
