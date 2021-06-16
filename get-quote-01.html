@@ -203,9 +203,9 @@
     el: '#move-details',
     data: {
       movingFrom: localStorage.movingFrom,
-      movingFromCoord: { lat: localStorage.movingFromLat, lng: localStorage.movingFromLng },
+      movingFromCoord: { lat: parseFloat(localStorage.movingFromLat), lng: parseFloat(localStorage.movingFromLng) },
       movingTo: localStorage.movingTo,
-      movingToCoord: { lat: localStorage.movingToLat, lng: localStorage.movingToLng },
+      movingToCoord: { lat: parseFloat(localStorage.movingToLat), lng: parseFloat(localStorage.movingToLng) },
       movingDate: localStorage.movingDate,
       movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
       movingSize: JSON.parse(localStorage.movingSize)
