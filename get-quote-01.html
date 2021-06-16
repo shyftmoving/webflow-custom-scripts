@@ -208,32 +208,28 @@
       movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
       movingSize: JSON.parse(localStorage.movingSize)
     },
-    methods: {
-      getDirections: async function () {
-        let directionsService = new google.maps.DirectionsService()
-        let directionsRenderer = new google.maps.DirectionsRenderer()
-        let mapOptions = {
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.IMPERIAL
-        }
-        let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
-        directionsRenderer.setMap(map)
-        let request = {
-          origin: this.movingFrom,
-          destination: this.movingTo,
-          travelMode: 'DRIVING'
-        }
-        await directionsService.route(request, (result, status) => {
-          if (status == 'OK') {
-            directionsRenderer.setDirections(result)
-          } else {
-            console.log('no directions!!')
-          }
-        })
-      }
-    },
+    methods: {},
     mounted() {
-      this.getDirections()
+      var directionsService = new google.maps.DirectionsService()
+      let directionsRenderer = new google.maps.DirectionsRenderer()
+      let mapOptions = {
+        travelMode: 'DRIVING',
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+      }
+      let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+      directionsRenderer.setMap(map)
+      let request = {
+        origin: this.movingFrom,
+        destination: this.movingTo,
+        travelMode: 'DRIVING'
+      }
+      directionsService.route(request, function (result, status) {
+        if (status == 'OK') {
+          directionsRenderer.setDirections(result)
+        } else {
+          console.log('no destination !!!')
+        }
+      })
     }
   })
 </script>
