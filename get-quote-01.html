@@ -228,12 +228,11 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination 1111')
-              this.displayFailsafeMap()
+              console.log('no destination 2222')
             }
           })
         } catch (err) {
-          console.log('something is wrong 1111')
+          this.displayFailsafeMap()
         }
       },
       displayFailsafeMap: async function () {
