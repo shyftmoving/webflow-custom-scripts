@@ -694,7 +694,11 @@
     data: {
       completed: false,
       movingFrom: '',
+      movingFromLat: '',
+      movingFromLng: '',
       movingTo: '',
+      movingToLat: '',
+      movingToLng: '',
       movingDate: null,
       movingDateFlexible: false,
       movingSize: {
@@ -716,7 +720,11 @@
       goToQuote: function () {
         if (this.completed) {
           localStorage.movingFrom = this.movingFrom
+          localStorage.movingFromLat = this.movingFromLat
+          localStorage.movingFromLng = this.movingFromLng
           localStorage.movingTo = this.movingTo
+          localStorage.movingToLat = this.movingToLat
+          localStorage.movingToLng = this.movingToLng
           localStorage.movingDate = this.movingDate
           localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
@@ -756,13 +764,15 @@
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
         this.movingFrom = placeOrigin.formatted_address
-        console.log(placeOrigin.geometry.location.lat())
-        console.log(placeOrigin.geometry.location.lng())
+        this.movingFromLat = placeOrigin.geometry.location.lat()
+        this.movingFromLng = placeOrigin.geometry.location.lng()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
         this.movingTo = placeDestination.formatted_address
+        this.movingToLat = placeDestination.geometry.location.lat()
+        this.movingToLng = placeDestination.geometry.location.lng()
       })
     }
   })
