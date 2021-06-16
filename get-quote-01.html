@@ -203,7 +203,9 @@
     el: '#move-details',
     data: {
       movingFrom: localStorage.movingFrom,
+      movingFromCoord: { lat: localStorage.movingFromLat, lng: localStorage.movingFromLng },
       movingTo: localStorage.movingTo,
+      movingToCoord: { lat: localStorage.movingToLat, lng: localStorage.movingToLng },
       movingDate: localStorage.movingDate,
       movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
       movingSize: JSON.parse(localStorage.movingSize)
@@ -228,7 +230,7 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination 5555')
+              console.log('no destination 6666')
             }
           })
         } catch (err) {
@@ -243,10 +245,10 @@
         }
         let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
         const marker = new google.maps.Marker({
-          position: this.movingFrom,
+          position: this.movingFromCoord,
           map: failsafeMap
         })
-        console.log('failsafemap 5555')
+        console.log('failsafemap 6666')
       }
     },
     mounted() {
