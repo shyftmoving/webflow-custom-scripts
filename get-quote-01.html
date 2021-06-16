@@ -228,13 +228,20 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination +++++')
-              console.log(result)
+              console.log('no destination 1111')
+              this.displayFailsafeMap()
             }
           })
         } catch (err) {
-          console.log('something is wrong')
+          console.log('something is wrong 1111')
         }
+      },
+      displayFailsafeMap: async function () {
+        let mapOptions = {
+          origin: this.movingFrom,
+          destination: this.movingTo
+        }
+        let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
       }
     },
     mounted() {
