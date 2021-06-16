@@ -756,7 +756,7 @@
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
         this.movingFrom = placeOrigin.formatted_address
-        console.log(placeOrigin)
+        console.log(placeOrigin.geometry.location.lat)
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
