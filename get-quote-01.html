@@ -228,7 +228,7 @@
             if (status == 'OK') {
               directionsRenderer.setDirections(result)
             } else {
-              console.log('no destination 2222')
+              console.log('no destination 3333')
             }
           })
         } catch (err) {
@@ -238,9 +238,12 @@
       displayFailsafeMap: async function () {
         let mapOptions = {
           origin: this.movingFrom,
-          destination: this.movingTo
+          destination: this.movingTo,
+          zoom: 3,
+          center: this.movingTo
         }
         let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+        console.log('failsafemap')
       }
     },
     mounted() {
