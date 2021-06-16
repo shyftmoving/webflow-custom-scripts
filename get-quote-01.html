@@ -209,7 +209,7 @@
       movingSize: JSON.parse(localStorage.movingSize)
     },
     methods: {
-      getDirections: async () => {
+      getDirections: async function () {
         let directionsService = new google.maps.DirectionsService()
         let directionsRenderer = new google.maps.DirectionsRenderer()
         let mapOptions = {
