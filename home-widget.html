@@ -548,7 +548,7 @@
     <!-- Modal -->
     <div v-if="showDateModal" class="home-widget__moving-date--modal">
       <div class="home-widget__moving-date--modal-inner">
-        <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" />
+        <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" :min-date="new Date()" />
       </div>
       <div class="home-modal__widget--last-row">
         <div class="home-widget__checkbox-wrapper">
