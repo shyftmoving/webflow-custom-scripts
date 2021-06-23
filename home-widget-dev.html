@@ -582,18 +582,26 @@
       <div class="home-widget__moving-size--inner">
         <div class="home-widget__moving-size--column01">
           <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-          <div class="home-widget__radio-wrapper">
-            <label class="b-contain">
-              <span>Apartment</span>
-              <input type="radio" name="moveType" value="Apartment" v-model="movingSize.moveType" />
-              <div class="b-input"></div>
-            </label>
-            <label class="b-contain">
-              <span>House</span>
-              <input type="radio" name="moveType" value="House" v-model="movingSize.moveType" />
-              <div class="b-input"></div>
-            </label>
-          </div>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="Apartment"
+              />
+              <label for="boxes">Just a few boxes</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="House"
+              />
+              <label for="studio">Studio</label>
+            </li>
+          </ul>
         </div>
         <div class="home-widget__moving-size--column02">
           <h5>Please select: <span class="modal-required__text">(required)</span></h5>
