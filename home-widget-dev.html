@@ -12,7 +12,7 @@
     font-weight: 500;
   }
   .home-widget__moving--title {
-    margin-bottom: 0;
+    margin-bottom: 3px;
     display: inline-block;
     font-weight: 500;
     color: #000;
@@ -78,7 +78,7 @@
     /* margin: 0 auto; */
     width: fit-content;
     position: relative;
-    margin-top: 4px;
+    margin-top: 0;
   }
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
@@ -411,6 +411,18 @@
     border: 2px solid #FF005C;
     border-radius: 50%;
     padding: 0px 7px;
+  }
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #E7E9EB;
+  opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #E7E9EB;
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #E7E9EB;
   }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
