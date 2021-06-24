@@ -827,6 +827,13 @@
         this.inputStarted = true
         this.showDateModal = false
         this.showSizeModal = !this.showSizeModal
+      },
+      allRedIcons: function () {
+        let redColor = '#FF005C'
+        this.widgetIconMoveFrom = redColor
+        this.widgetIconMoveTo = redColor
+        this.widgetIconMovingDate = redColor
+        this.widgetIconMovingSize = redColor
       }
     },
     mounted() {
@@ -837,6 +844,7 @@
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
+        allRedIcons();
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -849,6 +857,31 @@
         this.showSizeModal = false
         this.showDateModal = true
       })
+    },
+    watch : {
+      movingFrom:function(val) {
+        if(val) {
+          this.widgetIconMoveFrom = "#1BE07F"
+        }
+      },
+      movingTo: function (val) {
+        if(val) {
+          this.widgetIconMoveTo = "#1BE07F"
+        }
+      },
+      movingDate: function (val) {
+        if(val) {
+          this.widgetIconMovingDate = "#1BE07F"
+        }
+      },
+      movingSize: function () {
+        if(movingSize.moveType && movingSize.moveObjects) {
+          this.widgetIconMovingSize = "#1BE07F"
+        }
+      }
     }
   })
 </script>
+
+
+
