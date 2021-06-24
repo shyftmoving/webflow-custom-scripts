@@ -55,7 +55,7 @@
     top: 1px;
   }
   .home-widget__moving-icon--move {
-    /* background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg'); */
+    background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
   }
   .home-widget__moving-icon--date {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f702efef3a9145320d_Calendar-icon.svg');
@@ -408,7 +408,7 @@
     color: #FF005C;
     margin-left: 8px;
     font-weight: 800;
-    border: 2px solid #FF005C;
+    border: 1px solid #FF005C;
     border-radius: 50%;
     padding: 0px 7px;
   }
@@ -523,9 +523,7 @@
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--move">
-        <img id="svg-icon__move-from" src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg" alt="Location icon">
-      </div>
+      <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
       <div class="home-widget__moving--title">Moving from<span v-if="inputStarted && !movingFrom" class="red-exclamation">!</span></div>
       <input
         v-model="movingFrom"
@@ -540,9 +538,7 @@
   </div>
   <div class="home-widget__moving-to--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--move">
-        <img id="svg-icon__move-to" src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg" alt="Location icon">
-      </div>
+      <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
       <div class="home-widget__moving--title">Moving to<span v-if="inputStarted && !movingTo" class="red-exclamation">!</span></div>
       <input
         v-model="movingTo"
