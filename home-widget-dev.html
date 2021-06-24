@@ -404,6 +404,11 @@
   .vc-weeks {
     min-width: 300px !important;
   }
+  .red-exclamation {
+    color: #FF005C;
+    margin-left: 8px;
+    font-weight: 800;
+  }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input {
@@ -504,7 +509,7 @@
   <div class="home-widget__moving-from--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving from</div>
+      <div class="home-widget__moving--title">Moving from<span v-if="inputStarted && !movingFrom" class="red-exclamation">!</span></div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
@@ -519,7 +524,7 @@
   <div class="home-widget__moving-to--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving to</div>
+      <div class="home-widget__moving--title">Moving to<span v-if="inputStarted && !movingTo" class="red-exclamation">!</span></div>
       <input
         v-model="movingTo"
         @input="dataComplete"
@@ -534,7 +539,7 @@
   <div class="home-widget__moving-date--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--date"></div>
-      <div class="home-widget__moving--title">Moving date</div>
+      <div class="home-widget__moving--title">Moving date<span v-if="inputStarted && !movingDate" class="red-exclamation">!</span></div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
@@ -566,7 +571,7 @@
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--size"></div>
-      <div class="home-widget__moving--title">Move size</div>
+      <div class="home-widget__moving--title">Move size<span v-if="inputStarted && !movingSize.moveType && !movingSize.moveObjects" class="red-exclamation">!</span></div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
@@ -719,6 +724,7 @@
     components: {},
     data: {
       completed: false,
+      inputStarted: false,
       movingFrom: '',
       movingFromLat: '',
       movingFromLng: '',
@@ -777,10 +783,12 @@
         this.dataComplete()
       },
       showDateModalHandler: function () {
+        this.inputStarted = true
         this.showSizeModal = false
         this.showDateModal = !this.showDateModal
       },
       showSizeModalHandler: function () {
+        this.inputStarted = true
         this.showDateModal = false
         this.showSizeModal = !this.showSizeModal
       }
@@ -788,6 +796,7 @@
     mounted() {
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
+        this.inputStarted = true
         let placeOrigin = this.origin.getPlace()
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
@@ -795,6 +804,7 @@
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
+        this.inputStarted = true
         let placeDestination = this.destination.getPlace()
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
