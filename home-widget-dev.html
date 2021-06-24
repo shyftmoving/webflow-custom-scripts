@@ -829,11 +829,19 @@
         this.showSizeModal = !this.showSizeModal
       },
       allRedIcons: function () {
-        let redColor = '#FF005C'
-        this.widgetIconMoveFrom = redColor
-        this.widgetIconMoveTo = redColor
-        this.widgetIconMovingDate = redColor
-        this.widgetIconMovingSize = redColor
+        if (
+          !this.movingFrom &&
+          !this.movingTo &&
+          !this.movingDate &&
+          !this.movingSize.moveType &&
+          !this.movingSize.moveObjects
+        ) {
+          let redColor = '#FF005C'
+          this.widgetIconMoveFrom = redColor
+          this.widgetIconMoveTo = redColor
+          this.widgetIconMovingDate = redColor
+          this.widgetIconMovingSize = redColor
+        }
       }
     },
     mounted() {
@@ -844,6 +852,7 @@
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
+        this.allRedIcons()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -857,7 +866,7 @@
         this.showDateModal = true
       })
     },
-    watch : {
+    watch: {
       movingFrom: function (val) {
         if(val) {
           this.widgetIconMoveFrom = '#1BE07F'
@@ -879,12 +888,15 @@
           this.widgetIconMovingDate = '#FF005C'
         }
       },
-      movingSize: function () {
-        if(movingSize.moveType && movingSize.moveObjects) {
-          this.widgetIconMovingSize = '#1BE07F'
-        } else {
-          this.widgetIconMovingSize = '#FF005C'
-        }
+      movingSize: {
+        function () {
+          if(movingSize.moveType && movingSize.moveObjects) {
+            this.widgetIconMovingSize = '#1BE07F'
+          } else {
+            this.widgetIconMovingSize = '#FF005C'
+          }
+        },
+        deep: true
       }
     }
   })
