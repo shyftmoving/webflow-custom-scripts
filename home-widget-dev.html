@@ -574,7 +574,7 @@
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--size"></div>
-      <div class="home-widget__moving--title">Move size<span v-if="inputStarted && (!movingSize.moveType && !movingSize.moveObjects)" class="red-exclamation">!</span></div>
+      <div class="home-widget__moving--title">Move size<span v-if="inputStarted && (!movingSize.moveType || !movingSize.moveObjects)" class="red-exclamation">!</span></div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
