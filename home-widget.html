@@ -12,7 +12,7 @@
     font-weight: 500;
   }
   .home-widget__moving--title {
-    margin-bottom: 0;
+    margin-bottom: 3px;
     display: inline-block;
     font-weight: 500;
     color: #000;
@@ -78,7 +78,7 @@
     /* margin: 0 auto; */
     width: fit-content;
     position: relative;
-    margin-top: 4px;
+    margin-top: 0;
   }
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
@@ -393,7 +393,7 @@
   .home-widget__moving-size--column01 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .home-widget__moving-size--column02 {
     display: flex;
@@ -403,6 +403,26 @@
   }
   .vc-weeks {
     min-width: 300px !important;
+  }
+  .red-exclamation {
+    color: #FF005C;
+    margin-left: 8px;
+    font-weight: 800;
+    border: 1px solid #FF005C;
+    border-radius: 50%;
+    padding: 0px 7px;
+  }
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #c4c4c4;
+  opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #c4c4c4;
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #c4c4c4;
   }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
@@ -504,7 +524,7 @@
   <div class="home-widget__moving-from--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving from</div>
+      <div class="home-widget__moving--title">Moving from<span v-if="inputStarted && !movingFrom" class="red-exclamation">!</span></div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
@@ -519,7 +539,7 @@
   <div class="home-widget__moving-to--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving to</div>
+      <div class="home-widget__moving--title">Moving to<span v-if="inputStarted && !movingTo" class="red-exclamation">!</span></div>
       <input
         v-model="movingTo"
         @input="dataComplete"
@@ -534,7 +554,7 @@
   <div class="home-widget__moving-date--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--date"></div>
-      <div class="home-widget__moving--title">Moving date</div>
+      <div class="home-widget__moving--title">Moving date<span v-if="inputStarted && !movingDate" class="red-exclamation">!</span></div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
@@ -566,7 +586,7 @@
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__inner-items">
       <div class="home-widget__moving-icon--title home-widget__moving-icon--size"></div>
-      <div class="home-widget__moving--title">Move size</div>
+      <div class="home-widget__moving--title">Move size<span v-if="inputStarted && (!movingSize.moveType || !movingSize.moveObjects)" class="red-exclamation">!</span></div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
@@ -582,18 +602,28 @@
       <div class="home-widget__moving-size--inner">
         <div class="home-widget__moving-size--column01">
           <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-          <div class="home-widget__radio-wrapper">
-            <label class="b-contain">
-              <span>Apartment</span>
-              <input type="radio" name="moveType" value="Apartment" v-model="movingSize.moveType" />
-              <div class="b-input"></div>
-            </label>
-            <label class="b-contain">
-              <span>House</span>
-              <input type="radio" name="moveType" value="House" v-model="movingSize.moveType" />
-              <div class="b-input"></div>
-            </label>
-          </div>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="Apartment"
+                id="apartment"
+              />
+              <label for="apartment">Apartment</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="House"
+                id="house"
+              />
+              <label for="house">House</label>
+            </li>
+          </ul>
         </div>
         <div class="home-widget__moving-size--column02">
           <h5>Please select: <span class="modal-required__text">(required)</span></h5>
@@ -709,6 +739,7 @@
     components: {},
     data: {
       completed: false,
+      inputStarted: false,
       movingFrom: '',
       movingFromLat: '',
       movingFromLng: '',
@@ -761,16 +792,19 @@
       endDateModal: function () {
         this.showDateModal = false
         this.dataComplete()
+        this.showSizeModal = true
       },
       endSizeModal: function () {
         this.showSizeModal = false
         this.dataComplete()
       },
       showDateModalHandler: function () {
+        this.inputStarted = true
         this.showSizeModal = false
         this.showDateModal = !this.showDateModal
       },
       showSizeModalHandler: function () {
+        this.inputStarted = true
         this.showDateModal = false
         this.showSizeModal = !this.showSizeModal
       }
@@ -778,17 +812,22 @@
     mounted() {
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
+        this.inputStarted = true
         let placeOrigin = this.origin.getPlace()
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
+        this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
+        this.inputStarted = true
         let placeDestination = this.destination.getPlace()
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
+        this.showSizeModal = false
+        this.showDateModal = true
       })
     }
   })
