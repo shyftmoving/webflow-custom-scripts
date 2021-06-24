@@ -825,6 +825,13 @@
           this.widgetIconMovingDate = redColor
           this.widgetIconMovingSize = redColor
         }
+      },
+      checkMovingSize: function() {
+        if(this.movingSize.moveType && this.movingSize.moveObjects) {
+          this.widgetIconMovingSize = '#1BE07F'
+        } else {
+          this.widgetIconMovingSize = '#FF005C'
+        }
       }
     },
     mounted() {
@@ -869,15 +876,8 @@
         }
       },
       movingSize: {
-        function () {
-          console.log(this.movingSize)
-          if(this.movingSize.moveType && this.movingSize.moveObjects) {
-            this.widgetIconMovingSize = '#1BE07F'
-          } else {
-            this.widgetIconMovingSize = '#FF005C'
-          }
-        },
-        deep: true
+        deep: true,
+        handler: 'checkMovingSize'
       }
     }
   })
