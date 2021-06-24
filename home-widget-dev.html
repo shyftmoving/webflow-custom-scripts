@@ -844,7 +844,6 @@
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
-        allRedIcons();
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -859,24 +858,32 @@
       })
     },
     watch : {
-      movingFrom:function(val) {
+      movingFrom: function (val) {
         if(val) {
-          this.widgetIconMoveFrom = "#1BE07F"
+          this.widgetIconMoveFrom = '#1BE07F'
+        } else {
+          this.widgetIconMoveFrom = '#FF005C'
         }
       },
       movingTo: function (val) {
         if(val) {
-          this.widgetIconMoveTo = "#1BE07F"
+          this.widgetIconMoveTo = '#1BE07F'
+        } else {
+          this.widgetIconMoveTo = '#FF005C'
         }
       },
       movingDate: function (val) {
         if(val) {
-          this.widgetIconMovingDate = "#1BE07F"
+          this.widgetIconMovingDate = '#1BE07F'
+        } else {
+          this.widgetIconMovingDate = '#FF005C'
         }
       },
       movingSize: function () {
         if(movingSize.moveType && movingSize.moveObjects) {
-          this.widgetIconMovingSize = "#1BE07F"
+          this.widgetIconMovingSize = '#1BE07F'
+        } else {
+          this.widgetIconMovingSize = '#FF005C'
         }
       }
     }
