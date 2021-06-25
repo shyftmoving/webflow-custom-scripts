@@ -872,7 +872,19 @@
         this.showDateModal = true
       })
     },
-    watch: {}
+    watch: {
+      movingDate: function (val) {
+        if(val) {
+          this.widgetIconMovingDate = '#1BE07F'
+        } else {
+          this.widgetIconMovingDate = '#FF005C'
+        }
+      },
+      movingSize: {
+        deep: true,
+        handler: 'checkEntriesAndColor'
+      }
+    }
   })
 </script>
 
