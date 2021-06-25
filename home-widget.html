@@ -12,10 +12,10 @@
     font-weight: 500;
   }
   .home-widget__moving--title {
-    margin-bottom: 6px;
+    margin-bottom: 3px;
     display: inline-block;
     font-weight: 500;
-    color: #000;
+    color: #737373;
     font-size: 1.2em;
   }
   .home-widget__inner-items input {
@@ -55,13 +55,13 @@
     top: 1px;
   }
   .home-widget__moving-icon--move {
-    background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
+    /* background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg'); */
   }
   .home-widget__moving-icon--date {
-    background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f702efef3a9145320d_Calendar-icon.svg');
+    /* background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f702efef3a9145320d_Calendar-icon.svg'); */
   }
   .home-widget__moving-icon--size {
-    background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f74b6b2e27b3d526c7_Home-icon.svg');
+    /* background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f74b6b2e27b3d526c7_Home-icon.svg'); */
   }
   .home-widget__moving-from--wrapper,
   .home-widget__moving-to--wrapper,
@@ -93,9 +93,6 @@
     width: 860px;
     right: 0;
     z-index: 3;
-  }
-  .widgetOnTop .home-widget__moving-size--modal {
-    right: 10%;
   }
   .home-widget__moving-date--modal-inner {
     display: flex;
@@ -407,22 +404,17 @@
   .vc-weeks {
     min-width: 300px !important;
   }
-  .red-exclamation {
-    color: #FF005C;
-    margin-left: 8px;
-    font-weight: 800;
-  }
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #8d8d8d;
+  color: #c4c4c4;
   opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #8d8d8d;
+    color: #c4c4c4;
   }
 
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #8d8d8d;
+    color: #c4c4c4;
   }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
@@ -523,8 +515,12 @@
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving from<span v-if="inputStarted && !movingFrom" class="red-exclamation">!</span></div>
+      <div id="widget-icon__move-from" class="home-widget__moving-icon--title home-widget__moving-icon--move">
+        <svg width="13" height="14" viewBox="0 0 13 14" v-bind:fill="widgetIconMoveFrom" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.78833 6.18604C0.78833 3.11946 3.35092 0.640869 6.45063 0.640869C9.55908 0.640869 12.1217 3.11946 12.1217 6.18604C12.1217 7.73133 11.5597 9.16595 10.6347 10.3819C9.6142 11.7232 8.35643 12.8918 6.94069 13.8092C6.61667 14.0211 6.32425 14.0371 5.96863 13.8092C4.54482 12.8918 3.28705 11.7232 2.27533 10.3819C1.34965 9.16595 0.78833 7.73133 0.78833 6.18604ZM4.58449 6.35874C4.58449 7.38604 5.42278 8.19402 6.45064 8.19402C7.47917 8.19402 8.32552 7.38604 8.32552 6.35874C8.32552 5.33944 7.47917 4.49213 6.45064 4.49213C5.42278 4.49213 4.58449 5.33944 4.58449 6.35874Z" />
+        </svg>
+      </div>
+      <div class="home-widget__moving--title">Moving from</div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
@@ -538,8 +534,12 @@
   </div>
   <div class="home-widget__moving-to--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--move"></div>
-      <div class="home-widget__moving--title">Moving to<span v-if="inputStarted && !movingTo" class="red-exclamation">!</span></div>
+      <div id="widget-icon__move-to" class="home-widget__moving-icon--title home-widget__moving-icon--move">
+        <svg width="13" height="14" viewBox="0 0 13 14" v-bind:fill="widgetIconMoveTo" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M0.78833 6.18604C0.78833 3.11946 3.35092 0.640869 6.45063 0.640869C9.55908 0.640869 12.1217 3.11946 12.1217 6.18604C12.1217 7.73133 11.5597 9.16595 10.6347 10.3819C9.6142 11.7232 8.35643 12.8918 6.94069 13.8092C6.61667 14.0211 6.32425 14.0371 5.96863 13.8092C4.54482 12.8918 3.28705 11.7232 2.27533 10.3819C1.34965 9.16595 0.78833 7.73133 0.78833 6.18604ZM4.58449 6.35874C4.58449 7.38604 5.42278 8.19402 6.45064 8.19402C7.47917 8.19402 8.32552 7.38604 8.32552 6.35874C8.32552 5.33944 7.47917 4.49213 6.45064 4.49213C5.42278 4.49213 4.58449 5.33944 4.58449 6.35874Z" />
+        </svg>
+      </div>
+      <div class="home-widget__moving--title">Moving to</div>
       <input
         v-model="movingTo"
         @input="dataComplete"
@@ -553,8 +553,12 @@
   </div>
   <div class="home-widget__moving-date--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--date"></div>
-      <div class="home-widget__moving--title">Moving date<span v-if="inputStarted && !movingDate" class="red-exclamation">!</span></div>
+      <div id="widget-icon__moving-date" class="home-widget__moving-icon--title home-widget__moving-icon--date">
+        <svg width="13" height="14" viewBox="0 0 13 14" v-bind:fill="widgetIconMovingDate" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.42887 0.821371L9.42953 1.32112C11.266 1.46505 12.4791 2.71642 12.481 4.63546L12.4883 10.2526C12.4909 12.3449 11.1764 13.6323 9.06948 13.6356L3.92287 13.6423C1.82908 13.6449 0.498159 12.3269 0.495526 10.2287L0.488286 4.67744C0.485653 2.74574 1.65597 1.4977 3.4924 1.32912L3.49174 0.829367C3.49108 0.536181 3.70829 0.315625 3.99791 0.315625C4.28752 0.314958 4.50474 0.534848 4.50539 0.828035L4.50605 1.29447L8.41587 1.28914L8.41521 0.822704C8.41455 0.529518 8.63177 0.309628 8.92138 0.308961C9.20442 0.308295 9.42821 0.528185 9.42887 0.821371ZM1.50259 4.88325L11.468 4.86992V4.6367C11.4397 3.20409 10.7209 2.45246 9.43084 2.34052L9.43149 2.8536C9.43149 3.14012 9.20836 3.36734 8.92532 3.36734C8.63571 3.36801 8.41784 3.14145 8.41784 2.85493L8.41718 2.3152L4.50736 2.32053L4.50802 2.85959C4.50802 3.14678 4.29147 3.37334 4.00185 3.37334C3.71223 3.374 3.49436 3.14812 3.49436 2.86093L3.4937 2.34785C2.21018 2.47645 1.49996 3.23074 1.50193 4.67602L1.50259 4.88325ZM8.64811 7.91191V7.91924C8.65469 8.22575 8.90482 8.4583 9.20826 8.45164C9.50445 8.44431 9.74076 8.19043 9.73417 7.88392C9.72035 7.59073 9.48273 7.35152 9.18719 7.35219C8.88441 7.35885 8.64745 7.60539 8.64811 7.91191ZM9.19204 10.9038C8.88926 10.8972 8.64506 10.6446 8.6444 10.3381C8.63782 10.0316 8.8807 9.77772 9.18348 9.77039H9.19006C9.49943 9.77039 9.75021 10.0229 9.75021 10.3361C9.75087 10.6493 9.50074 10.9032 9.19204 10.9038ZM5.93644 7.9222C5.94961 8.22872 6.20039 8.46793 6.50317 8.4546C6.79937 8.44061 7.03567 8.1874 7.0225 7.88089C7.01526 7.58104 6.77172 7.34782 6.47552 7.34849C6.17274 7.36182 5.93578 7.61569 5.93644 7.9222ZM6.50582 10.8738C6.20304 10.8871 5.95291 10.6479 5.93909 10.3414C5.93909 10.0349 6.17539 9.78168 6.47817 9.76769C6.77437 9.76702 7.01857 10.0002 7.02515 10.2994C7.03897 10.6066 6.80201 10.8598 6.50582 10.8738ZM3.22445 7.94547C3.23761 8.25198 3.48839 8.49186 3.79117 8.47787C4.08737 8.46454 4.32367 8.21067 4.30985 7.90415C4.30327 7.6043 4.05972 7.37109 3.76287 7.37175C3.46009 7.38508 3.22379 7.63895 3.22445 7.94547ZM3.79382 10.8768C3.49104 10.8908 3.24091 10.651 3.22709 10.3444C3.22643 10.0379 3.46339 9.78406 3.76617 9.77073C4.06237 9.77007 4.30657 10.0033 4.31315 10.3031C4.32698 10.6096 4.09068 10.8635 3.79382 10.8768Z"/>
+        </svg>
+      </div>
+      <div class="home-widget__moving--title">Moving date</div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
@@ -585,8 +589,12 @@
   </div>
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__inner-items">
-      <div class="home-widget__moving-icon--title home-widget__moving-icon--size"></div>
-      <div class="home-widget__moving--title">Move size<span v-if="inputStarted && (!movingSize.moveType || !movingSize.moveObjects)" class="red-exclamation">!</span></div>
+      <div id="widget-icon__moving-size" class="home-widget__moving-icon--title home-widget__moving-icon--size">
+        <svg width="13" height="14" viewBox="0 0 13 14" v-bind:fill="widgetIconMovingSize" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.53541 12.291V10.3799C4.53541 9.89203 4.93378 9.49656 5.42519 9.49656H7.22155C7.45754 9.49656 7.68386 9.58962 7.85073 9.75528C8.01759 9.92093 8.11134 10.1456 8.11134 10.3799V12.291C8.10985 12.4938 8.18996 12.6888 8.3339 12.8327C8.47784 12.9767 8.6737 13.0576 8.87801 13.0576H10.1036C10.6759 13.0591 11.2254 12.8344 11.6307 12.4331C12.0359 12.0318 12.2637 11.487 12.2637 10.9188V5.4744C12.2637 5.0154 12.0587 4.58002 11.7041 4.28554L7.53494 0.980035C6.80971 0.400468 5.77062 0.419181 5.06704 1.02448L0.993055 4.28554C0.621635 4.57134 0.399642 5.00801 0.388672 5.4744V10.9132C0.388672 12.0975 1.35579 13.0576 2.54878 13.0576H3.74635C4.17069 13.0576 4.51554 12.7178 4.51862 12.2965L4.53541 12.291Z"/>
+        </svg>
+      </div>
+      <div class="home-widget__moving--title">Move size</div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
@@ -739,7 +747,6 @@
     components: {},
     data: {
       completed: false,
-      inputStarted: false,
       movingFrom: '',
       movingFromLat: '',
       movingFromLng: '',
@@ -761,7 +768,11 @@
       modelConfig: {
         type: 'string',
         mask: 'MM/DD/YYYY'
-      }
+      },
+      widgetIconMoveFrom: '#0E30A8',
+      widgetIconMoveTo: '#0E30A8',
+      widgetIconMovingDate: '#0E30A8',
+      widgetIconMovingSize: '#0E30A8'
     },
     methods: {
       goToQuote: function () {
@@ -792,43 +803,90 @@
       endDateModal: function () {
         this.showDateModal = false
         this.dataComplete()
+        this.checkEntriesAndColor()
         this.showSizeModal = true
       },
       endSizeModal: function () {
         this.showSizeModal = false
+        this.checkEntriesAndColor()
         this.dataComplete()
       },
       showDateModalHandler: function () {
-        this.inputStarted = true
         this.showSizeModal = false
         this.showDateModal = !this.showDateModal
       },
       showSizeModalHandler: function () {
-        this.inputStarted = true
         this.showDateModal = false
         this.showSizeModal = !this.showSizeModal
+      },
+      allRedIcons: function () {
+        if (inputStarted) {
+          let redColor = '#FF005C'
+          this.widgetIconMoveFrom = redColor
+          this.widgetIconMoveTo = redColor
+          this.widgetIconMovingDate = redColor
+          this.widgetIconMovingSize = redColor
+        }
+      },
+      checkEntriesAndColor: function() {
+        if(this.movingFrom) {
+          this.widgetIconMoveFrom = '#1BE07F'
+        } else {
+          this.widgetIconMoveFrom = '#FF005C'
+        }
+        if(this.movingTo) {
+          this.widgetIconMoveTo = '#1BE07F'
+        } else {
+          this.widgetIconMoveTo = '#FF005C'
+        }
+        if(this.movingDate) {
+          this.widgetIconMovingDate = '#1BE07F'
+        } else {
+          this.widgetIconMovingDate = '#FF005C'
+        }
+        if(this.movingSize.moveType && this.movingSize.moveObjects) {
+          this.widgetIconMovingSize = '#1BE07F'
+        } else {
+          this.widgetIconMovingSize = '#FF005C'
+        }
       }
     },
     mounted() {
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
-        this.inputStarted = true
         let placeOrigin = this.origin.getPlace()
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
+        this.checkEntriesAndColor()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
-        this.inputStarted = true
         let placeDestination = this.destination.getPlace()
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
+        this.checkEntriesAndColor()
         this.showSizeModal = false
         this.showDateModal = true
       })
+    },
+    watch: {
+      movingDate: function (val) {
+        if(val) {
+          this.widgetIconMovingDate = '#1BE07F'
+        } else {
+          this.widgetIconMovingDate = '#FF005C'
+        }
+      },
+      movingSize: {
+        deep: true,
+        handler: 'checkEntriesAndColor'
+      }
     }
   })
 </script>
+
+
+
