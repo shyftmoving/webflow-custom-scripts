@@ -803,10 +803,12 @@
       endDateModal: function () {
         this.showDateModal = false
         this.dataComplete()
+        checkEntriesAndColor()
         this.showSizeModal = true
       },
       endSizeModal: function () {
         this.showSizeModal = false
+        checkEntriesAndColor()
         this.dataComplete()
       },
       showDateModalHandler: function () {
@@ -826,7 +828,22 @@
           this.widgetIconMovingSize = redColor
         }
       },
-      checkMovingSize: function() {
+      checkEntriesAndColor: function() {
+        if(this.movingFrom) {
+          this.widgetIconMoveFrom = '#1BE07F'
+        } else {
+          this.widgetIconMoveFrom = '#FF005C'
+        }
+        if(this.movingTo) {
+          this.widgetIconMoveTo = '#1BE07F'
+        } else {
+          this.widgetIconMoveTo = '#FF005C'
+        }
+        if(this.movingDate) {
+          this.widgetIconMovingDate = '#1BE07F'
+        } else {
+          this.widgetIconMovingDate = '#FF005C'
+        }
         if(this.movingSize.moveType && this.movingSize.moveObjects) {
           this.widgetIconMovingSize = '#1BE07F'
         } else {
@@ -841,6 +858,7 @@
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
+        checkEntriesAndColor()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -849,37 +867,12 @@
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
+        checkEntriesAndColor()
         this.showSizeModal = false
         this.showDateModal = true
       })
     },
-    watch: {
-      movingFrom: function (val) {
-        if(val) {
-          this.widgetIconMoveFrom = '#1BE07F'
-        } else {
-          this.widgetIconMoveFrom = '#FF005C'
-        }
-      },
-      movingTo: function (val) {
-        if(val) {
-          this.widgetIconMoveTo = '#1BE07F'
-        } else {
-          this.widgetIconMoveTo = '#FF005C'
-        }
-      },
-      movingDate: function (val) {
-        if(val) {
-          this.widgetIconMovingDate = '#1BE07F'
-        } else {
-          this.widgetIconMovingDate = '#FF005C'
-        }
-      },
-      movingSize: {
-        deep: true,
-        handler: 'checkMovingSize'
-      }
-    }
+    watch: {}
   })
 </script>
 
