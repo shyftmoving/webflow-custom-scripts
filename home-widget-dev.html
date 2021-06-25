@@ -803,12 +803,12 @@
       endDateModal: function () {
         this.showDateModal = false
         this.dataComplete()
-        checkEntriesAndColor()
+        this.checkEntriesAndColor()
         this.showSizeModal = true
       },
       endSizeModal: function () {
         this.showSizeModal = false
-        checkEntriesAndColor()
+        this.checkEntriesAndColor()
         this.dataComplete()
       },
       showDateModalHandler: function () {
@@ -858,7 +858,7 @@
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
-        checkEntriesAndColor()
+        this.checkEntriesAndColor()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -867,7 +867,7 @@
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
-        checkEntriesAndColor()
+        this.checkEntriesAndColor()
         this.showSizeModal = false
         this.showDateModal = true
       })
