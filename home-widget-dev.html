@@ -463,13 +463,16 @@
     .home-widget__moving-date--modal,
     .home-widget__moving-size--modal {
       position: fixed;
-      top: 70px;
+      top: 0;
       left: 0;
       width: 100vw;
       max-width: none;
       min-height: 100vh;
       border-radius: 0;
       z-index: 1;
+      padding-top: 80px;
+      overflow: auto;
+      height: 100%;
     }
     .vc-weeks {
       min-width: auto !important;
