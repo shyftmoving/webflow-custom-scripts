@@ -42,6 +42,9 @@
   .home-widget__moving-go--button img {
     width: 18px;
     height: 15px;
+  }    
+  .home-widget__moving-go--button .get-quote-text {
+    display: none;
   }
   .home-widget__moving-icon--title {
     width: 14px;
@@ -443,13 +446,15 @@
       grid-template-columns: 1fr;
       background-color: #fff;
       border-radius: 8px;
+      min-height: calc(70vh - 70px);
+      padding: 20px 0;
     }
     .home-widget__inner-items {
       width: 100%;
       padding: 12px;
       /* border-bottom: 1px solid #c5cdec; */
       box-sizing: border-box;
-      max-width: 300px;
+      max-width: 400px;
       margin: 0 auto;
     }
     .home-widget__inner-items input[type=text] {
@@ -480,6 +485,17 @@
       padding-top: 80px;
       overflow: auto;
       height: 100%;
+    }
+    .home-widget__moving-go--button {
+      border-radius: 12px;
+      min-width: 220px;
+    }
+    .home-widget__moving-go--button img {
+      display: none;
+    }
+    .home-widget__moving-go--button .get-quote-text {
+      display: inline-block;
+      color: #fff;
     }
     .vc-weeks {
       min-width: auto !important;
@@ -761,6 +777,7 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
+      <span class="get-quote-text">Get Quote</span>
       <img
         src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
         alt="white arrow right"
