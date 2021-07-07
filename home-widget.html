@@ -439,7 +439,7 @@
       height: auto;
     }
     .home-widget__inner-wrapper {
-      width: 100%;
+      width: 300px;
       grid-template-columns: 1fr;
       background-color: #fff;
       border-radius: 8px;
@@ -450,11 +450,6 @@
       border-bottom: 1px solid #c5cdec;
       box-sizing: border-box;
     }
-    .home-modal__widget--last-row {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
     .home-widget__moving-go--wrapper {
       padding: 12px;
       display: flex;
@@ -462,14 +457,9 @@
     }
     .home-widget__moving-date--modal,
     .home-widget__moving-size--modal {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      width: 100vw;
-      max-width: none;
-      min-height: 100vh;
-      border-radius: 0;
-      z-index: 1;
+      position: relative;
+      top: 0;
+      max-width: 300px;
     }
     .vc-weeks {
       min-width: auto !important;
@@ -485,11 +475,6 @@
     .home-widget__moving-size--column03 {
       width: 100%;
       border-right: none;
-    }
-    .home-widget__moving-size--column03 {
-      padding-left: 0;
-      max-width: 200px;
-      margin: 0 auto;
     }
     .home-widget__moving-size--column01 {
       align-items: center;
