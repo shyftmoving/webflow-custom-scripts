@@ -42,6 +42,9 @@
   .home-widget__moving-go--button img {
     width: 18px;
     height: 15px;
+  }    
+  .home-widget__moving-go--button .get-quote-text {
+    display: none;
   }
   .home-widget__moving-icon--title {
     width: 14px;
@@ -365,9 +368,11 @@
   .move-size__selector--wrapper label:hover {
     background: #eaedff;
   }
-  .home-widget__moving-size--modal h5 {
+  .home-widget__moving-size--modal h5,
+  .home-widget__moving-date--modal h5 {
     color: rgba(135, 149, 161, 1);
     font-weight: 500;
+    text-align: center;
   }
   .modal-required__text {
     color: rgba(135, 149, 161, 0.6);
@@ -439,16 +444,30 @@
       height: auto;
     }
     .home-widget__inner-wrapper {
-      width: 300px;
+      width: 100%;
       grid-template-columns: 1fr;
       background-color: #fff;
       border-radius: 8px;
+      min-height: calc(70vh - 70px);
+      padding: 20px 0;
     }
     .home-widget__inner-items {
       width: 100%;
       padding: 12px;
-      border-bottom: 1px solid #c5cdec;
+      /* border-bottom: 1px solid #c5cdec; */
       box-sizing: border-box;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .home-widget__inner-items input[type=text] {
+      border: 1px solid #d8d8d8;
+      padding: 8px;
+      border-radius: 12px;
+    }
+    .home-modal__widget--last-row {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     .home-widget__moving-go--wrapper {
       padding: 12px;
@@ -457,9 +476,30 @@
     }
     .home-widget__moving-date--modal,
     .home-widget__moving-size--modal {
-      position: relative;
+      position: fixed;
       top: 0;
-      max-width: 300px;
+      left: 0;
+      width: 100vw;
+      max-width: none;
+      min-height: 100vh;
+      border-radius: 0;
+      z-index: 1;
+      padding-top: 80px;
+      overflow: auto;
+      height: 100%;
+    }
+    .home-widget__moving-go--button {
+      border-radius: 12px;
+      min-width: 220px;
+    }
+    .home-widget__moving-go--button img {
+      display: none;
+    }
+    .home-widget__moving-go--button .get-quote-text {
+      display: inline-block;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
     }
     .vc-weeks {
       min-width: auto !important;
@@ -475,6 +515,11 @@
     .home-widget__moving-size--column03 {
       width: 100%;
       border-right: none;
+    }
+    .home-widget__moving-size--column03 {
+      padding-left: 0;
+      max-width: 200px;
+      margin: 0 auto;
     }
     .home-widget__moving-size--column01 {
       align-items: center;
@@ -574,6 +619,7 @@
     </div>
     <!-- Modal -->
     <div v-if="showDateModal" class="home-widget__moving-date--modal">
+      <h5>Moving date</h5>
       <div class="home-widget__moving-date--modal-inner">
         <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" :min-date="new Date()" />
       </div>
@@ -736,6 +782,7 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
+      <span class="get-quote-text">Get Quote</span>
       <img
         src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
         alt="white arrow right"
@@ -890,6 +937,3 @@
     }
   })
 </script>
-
-
-
