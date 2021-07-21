@@ -228,6 +228,8 @@
         try {
           await directionsService.route(request, function (result, status) {
             if (status == 'OK') {
+              console.log(result.routes[0].legs[0].distance.text)
+              console.log(parseInit(result.routes[0].legs[0].distance.text))
               localStorage.distance = parseInt(result.routes[0].legs[0].distance.text)
               directionsRenderer.setDirections(result)
             }
