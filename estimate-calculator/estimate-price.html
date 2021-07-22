@@ -24,7 +24,7 @@
     },
     methods: {
       init: function () {
-        if (localStorage.movingFromCountry != 'US' && localStorage.movingToCountry != 'US') {
+        if (localStorage.movingFromCountry != 'US' || localStorage.movingToCountry != 'US') {
           this.hideCalc()
           console.log('no usa')
           return
