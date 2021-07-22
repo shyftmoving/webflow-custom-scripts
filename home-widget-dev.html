@@ -944,7 +944,7 @@
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
         console.log(placeOrigin)
-        console.log(placeOrigin.address_components[4].short_name)
+        console.log(placeOrigin.address_components[3].short_name)
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
