@@ -26,11 +26,24 @@
       init: function () {
         if (localStorage.distance) {
           this.distance = localStorage.distance
+        } else {
+          this.hideCalc()
+          return
         }
         if (localStorage.movingSize) {
           movingSize = JSON.parse(localStorage.movingSize)
-          // TODO: check for Apartment/4+, House/Studio and and rest false values that can not be calculated
+          if (movingSize.moveObjects == '4+ bedrooms') {
+            this.hideCalc()
+            return
+          }
+          if (movingSize.moveType == 'Studio' && movingSize.moveObjects == 'House') {
+            this.hideCalc()
+            return
+          }
           this.weight = this.calcWeight(movingSize.moveType, movingSize.moveObjects)
+        } else {
+          this.hideCalc()
+          return
         }
         this.calculate()
       },
@@ -45,6 +58,10 @@
       },
       roundTo50: function (num) {
         return Math.round(num / 50) * 50
+      },
+      hideCalc: function () {
+        document.getElementById('calcOK').style.display = 'none'
+        document.getElementById('calcNotOK').style.display = 'block'
       },
       calcWeight: function (moveType, moveObjects) {
         if (moveType == 'Apartment') {
@@ -68,8 +85,6 @@
             return 3838
           } else if (moveObjects == '3 bedrooms') {
             return 6341
-          } else if (moveObjects == '4+ bedrooms') {
-            return 8922
           }
         }
       },
