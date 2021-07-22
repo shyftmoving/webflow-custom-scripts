@@ -954,7 +954,7 @@
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
         this.movingTo = placeDestination.formatted_address
-        localStorage.movingToCountry = placeOrigin.address_components[3].short_name
+        localStorage.movingToCountry = placeDestination.address_components[3].short_name
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
         this.checkEntriesAndColor()

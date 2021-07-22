@@ -953,7 +953,7 @@
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
-        localStorage.movingToCountry = placeOrigin.address_components[3].short_name
+        localStorage.movingToCountry = placeDestination.address_components[3].short_name
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
