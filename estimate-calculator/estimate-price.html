@@ -24,6 +24,11 @@
     },
     methods: {
       init: function () {
+        if (localStorage.movingFromCountry != 'US' && localStorage.movingToCountry != 'US') {
+          this.hideCalc()
+          console.log('no usa')
+          return
+        }
         if (localStorage.distance && localStorage.distance != '0') {
           this.distance = localStorage.distance
           console.log('distance')
