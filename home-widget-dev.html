@@ -946,6 +946,7 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
+        console.log(placeOrigin)
         if (placeOrigin.address_components[3]) {
           localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
         } else {
@@ -960,6 +961,7 @@
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
+        console.log(placeDestination)
         if (placeDestination.address_components[3]) {
           localStorage.movingToCountry = placeDestination.address_components[3].short_name
         } else {
