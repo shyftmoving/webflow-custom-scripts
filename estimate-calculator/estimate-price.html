@@ -140,22 +140,24 @@
         } else if (distance > 3501) {
           mileIndex = 10
         }
-        if (between(weight, 0, 99)) {
+        if (between(weight, 0, 250)) {
           weightIndex = 0
-        } else if (between(weight, 100, 299)) {
+        } else if (between(weight, 251, 500)) {
           weightIndex = 1
-        } else if (between(weight, 300, 499)) {
+        } else if (between(weight, 501, 1000)) {
           weightIndex = 2
-        } else if (between(weight, 500, 749)) {
+        } else if (between(weight, 1001, 2000)) {
           weightIndex = 3
-        } else if (between(weight, 750, 999)) {
+        } else if (between(weight, 2001, 3000)) {
           weightIndex = 4
-        } else if (between(weight, 1000, 4999)) {
+        } else if (between(weight, 3001, 4000)) {
           weightIndex = 5
-        } else if (between(weight, 5000, 6999)) {
+        } else if (between(weight, 4001, 5000)) {
           weightIndex = 6
-        } else if (weight >= 7000) {
+        } else if (between(weight, 5001, 7500)) {
           weightIndex = 7
+        } else if (weight >= 7500) {
+          weightIndex = 8
         }
         let basePrice = (weight / 100) * priceCalcTable[mileIndex][weightIndex]
         let priceGoMin = basePrice * 0.95
