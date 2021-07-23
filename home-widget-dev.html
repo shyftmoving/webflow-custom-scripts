@@ -953,7 +953,7 @@
             if (addressObj.types[j] === 'country') {
               console.log(addressObj.types[j]) // confirm that this is 'country'
               console.log(addressObj.long_name) // confirm that this is the country name
-              localStorage.movingFromCountry = placeOrigin.address_components[j].short_name
+              localStorage.movingFromCountry = addressObj.short_name
             }
           }
         }
@@ -979,7 +979,7 @@
             if (addressObj.types[j] === 'country') {
               console.log(addressObj.types[j]) // confirm that this is 'country'
               console.log(addressObj.long_name) // confirm that this is the country name
-              localStorage.movingToCountry = placeDestination.address_components[j].short_name
+              localStorage.movingToCountry = addressObj.short_name
             }
           }
         }
