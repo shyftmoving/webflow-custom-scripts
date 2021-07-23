@@ -946,7 +946,11 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
-        localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
+        if (placeOrigin.address_components[3]) {
+          localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
+        } else {
+          localStorage.movingFromCountry = 'No location'
+        }
         this.movingFrom = placeOrigin.formatted_address
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
@@ -957,6 +961,11 @@
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
         localStorage.movingToCountry = placeDestination.address_components[3].short_name
+        if (placeDestination.address_components[3]) {
+          localStorage.movingToCountry = placeDestination.address_components[3].short_name
+        } else {
+          localStorage.movingFromCountry = 'No location'
+        }
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
