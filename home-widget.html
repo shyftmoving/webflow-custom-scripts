@@ -964,6 +964,7 @@
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
         this.checkEntriesAndColor()
+        this.dataComplete()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
@@ -986,6 +987,7 @@
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
         this.checkEntriesAndColor()
+        this.dataComplete()
         this.showSizeModal = false
         this.showDateModal = true
       })
