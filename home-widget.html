@@ -866,7 +866,10 @@
           localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // growth flow or regular Home page flow
-          if (window.location.href == 'https://www.shyftmoving.com/free-quotes') {
+          if (
+            window.location.href == 'https://www.shyftmoving.com/free-quotes' ||
+            window.location.href == 'https://shyft-moving-marketing-si-6246e38c72547.webflow.io/free-quotes'
+          ) {
             window.location.href = '/get-free-quote'
           } else {
             window.location.href = '/get-quote'
@@ -943,8 +946,22 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
+        console.log(placeOrigin)
+        for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
+          var addressObj = placeOrigin.address_components[i]
+          for (var j = 0; j < addressObj.types.length; j += 1) {
+            if (addressObj.types[j] === 'country') {
+              localStorage.movingFromCountry = addressObj.short_name
+            }
+          }
+        }
+
+        // if (placeOrigin.address_components[3]) {
+        //   localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
+        // } else {
+        //   localStorage.movingFromCountry = 'No location'
+        // }
         this.movingFrom = placeOrigin.formatted_address
-        localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
         this.checkEntriesAndColor()
@@ -953,8 +970,21 @@
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
+        console.log(placeDestination)
+        for (var i = 0; i < placeDestination.address_components.length; i += 1) {
+          var addressObj = placeDestination.address_components[i]
+          for (var j = 0; j < addressObj.types.length; j += 1) {
+            if (addressObj.types[j] === 'country') {
+              localStorage.movingToCountry = addressObj.short_name
+            }
+          }
+        }
+        // if (placeDestination.address_components[3]) {
+        //   localStorage.movingToCountry = placeDestination.address_components[3].short_name
+        // } else {
+        //   localStorage.movingToCountry = 'No location'
+        // }
         this.movingTo = placeDestination.formatted_address
-        localStorage.movingToCountry = placeDestination.address_components[3].short_name
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
         this.checkEntriesAndColor()
