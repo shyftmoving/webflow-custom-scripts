@@ -946,7 +946,6 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
-        console.log(placeOrigin)
         for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
           var addressObj = placeOrigin.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
@@ -970,7 +969,6 @@
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
-        console.log(placeDestination)
         for (var i = 0; i < placeDestination.address_components.length; i += 1) {
           var addressObj = placeDestination.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
