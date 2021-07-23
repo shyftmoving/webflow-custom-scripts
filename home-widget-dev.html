@@ -963,7 +963,7 @@
         if (placeDestination.address_components[3]) {
           localStorage.movingToCountry = placeDestination.address_components[3].short_name
         } else {
-          localStorage.movingFromCountry = 'No location'
+          localStorage.movingToCountry = 'No location'
         }
         this.movingTo = placeDestination.formatted_address
         this.movingToLat = placeDestination.geometry.location.lat()
