@@ -764,7 +764,7 @@
               />
               <label for="3bedroom">3 bedrooms</label>
             </li>
-            <li>
+            <li li v-if="movingSize.moveType == 'House'">
               <input
                 v-model="movingSize.moveObjects"
                 type="radio"
