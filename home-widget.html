@@ -946,10 +946,14 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
+        console.log(placeOrigin)
         for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
           var addressObj = placeOrigin.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
+              console.log(addressObj.types[j]) // confirm that this is 'country'
+              console.log(addressObj.long_name) // confirm that this is the country name
+              console.log(addressObj.short_name) // confirm that this is the country name
               localStorage.movingFromCountry = addressObj.short_name
             }
           }
@@ -964,16 +968,19 @@
         this.movingFromLat = placeOrigin.geometry.location.lat()
         this.movingFromLng = placeOrigin.geometry.location.lng()
         this.checkEntriesAndColor()
-        this.dataComplete()
         this.$refs['destination'].focus()
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
+        console.log(placeDestination)
         for (var i = 0; i < placeDestination.address_components.length; i += 1) {
           var addressObj = placeDestination.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
+              console.log(addressObj.types[j]) // confirm that this is 'country'
+              console.log(addressObj.long_name) // confirm that this is the country name
+              console.log(addressObj.short_name) // confirm that this is the country name
               localStorage.movingToCountry = addressObj.short_name
             }
           }
@@ -987,7 +994,6 @@
         this.movingToLat = placeDestination.geometry.location.lat()
         this.movingToLng = placeDestination.geometry.location.lng()
         this.checkEntriesAndColor()
-        this.dataComplete()
         this.showSizeModal = false
         this.showDateModal = true
       })
