@@ -50,11 +50,6 @@
             return
           }
           this.weight = this.calcWeight(movingSize.moveType, movingSize.moveObjects)
-          if (this.weight < 1) {
-            this.hideCalc()
-            console.log('weight less then 1')
-            return
-          }
         } else {
           this.hideCalc()
           console.log('no moving size')
@@ -64,6 +59,11 @@
         this.calculate()
       },
       calculate: function () {
+        if (this.weight < 1) {
+          this.hideCalc()
+          console.log('weight less then 1')
+          return
+        }
         const prices = this.getPrice(this.distance, this.weight)
         this.priceGoMin = this.roundTo50(parseInt(prices[0]))
         this.priceGoMax = this.roundTo50(parseInt(prices[1]))
