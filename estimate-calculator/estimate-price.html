@@ -50,6 +50,11 @@
             return
           }
           this.weight = this.calcWeight(movingSize.moveType, movingSize.moveObjects)
+          if (this.weight < 1) {
+            this.hideCalc()
+            console.log('house/studio')
+            return
+          }
         } else {
           this.hideCalc()
           console.log('no moving size')
