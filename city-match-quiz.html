@@ -1,586 +1,691 @@
-    <style>
-      .next-btn {
-        background-color: #ff005c;
-        border-radius: 20px;
-        padding: 16px 32px;
-        color: #fff;
-        text-align: center;
-        margin: 50px auto;
-        cursor: pointer;
-        transition: all 0.2s;
-        max-width: 300px;
-      }
-      .next-btn:hover {
-        background-color: #bd0045;
-      }
-      h2.question {
-        color: #0e30a8;
-        font-size: 2em;
-        font-weight: 700;
-        text-align: center;
-      }
-      .question-wrapper {
-        position: relative;
-      }
-      .quiestion-answers__wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        min-height: 400px;
-      }
-      .questions-answers__single--wrapper {
-        width: 250px;
-        height: 150px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #686868;
-        border-radius: 20px;
-        margin: 16px;
-        padding: 12px;
-        cursor: pointer;
-      }
-      .questions-answers__single--text {
-        color: #fff;
-        font-size: 1.2em;
-        font-weight: 700;
-        text-align: center;
-      }
-      .question-footer {
-        background-color: #0e30a8;
-        display: inline-block;
-        border-radius: 20px;
-        position: absolute;
-        right: 10px;
-      }
-      .question-footer__nav {
-        color: #fff;
-        display: inline-block;
-        font-size: 1.1em;
-        font-weight: 600;
-        border-right: 1px solid #899ad4;
-        border-left: 1px solid #899ad4;
-        height: 30px;
-        padding: 0 20px;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .question-footer__back,
-      .question-footer__forward {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 8px;
-        cursor: pointer;
-      }
-      .question-footer__back img,
-      .question-footer__forward img {
-        width: 10px;
-        height: 15px;
-        position: relative;
-        top: 1px;
-      }
-      .animated {
-        transition-duration: 0.15s;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="quiz-wrapper">
-      <transition
-        :duration="{ enter: 500, leave: 300 }"
-        enter-active-class="animated zoomIn"
-        leave-active-class="animated zoomOut"
-        mode="out-in"
-      >
-        <div class="question-wrapper">
-          <h2 class="question">{{questions[questionIndex].question}}</h2>
-          <div class="quiestion-answers__wrapper">
-            <div
-              v-for="(answers, index) in questions[questionIndex].answers"
-              @click="markAnswer(answers, index)"
-              class="questions-answers__single--wrapper"
-            >
-              <div class="questions-answers__single--text">{{answers.text}}</div>
-            </div>
-          </div>
-          <div @click="next" class="next-btn">Next</div>
-          <div class="question-footer">
-            <div @click="prev" class="question-footer__back">
-              <img
-                src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b5ba6204782c91000d7ed6_quiz-carret-prev.svg"
-                alt="Previous question"
-              />
-            </div>
-            <div class="question-footer__nav">{{questionIndex+1}} of {{questions.length}}</div>
-            <div @click="next" class="question-footer__forward">
-              <img
-                src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b5ba62ca5d3a775b6e83f1_quiz-carret-next.svg"
-                alt="Next question"
-              />
-            </div>
+<!-- REMOVE FOR PRODUCTION -->
+<head>
+  <!-- REMOVE FOR PRODUCTION  end -->
+  <style>
+    .next-btn {
+      background-color: #ff005c;
+      border-radius: 20px;
+      padding: 16px 32px;
+      color: #fff;
+      text-align: center;
+      margin: 50px auto;
+      cursor: pointer;
+      transition: all 0.2s;
+      max-width: 300px;
+    }
+    .next-btn:hover {
+      background-color: #bd0045;
+    }
+    h2.question {
+      color: #0e30a8;
+      font-size: 2em;
+      font-weight: 700;
+      text-align: center;
+    }
+    .question-wrapper {
+      position: relative;
+    }
+    .quiestion-answers__wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+    .questions-answers__single--wrapper {
+      width: 250px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #686868;
+      border-radius: 20px;
+      margin: 16px;
+      padding: 12px;
+      cursor: pointer;
+    }
+    .questions-answers__single--text {
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 700;
+      text-align: center;
+    }
+    .question-footer {
+      background-color: #0e30a8;
+      display: inline-block;
+      border-radius: 20px;
+      position: absolute;
+      right: 10px;
+    }
+    .question-footer__nav {
+      color: #fff;
+      display: inline-block;
+      font-size: 1.1em;
+      font-weight: 600;
+      border-right: 1px solid #899ad4;
+      border-left: 1px solid #899ad4;
+      height: 30px;
+      padding: 0 20px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .question-footer__back,
+    .question-footer__forward {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 8px;
+      cursor: pointer;
+    }
+    .question-footer__back img,
+    .question-footer__forward img {
+      width: 10px;
+      height: 15px;
+      position: relative;
+      top: 1px;
+    }
+    .animated {
+      transition-duration: 0.15s;
+    }
+    .selected-answer {
+      background-color: forestgreen;
+    }
+  </style>
+  <!-- REMOVE FOR PRODUCTION -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <!-- REMOVE FOR PRODUCTION  end -->
+</head>
+<body>
+  <div id="quiz-wrapper">
+    <transition
+      :duration="{ enter: 500, leave: 300 }"
+      enter-active-class="animated zoomIn"
+      leave-active-class="animated zoomOut"
+      mode="out-in"
+    >
+      <div v-if="!showResult" class="question-wrapper">
+        <h2 class="question">{{questions[questionIndex].question}}</h2>
+        <div class="quiestion-answers__wrapper">
+          <div
+            v-for="(answers, index) in questions[questionIndex].answers"
+            @click="markAnswer(answers, index)"
+            class="questions-answers__single--wrapper"
+            :class="{ 'selected-answer' : questions[questionIndex].answered === index}"
+          >
+            <div class="questions-answers__single--text">{{answers.text}}</div>
           </div>
         </div>
-      </transition>
-    </div>
-    <!-- --------------- Vue code------------------------- -->
-    <script>
-      var app = new Vue({
-        el: '#quiz-wrapper',
-        data: {
-          questions: [
-            {
-              qNumber: 1,
-              question: 'Where do you see yourself?',
-              answers: [
-                {
-                  text: 'In the states',
-                  img: '#',
-                  result: 1
-                },
-                {
-                  text: 'The world is my oyster',
-                  img: '#',
-                  result: 2
-                }
-              ]
-            },
-            {
-              qNumber: 2,
-              question: 'Are you…',
-              answers: [
-                {
-                  text: 'Single and ready to mingle',
-                  img: '#',
-                  result: ['Washington DC', 'Nashville', 'Australia', 'UAE']
-                },
-                {
-                  text: 'Living with my partner',
-                  img: '#',
-                  result: ['Chicago', 'UK']
-                },
-                {
-                  text: 'It’s complicated',
-                  img: '#',
-                  result: ['San Francisco', 'Miami', 'Japan', 'Netherlands']
-                },
-                {
-                  text: 'Starting a family',
-                  img: '#',
-                  result: ['Austin', 'Luxembourg', 'Ireland']
-                },
-                {
-                  text: 'Living with my family',
-                  img: '#',
-                  result: ['Dallas', 'Denver', 'Germany', 'Switzerland']
-                },
-                {
-                  text: 'Single – but actively looking',
-                  img: '#',
-                  result: ['Atlanta', 'Seattle', 'France']
-                },
-                {
-                  text: 'In a long-distance relationship',
-                  img: '#',
-                  result: ['New York', 'Los Angeles', 'Spain', 'Singapore']
-                }
-              ]
-            },
-            {
-              qNumber: 3,
-              question: 'What industry are you in?',
-              answers: [
-                {
-                  text: 'Technology',
-                  img: '#',
-                  result: ['Austin', 'Seattle', 'Luxembourg']
-                },
-                {
-                  text: 'Telecommunications',
-                  img: '#',
-                  result: ['Dallas', 'UAE']
-                },
-                {
-                  text: 'Healthcare',
-                  img: '#',
-                  result: ['Chicago', 'Germany']
-                },
-                {
-                  text: 'Sales',
-                  img: '#',
-                  result: ['San Francisco', 'Singapore']
-                },
-                {
-                  text: 'Real Estate',
-                  img: '#',
-                  result: ['Denver', 'Nashville', 'Japan']
-                },
-                {
-                  text: 'Marketing',
-                  img: '#',
-                  result: ['New York', 'UK']
-                },
-                {
-                  text: 'Creative industries',
-                  img: '#',
-                  result: ['Los Angeles', 'Netherlands']
-                },
-                {
-                  text: 'Financial',
-                  img: '#',
-                  result: ['Washington DC', 'Switzerland']
-                },
-                {
-                  text: 'Travel & Tourism',
-                  img: '#',
-                  result: ['Miami', 'Spain', 'Australia', 'France']
-                },
-                {
-                  text: 'Other',
-                  img: '#',
-                  result: ['Atlanta', 'Ireland']
-                }
-              ]
-            },
-            {
-              qNumber: 4,
-              question: 'What kind of weather do you prefer?',
-              answers: [
-                {
-                  text: 'Long cold winters and cool summers',
-                  img: '#',
-                  result: ['Denver', 'San Francisco', 'Seattle', 'Netherlands']
-                },
-                {
-                  text: 'A diversity of seasons – spring, summer, fall, winter',
-                  img: '#',
-                  result: ['New York', 'Chicago', 'Atlanta', 'UK', 'Ireland', 'Luxembourg', 'Switzerland']
-                },
-                {
-                  text: 'Really cold winters, and really hot summers',
-                  img: '#',
-                  result: ['Dallas', 'Austin', 'Nashville', 'Washington DC', 'Germany', 'France', 'Japan']
-                },
-                {
-                  text: 'I want to be laying by a pool year-round',
-                  img: '#',
-                  result: ['Miami', 'Los Angeles', 'UAE', 'Spain', 'Australia', 'Singapore']
-                }
-              ]
-            },
-            {
-              qNumber: 5,
-              question: 'What’s a perfect weekend? ',
-              answers: [
-                {
-                  text: 'Sports game and a bar ',
-                  img: '#',
-                  result: ['Chicago', 'Atlanta', 'Nashville', 'UK', 'Germany', 'Australia', 'Ireland']
-                },
-                {
-                  text: 'Start off at the beach, end up in a nightclub',
-                  img: '#',
-                  result: ['Miami', 'San Francisco', 'UAE', 'Spain', 'Singapore']
-                },
-                {
-                  text: 'Outside all day, hiking, swimming, playing sports, moving',
-                  img: '#',
-                  result: ['Los Angeles', 'Dallas', 'Switzerland']
-                },
-                {
-                  text: 'Home all day',
-                  img: '#',
-                  result: ['Denver', 'Austin', 'Luxembourg', 'Japan']
-                },
-                {
-                  text: 'Getting cultural at a museum and catching a show at the theatre',
-                  img: '#',
-                  result: ['New York', 'Seattle', 'Washington DC', 'France', 'Netherlands']
-                }
-              ]
-            },
-            {
-              qNumber: 6,
-              question: 'How are you getting places? ',
-              answers: [
-                {
-                  text: 'I’ll walk',
-                  img: '#',
-                  result: ['Miami', 'Nashville', 'UK', 'Luxembourg', 'Switzerland']
-                },
-                {
-                  text: 'Take the bus or subway',
-                  img: '#',
-                  result: ['New York', 'Chicago', 'Washington DC', 'Germany', 'France', 'Ireland', 'Singapore']
-                },
-                {
-                  text: 'Drive',
-                  img: '#',
-                  result: ['Los Angeles', 'Atlanta', 'Austin', 'Denver', 'Dallas', 'UAE', 'Australia']
-                },
-                {
-                  text: 'Cab, uber or Lyft',
-                  img: '#',
-                  result: ['Seattle', 'San Francisco', 'Spain', 'Netherlands', 'Japan']
-                }
-              ]
-            },
-            {
-              qNumber: 7,
-              question: 'What kind of home can you see yourself living in? ',
-              answers: [
-                {
-                  text: 'Busy centre in an apartment with roommates ',
-                  img: '#',
-                  result: ['New York', 'Austin', 'UAE', 'UK', 'Netherlands']
-                },
-                {
-                  text: 'On my own in a centrally located apartment ',
-                  img: '#',
-                  result: ['Miami', 'Chicago', 'Seattle', 'Spain', 'Ireland', 'Japan', 'Switzerland']
-                },
-                {
-                  text: 'I dream of suburbia, out of the hustle and bustle with loads of space',
-                  img: '#',
-                  result: ['Atlanta ', 'Washington DC', 'San Francisco', 'Germany', 'Luxembourg']
-                },
-                {
-                  text: 'On a ranch somewhere',
-                  img: '#',
-                  result: ['Denver', 'Dallas', 'Nashville', 'France']
-                },
-                {
-                  text: 'A bungalow by the beach',
-                  img: '#',
-                  result: ['Los Angeles', 'Australia', 'Singapore']
-                }
-              ]
-            },
-            {
-              qNumber: 8,
-              question: 'How important is culture to you?',
-              answers: [
-                {
-                  text: 'Life’s all about soaking in the culture',
-                  img: '#',
-                  result: ['Washington DC', 'San Francisco', 'Nashville', 'France', 'Spain', 'Netherlands']
-                },
-                {
-                  text: 'I’ll get cultural once in a while with a trip to the museum',
-                  result: ['Miami', 'New York', 'Seattle', 'Japan', 'UK', 'Germany']
-                },
-                {
-                  text: 'If family or friends are into it, I’ll tag along',
-                  img: '#',
-                  result: ['Chicago', 'Denver', 'Los Angeles', 'Ireland', 'Switzerland']
-                },
-                {
-                  text: 'Nah, I’d prefer to spend my time on other things',
-                  img: '#',
-                  result: ['Austin', 'Dallas', 'UAE', 'Australia', 'Luxembourg', 'Singapore']
-                }
-              ]
-            },
-            {
-              qNumber: 9,
-              question: 'How important are sports to you? ',
-              answers: [
-                {
-                  text: 'I watch sports every day and play regularly',
-                  img: '#',
-                  result: ['New York', 'Chicago', 'UK', 'Germany', 'Australia', 'Ireland']
-                },
-                {
-                  text: 'I like to go to the gym ',
-                  img: '#',
-                  result: ['Miami', 'San Francisco', 'Denver', 'Los Angeles', 'UAE']
-                },
-                {
-                  text: 'I neither watch nor play any sports',
-                  img: '#',
-                  result: ['Austin', 'Seattle', 'Nashville', 'Spain', 'Luxembourg', 'Switzerland', 'Japan']
-                },
-                {
-                  text: 'I only watch sports on TV ',
-                  img: '#',
-                  result: ['Atlanta ', 'Washington DC', 'Dallas', 'Singapore', 'Netherlands']
-                }
-              ]
-            },
-            {
-              qNumber: 10,
-              question: 'What are your priorities right now? ',
-              answers: [
-                {
-                  text: 'Exploring the world',
-                  img: '#',
-                  result: ['Washington DC', 'Nashville', 'Atlanta ', 'Seattle', 'UAE', 'Singapore']
-                },
-                {
-                  text: 'Living somewhere interesting ',
-                  img: '#',
-                  result: [
-                    'New York',
-                    'Los Angeles',
-                    'San Francisco',
-                    'Miami',
-                    'Spain',
-                    'Germany',
-                    'France',
-                    'Netherlands',
-                    'Japan'
-                  ]
-                },
-                {
-                  text: 'Living comfortably and raising a family ',
-                  img: '#',
-                  result: ['Dallas', 'Denver', 'Luxembourg', 'Switzerland', 'Australia']
-                },
-                {
-                  text: 'Being close to family',
-                  img: '#',
-                  result: ['Chicago', 'Austin', 'UK', 'Ireland']
-                }
-              ]
-            },
-            {
-              qNumber: 11,
-              question: 'If you could choose any era to live in, which would it be? ',
-              answers: [
-                {
-                  text: '80s ',
-                  img: '#',
-                  result: ['New York', 'Dallas', 'UK', 'Ireland']
-                },
-                {
-                  text: '90s ',
-                  img: '#',
-                  result: ['Los Angeles', 'Miami', 'Chicago', 'Spain', 'Germany', 'France', 'Switzerland']
-                },
-                {
-                  text: 'Present',
-                  img: '#',
-                  result: ['Washington DC', 'Seattle', 'Denver', 'Nashville', 'Singapore', 'Australia', 'Netherlands']
-                },
-                {
-                  text: 'Future',
-                  img: '#',
-                  result: ['San Francisco', 'Austin', 'Atlanta', 'UAE', 'Japan', 'Luxembourg']
-                }
-              ]
-            },
-            {
-              qNumber: 12,
-              question: 'What will you do if your air-conditioning stopped working this summer?',
-              answers: [
-                {
-                  text: 'I’d fix it myself',
-                  img: '#',
-                  result: ['Chicago', 'Atlanta ', 'Denver', 'Nashville', 'UK', 'Germany', 'France']
-                },
-                {
-                  text: 'I’d call an expert',
-                  img: '#',
-                  result: [
-                    'New York',
-                    'Miami',
-                    'Washington DC',
-                    'Los Angeles',
-                    'Luxembourg',
-                    'Singapore',
-                    'Japan',
-                    'Switzerland'
-                  ]
-                },
-                {
-                  text: 'I’d open the windows – c’est la vie',
-                  img: '#',
-                  result: ['Seattle', 'San Francisco', 'Spain', 'Ireland', 'Netherlands']
-                },
-                {
-                  text: 'I’d move',
-                  img: '#',
-                  result: ['Austin', 'Dallas', 'UAE', 'Australia']
-                }
-              ]
-            },
-            {
-              qNumber: 13,
-              question: 'You finally get to take a vacation, but it’s raining all day, every day. How will you feel?',
-              answers: [
-                {
-                  text: 'Great! I love spending time inside',
-                  img: '#',
-                  result: ['Atlanta ', 'Austin ', 'Denver', 'Germany', 'Luxembourg']
-                },
-                {
-                  text: 'I guess it’s time to break in my new raincoat',
-                  img: '#',
-                  result: ['New York', 'Seattle ', 'San Francisco', 'UK', 'Australia', 'Singapore']
-                },
-                {
-                  text: 'I’ll be miserable, hoping for the sun',
-                  img: '#',
-                  result: ['Miami', 'Los Angeles ', 'Dallas', 'UAE', 'Spain', 'Japan ']
-                },
-                {
-                  text: 'I won’t let that spoil my vacation – bring on indoor activities',
-                  img: '#',
-                  result: ['Chicago', 'Washington DC ', 'Nashville', 'Ireland', 'France', 'Netherlands', 'Switzerland']
-                }
-              ]
-            },
-            {
-              qNumber: 14,
-              question: 'What kind of a scenic background do you prefer when you take photos?',
-              answers: [
-                {
-                  text: 'Mountains',
-                  img: '#',
-                  result: ['Denver', 'France', 'Switzerland', 'Ireland']
-                },
-                {
-                  text: 'Green screen',
-                  img: '#',
-                  result: ['Austin', 'San Francisco ', 'Japan', 'Luxembourg']
-                },
-                {
-                  text: 'City',
-                  img: '#',
-                  result: ['Chicago', 'Atlanta', 'New York', 'Washington DC', 'Seattle', 'UK', 'Germany', 'Netherlands']
-                },
-                {
-                  text: 'Ocean',
-                  img: '#',
-                  result: ['Miami', 'Los Angeles ', 'Spain', 'Australia', 'Singapore']
-                },
-                {
-                  text: 'Desert',
-                  img: '#',
-                  result: ['Dallas', 'Nashville ', 'UAE']
-                }
-              ]
-            }
-          ],
-          answers: [],
-          questionIndex: 0
-        },
-        methods: {
-          next: function () {
-            if (this.questionIndex < this.questions.length - 1) {
-              this.questionIndex++
-            }
+        <div @click="next" class="next-btn" v-if="questionIndex+1 !== questions.length">Next</div>
+        <div @click="result" class="next-btn" v-if="questionIndex+1 === questions.length">Calculate result</div>
+        <div v-if="!showResult" class="question-footer">
+          <div @click="prev" class="question-footer__back">
+            <img
+              src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b5ba6204782c91000d7ed6_quiz-carret-prev.svg"
+              alt="Previous question"
+            />
+          </div>
+          <div class="question-footer__nav">{{questionIndex+1}} of {{questions.length}}</div>
+          <div @click="next" class="question-footer__forward">
+            <img
+              src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60b5ba62ca5d3a775b6e83f1_quiz-carret-next.svg"
+              alt="Next question"
+            />
+          </div>
+        </div>
+      </div>
+      <div v-if="showResult" class="result">{{ resultArr }}</div>
+    </transition>
+  </div>
+  <!-- --------------- Vue code------------------------- -->
+  <script>
+    var app = new Vue({
+      el: '#quiz-wrapper',
+      data: {
+        questions: [
+          {
+            qNumber: 1,
+            question: 'Where do you see yourself?',
+            answered: false,
+            answers: [
+              {
+                text: 'In the states',
+                img: '#',
+                result: 'USA'
+              },
+              {
+                text: 'The world is my oyster',
+                img: '#',
+                result: 'World'
+              }
+            ]
           },
-          prev: function () {
-            if (this.questionIndex > 0) {
-              this.questionIndex--
-            }
+          {
+            qNumber: 2,
+            question: 'Are you…',
+            answered: false,
+            answers: [
+              {
+                text: 'Single and ready to mingle',
+                img: '#',
+                result: ['Washington DC', 'Nashville', 'Australia', 'UAE']
+              },
+              {
+                text: 'Living with my partner',
+                img: '#',
+                result: ['Chicago', 'UK']
+              },
+              {
+                text: 'It’s complicated',
+                img: '#',
+                result: ['San Francisco', 'Miami', 'Japan', 'Netherlands']
+              },
+              {
+                text: 'Starting a family',
+                img: '#',
+                result: ['Austin', 'Luxembourg', 'Ireland']
+              },
+              {
+                text: 'Living with my family',
+                img: '#',
+                result: ['Dallas', 'Denver', 'Germany', 'Switzerland']
+              },
+              {
+                text: 'Single – but actively looking',
+                img: '#',
+                result: ['Atlanta', 'Seattle', 'France']
+              },
+              {
+                text: 'In a long-distance relationship',
+                img: '#',
+                result: ['New York', 'Los Angeles', 'Spain', 'Singapore']
+              }
+            ]
           },
-          markAnswer: function (answers, index) {
-            console.log(answers)
+          {
+            qNumber: 3,
+            question: 'What industry are you in?',
+            answered: false,
+            answers: [
+              {
+                text: 'Technology',
+                img: '#',
+                result: ['Austin', 'Seattle', 'Luxembourg']
+              },
+              {
+                text: 'Telecommunications',
+                img: '#',
+                result: ['Dallas', 'UAE']
+              },
+              {
+                text: 'Healthcare',
+                img: '#',
+                result: ['Chicago', 'Germany']
+              },
+              {
+                text: 'Sales',
+                img: '#',
+                result: ['San Francisco', 'Singapore']
+              },
+              {
+                text: 'Real Estate',
+                img: '#',
+                result: ['Denver', 'Nashville', 'Japan']
+              },
+              {
+                text: 'Marketing',
+                img: '#',
+                result: ['New York', 'UK']
+              },
+              {
+                text: 'Creative industries',
+                img: '#',
+                result: ['Los Angeles', 'Netherlands']
+              },
+              {
+                text: 'Financial',
+                img: '#',
+                result: ['Washington DC', 'Switzerland']
+              },
+              {
+                text: 'Travel & Tourism',
+                img: '#',
+                result: ['Miami', 'Spain', 'Australia', 'France']
+              },
+              {
+                text: 'Other',
+                img: '#',
+                result: ['Atlanta', 'Ireland']
+              }
+            ]
+          },
+          {
+            qNumber: 4,
+            question: 'What kind of weather do you prefer?',
+            answered: false,
+            answers: [
+              {
+                text: 'Long cold winters and cool summers',
+                img: '#',
+                result: ['Denver', 'San Francisco', 'Seattle', 'Netherlands']
+              },
+              {
+                text: 'A diversity of seasons – spring, summer, fall, winter',
+                img: '#',
+                result: ['New York', 'Chicago', 'Atlanta', 'UK', 'Ireland', 'Luxembourg', 'Switzerland']
+              },
+              {
+                text: 'Really cold winters, and really hot summers',
+                img: '#',
+                result: ['Dallas', 'Austin', 'Nashville', 'Washington DC', 'Germany', 'France', 'Japan']
+              },
+              {
+                text: 'I want to be laying by a pool year-round',
+                img: '#',
+                result: ['Miami', 'Los Angeles', 'UAE', 'Spain', 'Australia', 'Singapore']
+              }
+            ]
+          },
+          {
+            qNumber: 5,
+            question: 'What’s a perfect weekend? ',
+            answered: false,
+            answers: [
+              {
+                text: 'Sports game and a bar ',
+                img: '#',
+                result: ['Chicago', 'Atlanta', 'Nashville', 'UK', 'Germany', 'Australia', 'Ireland']
+              },
+              {
+                text: 'Start off at the beach, end up in a nightclub',
+                img: '#',
+                result: ['Miami', 'San Francisco', 'UAE', 'Spain', 'Singapore']
+              },
+              {
+                text: 'Outside all day, hiking, swimming, playing sports, moving',
+                img: '#',
+                result: ['Los Angeles', 'Dallas', 'Switzerland']
+              },
+              {
+                text: 'Home all day',
+                img: '#',
+                result: ['Denver', 'Austin', 'Luxembourg', 'Japan']
+              },
+              {
+                text: 'Getting cultural at a museum and catching a show at the theatre',
+                img: '#',
+                result: ['New York', 'Seattle', 'Washington DC', 'France', 'Netherlands']
+              }
+            ]
+          },
+          {
+            qNumber: 6,
+            question: 'How are you getting places? ',
+            answered: false,
+            answers: [
+              {
+                text: 'I’ll walk',
+                img: '#',
+                result: ['Miami', 'Nashville', 'UK', 'Luxembourg', 'Switzerland']
+              },
+              {
+                text: 'Take the bus or subway',
+                img: '#',
+                result: ['New York', 'Chicago', 'Washington DC', 'Germany', 'France', 'Ireland', 'Singapore']
+              },
+              {
+                text: 'Drive',
+                img: '#',
+                result: ['Los Angeles', 'Atlanta', 'Austin', 'Denver', 'Dallas', 'UAE', 'Australia']
+              },
+              {
+                text: 'Cab, uber or Lyft',
+                img: '#',
+                result: ['Seattle', 'San Francisco', 'Spain', 'Netherlands', 'Japan']
+              }
+            ]
           }
+          /*
+          {
+            qNumber: 7,
+            question: 'What kind of home can you see yourself living in? ',
+            answered: false,
+            answers: [
+              {
+                text: 'Busy centre in an apartment with roommates ',
+                img: '#',
+                result: ['New York', 'Austin', 'UAE', 'UK', 'Netherlands']
+              },
+              {
+                text: 'On my own in a centrally located apartment ',
+                img: '#',
+                result: ['Miami', 'Chicago', 'Seattle', 'Spain', 'Ireland', 'Japan', 'Switzerland']
+              },
+              {
+                text: 'I dream of suburbia, out of the hustle and bustle with loads of space',
+                img: '#',
+                result: ['Atlanta ', 'Washington DC', 'San Francisco', 'Germany', 'Luxembourg']
+              },
+              {
+                text: 'On a ranch somewhere',
+                img: '#',
+                result: ['Denver', 'Dallas', 'Nashville', 'France']
+              },
+              {
+                text: 'A bungalow by the beach',
+                img: '#',
+                result: ['Los Angeles', 'Australia', 'Singapore']
+              }
+            ]
+          },
+          {
+            qNumber: 8,
+            question: 'How important is culture to you?',
+            answered: false,
+            answers: [
+              {
+                text: 'Life’s all about soaking in the culture',
+                img: '#',
+                result: ['Washington DC', 'San Francisco', 'Nashville', 'France', 'Spain', 'Netherlands']
+              },
+              {
+                text: 'I’ll get cultural once in a while with a trip to the museum',
+                result: ['Miami', 'New York', 'Seattle', 'Japan', 'UK', 'Germany']
+              },
+              {
+                text: 'If family or friends are into it, I’ll tag along',
+                img: '#',
+                result: ['Chicago', 'Denver', 'Los Angeles', 'Ireland', 'Switzerland']
+              },
+              {
+                text: 'Nah, I’d prefer to spend my time on other things',
+                img: '#',
+                result: ['Austin', 'Dallas', 'UAE', 'Australia', 'Luxembourg', 'Singapore']
+              }
+            ]
+          },
+          {
+            qNumber: 9,
+            question: 'How important are sports to you? ',
+            answered: false,
+            answers: [
+              {
+                text: 'I watch sports every day and play regularly',
+                img: '#',
+                result: ['New York', 'Chicago', 'UK', 'Germany', 'Australia', 'Ireland']
+              },
+              {
+                text: 'I like to go to the gym ',
+                img: '#',
+                result: ['Miami', 'San Francisco', 'Denver', 'Los Angeles', 'UAE']
+              },
+              {
+                text: 'I neither watch nor play any sports',
+                img: '#',
+                result: ['Austin', 'Seattle', 'Nashville', 'Spain', 'Luxembourg', 'Switzerland', 'Japan']
+              },
+              {
+                text: 'I only watch sports on TV ',
+                img: '#',
+                result: ['Atlanta ', 'Washington DC', 'Dallas', 'Singapore', 'Netherlands']
+              }
+            ]
+          },
+          {
+            qNumber: 10,
+            question: 'What are your priorities right now? ',
+            answered: false,
+            answers: [
+              {
+                text: 'Exploring the world',
+                img: '#',
+                result: ['Washington DC', 'Nashville', 'Atlanta ', 'Seattle', 'UAE', 'Singapore']
+              },
+              {
+                text: 'Living somewhere interesting ',
+                img: '#',
+                result: [
+                  'New York',
+                  'Los Angeles',
+                  'San Francisco',
+                  'Miami',
+                  'Spain',
+                  'Germany',
+                  'France',
+                  'Netherlands',
+                  'Japan'
+                ]
+              },
+              {
+                text: 'Living comfortably and raising a family ',
+                img: '#',
+                result: ['Dallas', 'Denver', 'Luxembourg', 'Switzerland', 'Australia']
+              },
+              {
+                text: 'Being close to family',
+                img: '#',
+                result: ['Chicago', 'Austin', 'UK', 'Ireland']
+              }
+            ]
+          },
+          {
+            qNumber: 11,
+            question: 'If you could choose any era to live in, which would it be? ',
+            answered: false,
+            answers: [
+              {
+                text: '80s ',
+                img: '#',
+                result: ['New York', 'Dallas', 'UK', 'Ireland']
+              },
+              {
+                text: '90s ',
+                img: '#',
+                result: ['Los Angeles', 'Miami', 'Chicago', 'Spain', 'Germany', 'France', 'Switzerland']
+              },
+              {
+                text: 'Present',
+                img: '#',
+                result: ['Washington DC', 'Seattle', 'Denver', 'Nashville', 'Singapore', 'Australia', 'Netherlands']
+              },
+              {
+                text: 'Future',
+                img: '#',
+                result: ['San Francisco', 'Austin', 'Atlanta', 'UAE', 'Japan', 'Luxembourg']
+              }
+            ]
+          },
+          {
+            qNumber: 12,
+            question: 'What will you do if your air-conditioning stopped working this summer?',
+            answered: false,
+            answers: [
+              {
+                text: 'I’d fix it myself',
+                img: '#',
+                result: ['Chicago', 'Atlanta ', 'Denver', 'Nashville', 'UK', 'Germany', 'France']
+              },
+              {
+                text: 'I’d call an expert',
+                img: '#',
+                result: [
+                  'New York',
+                  'Miami',
+                  'Washington DC',
+                  'Los Angeles',
+                  'Luxembourg',
+                  'Singapore',
+                  'Japan',
+                  'Switzerland'
+                ]
+              },
+              {
+                text: 'I’d open the windows – c’est la vie',
+                img: '#',
+                result: ['Seattle', 'San Francisco', 'Spain', 'Ireland', 'Netherlands']
+              },
+              {
+                text: 'I’d move',
+                img: '#',
+                result: ['Austin', 'Dallas', 'UAE', 'Australia']
+              }
+            ]
+          },
+          {
+            qNumber: 13,
+            question: 'You finally get to take a vacation, but it’s raining all day, every day. How will you feel?',
+            answered: false,
+            answers: [
+              {
+                text: 'Great! I love spending time inside',
+                img: '#',
+                result: ['Atlanta ', 'Austin ', 'Denver', 'Germany', 'Luxembourg']
+              },
+              {
+                text: 'I guess it’s time to break in my new raincoat',
+                img: '#',
+                result: ['New York', 'Seattle ', 'San Francisco', 'UK', 'Australia', 'Singapore']
+              },
+              {
+                text: 'I’ll be miserable, hoping for the sun',
+                img: '#',
+                result: ['Miami', 'Los Angeles ', 'Dallas', 'UAE', 'Spain', 'Japan ']
+              },
+              {
+                text: 'I won’t let that spoil my vacation – bring on indoor activities',
+                img: '#',
+                result: ['Chicago', 'Washington DC ', 'Nashville', 'Ireland', 'France', 'Netherlands', 'Switzerland']
+              }
+            ]
+          },
+          {
+            qNumber: 14,
+            question: 'What kind of a scenic background do you prefer when you take photos?',
+            answered: false,
+            answers: [
+              {
+                text: 'Mountains',
+                img: '#',
+                result: ['Denver', 'France', 'Switzerland', 'Ireland']
+              },
+              {
+                text: 'Green screen',
+                img: '#',
+                result: ['Austin', 'San Francisco ', 'Japan', 'Luxembourg']
+              },
+              {
+                text: 'City',
+                img: '#',
+                result: ['Chicago', 'Atlanta', 'New York', 'Washington DC', 'Seattle', 'UK', 'Germany', 'Netherlands']
+              },
+              {
+                text: 'Ocean',
+                img: '#',
+                result: ['Miami', 'Los Angeles ', 'Spain', 'Australia', 'Singapore']
+              },
+              {
+                text: 'Desert',
+                img: '#',
+                result: ['Dallas', 'Nashville ', 'UAE']
+              }
+            ]
+          } */
+        ],
+        answers: [],
+        questionIndex: 0,
+        selectedRegion: '',
+        showResult: false,
+        resultArr: []
+      },
+      methods: {
+        next: function () {
+          if (this.questionIndex < this.questions.length - 1) {
+            this.questionIndex++
+          }
+        },
+        prev: function () {
+          if (this.questionIndex > 0) {
+            this.questionIndex--
+          }
+        },
+        removeAnswersDOM: function () {
+          // remove 'selected-answer' class from all answers
+          var elems = document.querySelectorAll('.questions-answers__single--wrapper')
+          ;[].forEach.call(elems, function (el) {
+            el.classList.remove('selected-answer')
+          })
+        },
+        markAnswer: function (answers, index) {
+          /*TODO
+            1. is something selected
+                true - remove class "selected-answer" from all answers, remove answer from answers[]
+                      - add class "selected-answer" to target, add answer to answers[]
+
+                false - add class "selected-answer" to target, add answer to answers[]
+
+
+            */
+          // console.log(this.questionIndex)
+          // console.log(answers)
+          // console.log(index)
+          // console.log(event.target)
+
+          // ignore same answer
+          if (this.questions[this.questionIndex].answered !== index) {
+            if (this.questions[this.questionIndex].answered !== false) {
+              console.log('answered')
+              this.removeAnswersDOM()
+              // add 'selected-answer' class to target
+              event.target.classList.add('selected-answer')
+              if (typeof answers.result === 'string') {
+                this.selectedRegion = answers.result
+              } else {
+                // remove previous answer from answers[]
+                this.removeAnswer(
+                  this.questions[this.questionIndex].answers[this.questions[this.questionIndex].answered].result
+                )
+                // add new answer to answers[]
+                this.answers.push(...answers.result)
+              }
+
+              // add answered index to question
+              this.questions[this.questionIndex].answered = index
+            } else {
+              console.log('not answered')
+              this.questions[this.questionIndex].answered = true
+              event.target.classList.add('selected-answer')
+              // add answered index to question
+              this.questions[this.questionIndex].answered = index
+
+              // add answers to answers[] or to selected region
+              if (typeof answers.result === 'string') {
+                this.selectedRegion = answers.result
+              } else {
+                this.answers.push(...answers.result)
+              }
+            }
+          }
+        },
+        removeAnswer: function (arrToRemove) {
+          arrToRemove.forEach((answer) => {
+            const index = this.answers.indexOf(answer)
+            if (index > -1) {
+              this.answers.splice(index, 1)
+            }
+          })
+        },
+        result: function () {
+          this.showResult = true
+          console.log(this.answers)
+          const counts = {}
+          this.answers.forEach(function (x) {
+            counts[x] = (counts[x] || 0) + 1
+          })
+          console.log(counts)
+          this.resultArr = counts
         }
-      })
-    </script>
+      }
+    })
+  </script>
+</body>
