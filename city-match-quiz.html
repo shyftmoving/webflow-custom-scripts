@@ -113,8 +113,8 @@
             <div class="questions-answers__single--text">{{answers.text}}</div>
           </div>
         </div>
-        <div @click="next" class="next-btn" v-if="questionIndex+1 !== questions.length">Next</div>
-        <div @click="result" class="next-btn" v-if="questionIndex+1 === questions.length">Calculate result</div>
+        <!-- <div @click="next" class="next-btn" v-if="questionIndex+1 !== questions.length">Next</div> -->
+        <!-- <div @click="result" class="next-btn" v-if="questionIndex+1 === questions.length">Calculate result</div> -->
         <div v-if="!showResult" class="question-footer">
           <div @click="prev" class="question-footer__back">
             <img
@@ -360,7 +360,7 @@
               {
                 text: 'I dream of suburbia, out of the hustle and bustle with loads of space',
                 img: '#',
-                result: ['Atlanta ', 'Washington DC', 'San Francisco', 'Germany', 'Luxembourg']
+                result: ['Atlanta', 'Washington DC', 'San Francisco', 'Germany', 'Luxembourg']
               },
               {
                 text: 'On a ranch somewhere',
@@ -423,7 +423,7 @@
               {
                 text: 'I only watch sports on TV ',
                 img: '#',
-                result: ['Atlanta ', 'Washington DC', 'Dallas', 'Singapore', 'Netherlands']
+                result: ['Atlanta', 'Washington DC', 'Dallas', 'Singapore', 'Netherlands']
               }
             ]
           },
@@ -435,7 +435,7 @@
               {
                 text: 'Exploring the world',
                 img: '#',
-                result: ['Washington DC', 'Nashville', 'Atlanta ', 'Seattle', 'UAE', 'Singapore']
+                result: ['Washington DC', 'Nashville', 'Atlanta', 'Seattle', 'UAE', 'Singapore']
               },
               {
                 text: 'Living somewhere interesting ',
@@ -499,7 +499,7 @@
               {
                 text: 'I’d fix it myself',
                 img: '#',
-                result: ['Chicago', 'Atlanta ', 'Denver', 'Nashville', 'UK', 'Germany', 'France']
+                result: ['Chicago', 'Atlanta', 'Denver', 'Nashville', 'UK', 'Germany', 'France']
               },
               {
                 text: 'I’d call an expert',
@@ -535,22 +535,22 @@
               {
                 text: 'Great! I love spending time inside',
                 img: '#',
-                result: ['Atlanta ', 'Austin ', 'Denver', 'Germany', 'Luxembourg']
+                result: ['Atlanta', 'Austin', 'Denver', 'Germany', 'Luxembourg']
               },
               {
                 text: 'I guess it’s time to break in my new raincoat',
                 img: '#',
-                result: ['New York', 'Seattle ', 'San Francisco', 'UK', 'Australia', 'Singapore']
+                result: ['New York', 'Seattle', 'San Francisco', 'UK', 'Australia', 'Singapore']
               },
               {
                 text: 'I’ll be miserable, hoping for the sun',
                 img: '#',
-                result: ['Miami', 'Los Angeles ', 'Dallas', 'UAE', 'Spain', 'Japan ']
+                result: ['Miami', 'Los Angeles', 'Dallas', 'UAE', 'Spain', 'Japan']
               },
               {
                 text: 'I won’t let that spoil my vacation – bring on indoor activities',
                 img: '#',
-                result: ['Chicago', 'Washington DC ', 'Nashville', 'Ireland', 'France', 'Netherlands', 'Switzerland']
+                result: ['Chicago', 'Washington DC', 'Nashville', 'Ireland', 'France', 'Netherlands', 'Switzerland']
               }
             ]
           },
@@ -567,7 +567,7 @@
               {
                 text: 'Green screen',
                 img: '#',
-                result: ['Austin', 'San Francisco ', 'Japan', 'Luxembourg']
+                result: ['Austin', 'San Francisco', 'Japan', 'Luxembourg']
               },
               {
                 text: 'City',
@@ -577,12 +577,12 @@
               {
                 text: 'Ocean',
                 img: '#',
-                result: ['Miami', 'Los Angeles ', 'Spain', 'Australia', 'Singapore']
+                result: ['Miami', 'Los Angeles', 'Spain', 'Australia', 'Singapore']
               },
               {
                 text: 'Desert',
                 img: '#',
-                result: ['Dallas', 'Nashville ', 'UAE']
+                result: ['Dallas', 'Nashville', 'UAE']
               }
             ]
           }
@@ -597,6 +597,8 @@
         next: function () {
           if (this.questionIndex < this.questions.length - 1) {
             this.questionIndex++
+          } else {
+            this.result()
           }
         },
         prev: function () {
@@ -612,25 +614,9 @@
           })
         },
         markAnswer: function (answers, index) {
-          /*TODO
-            1. is something selected
-                true - remove class "selected-answer" from all answers, remove answer from answers[]
-                      - add class "selected-answer" to target, add answer to answers[]
-
-                false - add class "selected-answer" to target, add answer to answers[]
-
-
-            */
-          // console.log(this.questionIndex)
-          // console.log(answers)
-          // console.log(index)
-          // console.log(event.target)
-
           // ignore same answer
           if (this.questions[this.questionIndex].answered !== index) {
             if (this.questions[this.questionIndex].answered !== false) {
-              console.log('answered')
-              this.removeAnswersDOM()
               // add 'selected-answer' class to target
               event.target.classList.add('selected-answer')
               if (typeof answers.result === 'string') {
@@ -646,8 +632,8 @@
 
               // add answered index to question
               this.questions[this.questionIndex].answered = index
+              this.removeAnswersDOM()
             } else {
-              console.log('not answered')
               this.questions[this.questionIndex].answered = true
               event.target.classList.add('selected-answer')
               // add answered index to question
@@ -659,7 +645,9 @@
               } else {
                 this.answers.push(...answers.result)
               }
+              this.removeAnswersDOM()
             }
+            this.next()
           }
         },
         removeAnswer: function (arrToRemove) {
