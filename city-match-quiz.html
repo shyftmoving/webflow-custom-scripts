@@ -47,6 +47,7 @@
       font-size: 1.2em;
       font-weight: 700;
       text-align: center;
+      pointer-events: none;
     }
     .question-footer {
       background-color: #0e30a8;
@@ -105,7 +106,7 @@
         <div class="quiestion-answers__wrapper">
           <div
             v-for="(answers, index) in questions[questionIndex].answers"
-            @click="markAnswer(answers, index)"
+            @click.self="markAnswer(answers, index)"
             class="questions-answers__single--wrapper"
             :class="{ 'selected-answer' : questions[questionIndex].answered === index}"
           >
