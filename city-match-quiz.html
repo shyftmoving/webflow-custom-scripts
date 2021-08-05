@@ -1,5 +1,14 @@
+<!-- DELETE FOR PRODUCTION -->
+<head>
+  <!-- DELETE FOR PRODUCTION END -->
 
   <style>
+    * {
+      font-family: 'Silka webfont', sans-serif;
+    }
+    body {
+      margin: 0;
+    }
     .next-btn {
       background-color: #ff005c;
       border-radius: 20px;
@@ -90,8 +99,30 @@
     .selected-answer {
       background-color: forestgreen;
     }
+    .result {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610ba959141cc4a9e64c05e5_bg-result-nashville.jpeg');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .result h2 {
+      color: #fff;
+      font-size: 4em;
+    }
+    .result h3 {
+      color: #fff;
+      font-size: 2.4em;
+    }
   </style>
-
+  <!-- DELETE FOR PRODUCTION -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <!-- DELETE FOR PRODUCTION END -->
 </head>
 <body>
   <div id="quiz-wrapper">
@@ -131,7 +162,10 @@
           </div>
         </div>
       </div>
-      <div v-if="showResult" class="result">{{ resultArr }}</div>
+      <div v-if="showResult" class="result">
+        <h3>It’s time to shyft to</h3>
+        <h2>{{ winner }}</h2>
+      </div>
     </transition>
   </div>
   <!-- --------------- Vue code------------------------- -->
@@ -148,12 +182,12 @@
               {
                 text: 'In the states',
                 img: '#',
-                result: 'USA'
+                result: true
               },
               {
                 text: 'The world is my oyster',
                 img: '#',
-                result: 'World'
+                result: false
               }
             ]
           },
@@ -589,9 +623,23 @@
         ],
         answers: [],
         questionIndex: 0,
-        selectedRegion: '',
+        USAonly: true,
         showResult: false,
-        resultArr: []
+        USAcities: [
+          'Washington DC',
+          'Nashville',
+          'Atlanta',
+          'Seattle',
+          'Chicago',
+          'New York',
+          'Los Angeles',
+          'San Francisco',
+          'Miami',
+          'Austin',
+          'Dallas',
+          'Denver'
+        ],
+        winner: []
       },
       methods: {
         next: function () {
@@ -619,8 +667,8 @@
             if (this.questions[this.questionIndex].answered !== false) {
               // add 'selected-answer' class to target
               event.target.classList.add('selected-answer')
-              if (typeof answers.result === 'string') {
-                this.selectedRegion = answers.result
+              if (typeof answers.result === 'boolean') {
+                this.USAonly = answers.result
               } else {
                 // remove previous answer from answers[]
                 this.removeAnswer(
@@ -640,8 +688,8 @@
               this.questions[this.questionIndex].answered = index
 
               // add answers to answers[] or to selected region
-              if (typeof answers.result === 'string') {
-                this.selectedRegion = answers.result
+              if (typeof answers.result === 'boolean') {
+                this.USAonly = answers.result
               } else {
                 this.answers.push(...answers.result)
               }
@@ -660,13 +708,47 @@
         },
         result: function () {
           this.showResult = true
-          console.log(this.answers)
+          // sum answers by city/country
           const counts = {}
           this.answers.forEach(function (x) {
             counts[x] = (counts[x] || 0) + 1
           })
+          // filter answers by region
+          let regionFilteredCounts = {}
+          for (const property in counts) {
+            if (this.USAonly) {
+              if (this.USAcities.indexOf(property) > -1) {
+                regionFilteredCounts[property] = counts[property]
+              }
+            } else {
+              if (this.USAcities.indexOf(property) === -1) {
+                regionFilteredCounts[property] = counts[property]
+              }
+            }
+          }
+          // find answer with highest score
+          let highestScore = 0
+          let higestScoreResult = []
+          for (const property in regionFilteredCounts) {
+            if (regionFilteredCounts[property] > highestScore) {
+              highestScore = regionFilteredCounts[property]
+              higestScoreResult = [property]
+            } else if (regionFilteredCounts[property] === highestScore) {
+              higestScoreResult.push(property)
+            }
+          }
+          // TESTING
+          console.log(this.answers)
           console.log(counts)
-          this.resultArr = counts
+          console.log(higestScoreResult)
+          // TESTING END
+          // if multiple answers select one
+          if (higestScoreResult.length > 1) {
+            let num = Math.floor(Math.random() * higestScoreResult.length)
+            this.winner = higestScoreResult[num]
+          } else {
+            this.winner = higestScoreResult[0]
+          }
         }
       }
     })
