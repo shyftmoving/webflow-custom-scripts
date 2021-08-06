@@ -1,5 +1,4 @@
 
-
   <style>
     * {
       font-family: 'Silka webfont', sans-serif;
@@ -47,11 +46,16 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #686868;
+      background-color: #000000;
       border-radius: 20px;
       margin: 16px;
       padding: 12px;
       cursor: pointer;
+      background: rgb(0 0 0 / 40%);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-blend-mode: multiply;
     }
     .questions-answers__single--text {
       color: #fff;
@@ -134,12 +138,13 @@
     >
       <div v-if="!showResult" class="question-wrapper">
         <h2 class="question">{{questions[questionIndex].question}}</h2>
-        <div class="quiestion-answers__wrapper">
+        <div class="quiestion-answers__wrapper" >
           <div
             v-for="(answers, index) in questions[questionIndex].answers"
             @click.self="markAnswer(answers, index)"
             class="questions-answers__single--wrapper"
             :class="{ 'selected-answer' : questions[questionIndex].answered === index}"
+            v-bind:style="{ backgroundImage: 'url(' + answers.img + ')' }"
           >
             <div class="questions-answers__single--text">{{answers.text}}</div>
           </div>
@@ -181,12 +186,12 @@
             answers: [
               {
                 text: 'In the states',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3103d2bae3ac8efe40_bg-question-01-01.png',
                 result: true
               },
               {
                 text: 'The world is my oyster',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3103d2ba650a8efe41_bg-question-01-02.png',
                 result: false
               }
             ]
@@ -198,37 +203,37 @@
             answers: [
               {
                 text: 'Single and ready to mingle',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d31a023cff1a9b93a2c_bg-question-02-01.png',
                 result: ['Washington DC', 'Nashville', 'Australia', 'UAE']
               },
               {
                 text: 'Living with my partner',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d31845163b94884083a_bg-question-02-02.png',
                 result: ['Chicago', 'UK']
               },
               {
                 text: 'It’s complicated',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d315fd779096777d94b_bg-question-02-03.png',
                 result: ['San Francisco', 'Miami', 'Japan', 'Netherlands']
               },
               {
                 text: 'Starting a family',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d32a023cf25efb93a2d_bg-question-02-04.png',
                 result: ['Austin', 'Luxembourg', 'Ireland']
               },
               {
                 text: 'Living with my family',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d71f57f7c9d_bg-question-02-05.png',
                 result: ['Dallas', 'Denver', 'Germany', 'Switzerland']
               },
               {
                 text: 'Single – but actively looking',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3366cce12a6469108e_bg-question-02-06.png',
                 result: ['Atlanta', 'Seattle', 'France']
               },
               {
                 text: 'In a long-distance relationship',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3292065e6ef4eb62ae_bg-question-02-07.png',
                 result: ['New York', 'Los Angeles', 'Spain', 'Singapore']
               }
             ]
@@ -240,52 +245,52 @@
             answers: [
               {
                 text: 'Technology',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Austin', 'Seattle', 'Luxembourg']
               },
               {
                 text: 'Telecommunications',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Dallas', 'UAE']
               },
               {
                 text: 'Healthcare',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Chicago', 'Germany']
               },
               {
                 text: 'Sales',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['San Francisco', 'Singapore']
               },
               {
                 text: 'Real Estate',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Denver', 'Nashville', 'Japan']
               },
               {
                 text: 'Marketing',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['New York', 'UK']
               },
               {
                 text: 'Creative industries',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Los Angeles', 'Netherlands']
               },
               {
                 text: 'Financial',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Washington DC', 'Switzerland']
               },
               {
                 text: 'Travel & Tourism',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Miami', 'Spain', 'Australia', 'France']
               },
               {
                 text: 'Other',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d322dd63d2fda7f7c9c_bg-question-03-01.png',
                 result: ['Atlanta', 'Ireland']
               }
             ]
@@ -297,22 +302,22 @@
             answers: [
               {
                 text: 'Long cold winters and cool summers',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d36aa6f28a3ed5d0d32_bg-question-04-01.png',
                 result: ['Denver', 'San Francisco', 'Seattle', 'Netherlands']
               },
               {
                 text: 'A diversity of seasons – spring, summer, fall, winter',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d33e2c3de27eb5c50bc_bg-question-04-02.png',
                 result: ['New York', 'Chicago', 'Atlanta', 'UK', 'Ireland', 'Luxembourg', 'Switzerland']
               },
               {
                 text: 'Really cold winters, and really hot summers',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d331aa4957228d9a7d5_bg-question-04-03.png',
                 result: ['Dallas', 'Austin', 'Nashville', 'Washington DC', 'Germany', 'France', 'Japan']
               },
               {
                 text: 'I want to be laying by a pool year-round',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3466cce1c5136910b0_bg-question-04-04.png',
                 result: ['Miami', 'Los Angeles', 'UAE', 'Spain', 'Australia', 'Singapore']
               }
             ]
@@ -324,27 +329,27 @@
             answers: [
               {
                 text: 'Sports game and a bar ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d34dc4f770dbc02bccb_bg-question-05-01.png',
                 result: ['Chicago', 'Atlanta', 'Nashville', 'UK', 'Germany', 'Australia', 'Ireland']
               },
               {
                 text: 'Start off at the beach, end up in a nightclub',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3490cb91fdde741364_bg-question-05-02.png',
                 result: ['Miami', 'San Francisco', 'UAE', 'Spain', 'Singapore']
               },
               {
                 text: 'Outside all day, hiking, swimming, playing sports, moving',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d34dc4f77834b02bccc_bg-question-05-03.png',
                 result: ['Los Angeles', 'Dallas', 'Switzerland']
               },
               {
                 text: 'Home all day',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3403d2ba6bd88efe47_bg-question-05-04.png',
                 result: ['Denver', 'Austin', 'Luxembourg', 'Japan']
               },
               {
                 text: 'Getting cultural at a museum and catching a show at the theatre',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d345fd779fed877d94c_bg-question-05-05.png',
                 result: ['New York', 'Seattle', 'Washington DC', 'France', 'Netherlands']
               }
             ]
@@ -356,22 +361,22 @@
             answers: [
               {
                 text: 'I’ll walk',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d36d19ead66a982b202_bg-question-06-01.png',
                 result: ['Miami', 'Nashville', 'UK', 'Luxembourg', 'Switzerland']
               },
               {
                 text: 'Take the bus or subway',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3440201631fb9770a2_bg-question-06-02.png',
                 result: ['New York', 'Chicago', 'Washington DC', 'Germany', 'France', 'Ireland', 'Singapore']
               },
               {
                 text: 'Drive',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d35554ab08219793630_bg-question-06-03.png',
                 result: ['Los Angeles', 'Atlanta', 'Austin', 'Denver', 'Dallas', 'UAE', 'Australia']
               },
               {
                 text: 'Cab, uber or Lyft',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d35961c95d163ad8976_bg-question-06-04.png',
                 result: ['Seattle', 'San Francisco', 'Spain', 'Netherlands', 'Japan']
               }
             ]
@@ -383,27 +388,27 @@
             answers: [
               {
                 text: 'Busy centre in an apartment with roommates ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d34fad63a04eb58f032_bg-question-07-01.png',
                 result: ['New York', 'Austin', 'UAE', 'UK', 'Netherlands']
               },
               {
                 text: 'On my own in a centrally located apartment ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3655627271078725cc_bg-question-07-02.png',
                 result: ['Miami', 'Chicago', 'Seattle', 'Spain', 'Ireland', 'Japan', 'Switzerland']
               },
               {
                 text: 'I dream of suburbia, out of the hustle and bustle with loads of space',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d3540201669439770a4_bg-question-07-03.png',
                 result: ['Atlanta', 'Washington DC', 'San Francisco', 'Germany', 'Luxembourg']
               },
               {
                 text: 'On a ranch somewhere',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d2b9fb29741219941_bg-question-07-04.png',
                 result: ['Denver', 'Dallas', 'Nashville', 'France']
               },
               {
                 text: 'A bungalow by the beach',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d90cb913b147412f9_bg-question-07-05.png',
                 result: ['Los Angeles', 'Australia', 'Singapore']
               }
             ]
@@ -415,21 +420,22 @@
             answers: [
               {
                 text: 'Life’s all about soaking in the culture',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d1df23cfecf7c7fcd_bg-question-08-01.png',
                 result: ['Washington DC', 'San Francisco', 'Nashville', 'France', 'Spain', 'Netherlands']
               },
               {
                 text: 'I’ll get cultural once in a while with a trip to the museum',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2dcfbb69ae32692faf_bg-question-08-02.png',
                 result: ['Miami', 'New York', 'Seattle', 'Japan', 'UK', 'Germany']
               },
               {
                 text: 'If family or friends are into it, I’ll tag along',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d1df23c07067c7fcc_bg-question-08-03.png',
                 result: ['Chicago', 'Denver', 'Los Angeles', 'Ireland', 'Switzerland']
               },
               {
                 text: 'Nah, I’d prefer to spend my time on other things',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d66cce1294869100a_bg-question-08-04.png',
                 result: ['Austin', 'Dallas', 'UAE', 'Australia', 'Luxembourg', 'Singapore']
               }
             ]
@@ -441,22 +447,22 @@
             answers: [
               {
                 text: 'I watch sports every day and play regularly',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d57fcce98d8d8f391_bg-question-09-01.png',
                 result: ['New York', 'Chicago', 'UK', 'Germany', 'Australia', 'Ireland']
               },
               {
                 text: 'I like to go to the gym ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d57fcce98d8d8f391_bg-question-09-01.png',
                 result: ['Miami', 'San Francisco', 'Denver', 'Los Angeles', 'UAE']
               },
               {
                 text: 'I neither watch nor play any sports',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d57fcce98d8d8f391_bg-question-09-01.png',
                 result: ['Austin', 'Seattle', 'Nashville', 'Spain', 'Luxembourg', 'Switzerland', 'Japan']
               },
               {
                 text: 'I only watch sports on TV ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d57fcce98d8d8f391_bg-question-09-01.png',
                 result: ['Atlanta', 'Washington DC', 'Dallas', 'Singapore', 'Netherlands']
               }
             ]
@@ -468,12 +474,12 @@
             answers: [
               {
                 text: 'Exploring the world',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2e40201641b797709e_bg-question-10-01.png',
                 result: ['Washington DC', 'Nashville', 'Atlanta', 'Seattle', 'UAE', 'Singapore']
               },
               {
                 text: 'Living somewhere interesting ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2ee2c3de5b1c5c50ac_bg-question-10-02.png',
                 result: [
                   'New York',
                   'Los Angeles',
@@ -488,12 +494,12 @@
               },
               {
                 text: 'Living comfortably and raising a family ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2d82bc08ffb72a09af_bg-question-10-03.png',
                 result: ['Dallas', 'Denver', 'Luxembourg', 'Switzerland', 'Australia']
               },
               {
                 text: 'Being close to family',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2e3687ec1a842d7b5a_bg-question-10-04.png',
                 result: ['Chicago', 'Austin', 'UK', 'Ireland']
               }
             ]
@@ -505,22 +511,22 @@
             answers: [
               {
                 text: '80s ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2e5b03392132f4fa6d_bg-question-11-01.png',
                 result: ['New York', 'Dallas', 'UK', 'Ireland']
               },
               {
                 text: '90s ',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2e943de7aaea04bad6_bg-question-11-02.png',
                 result: ['Los Angeles', 'Miami', 'Chicago', 'Spain', 'Germany', 'France', 'Switzerland']
               },
               {
                 text: 'Present',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2eccd64cc7c0b94773_bg-question-11-03.png',
                 result: ['Washington DC', 'Seattle', 'Denver', 'Nashville', 'Singapore', 'Australia', 'Netherlands']
               },
               {
                 text: 'Future',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2eacbdd5bd43b4a86f_bg-question-11-04.png',
                 result: ['San Francisco', 'Austin', 'Atlanta', 'UAE', 'Japan', 'Luxembourg']
               }
             ]
@@ -532,12 +538,12 @@
             answers: [
               {
                 text: 'I’d fix it myself',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2ffb9ce219cb19fda7_bg-question-12-01.png',
                 result: ['Chicago', 'Atlanta', 'Denver', 'Nashville', 'UK', 'Germany', 'France']
               },
               {
                 text: 'I’d call an expert',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2f1df23c3d057c7fce_bg-question-12-02.png',
                 result: [
                   'New York',
                   'Miami',
@@ -551,12 +557,12 @@
               },
               {
                 text: 'I’d open the windows – c’est la vie',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d2fccd64c5b47b94775_bg-question-12-03.png',
                 result: ['Seattle', 'San Francisco', 'Spain', 'Ireland', 'Netherlands']
               },
               {
                 text: 'I’d move',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d30acbdd50155b4a871_bg-question-12-04.png',
                 result: ['Austin', 'Dallas', 'UAE', 'Australia']
               }
             ]
@@ -568,22 +574,22 @@
             answers: [
               {
                 text: 'Great! I love spending time inside',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d30ce81ee471741fd70_bg-question-13-01.png',
                 result: ['Atlanta', 'Austin', 'Denver', 'Germany', 'Luxembourg']
               },
               {
                 text: 'I guess it’s time to break in my new raincoat',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d30ce81ee471741fd70_bg-question-13-01.png',
                 result: ['New York', 'Seattle', 'San Francisco', 'UK', 'Australia', 'Singapore']
               },
               {
                 text: 'I’ll be miserable, hoping for the sun',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d30ce81ee471741fd70_bg-question-13-01.png',
                 result: ['Miami', 'Los Angeles', 'Dallas', 'UAE', 'Spain', 'Japan']
               },
               {
                 text: 'I won’t let that spoil my vacation – bring on indoor activities',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d30ce81ee471741fd70_bg-question-13-01.png',
                 result: ['Chicago', 'Washington DC', 'Nashville', 'Ireland', 'France', 'Netherlands', 'Switzerland']
               }
             ]
@@ -595,27 +601,27 @@
             answers: [
               {
                 text: 'Mountains',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d31cfbb69d198692fb2_bg-question-14-01.png',
                 result: ['Denver', 'France', 'Switzerland', 'Ireland']
               },
               {
                 text: 'Green screen',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d31539dfa8271ca3f42_bg-question-14-02.png',
                 result: ['Austin', 'San Francisco', 'Japan', 'Luxembourg']
               },
               {
                 text: 'City',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d312446d946675eff57_bg-question-14-03.png',
                 result: ['Chicago', 'Atlanta', 'New York', 'Washington DC', 'Seattle', 'UK', 'Germany', 'Netherlands']
               },
               {
                 text: 'Ocean',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d312dd63d30b97f7c9b_bg-question-14-04.png',
                 result: ['Miami', 'Los Angeles', 'Spain', 'Australia', 'Singapore']
               },
               {
                 text: 'Desert',
-                img: '#',
+                img: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/610d3d31402016dfaa9770a0_bg-question-14-05.png',
                 result: ['Dallas', 'Nashville', 'UAE']
               }
             ]
