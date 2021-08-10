@@ -205,7 +205,7 @@
           </div>
         </div>
       </div>
-      <div v-if="showResult" class="result">
+      <div v-if="showResult" class="result" :style="{ backgroundImage: 'url(' + resultBgImg[this.winner] + ')' }">
         <h3>It’s time to shyft to</h3>
         <h2>{{ winner }}</h2>
       </div>
@@ -700,7 +700,39 @@
           'Dallas',
           'Denver'
         ],
-        winner: []
+        winner: [],
+        resultBgImg: {
+          'Washington DC':
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816b4c64b17799106492_washington-dc.jpeg',
+          Nashville: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/611281690e37de1ce9d32f38_nashville.jpeg',
+          Atlanta: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128168cd4f3f81a05ce6f1_atlanta.jpeg',
+          Seattle: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816a5c8796243dbf93be_seattle.jpeg',
+          Chicago: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816881b89c23d3cfa74a_chicago.jpeg',
+          'New York': 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816a8f862f5a161f296b_new-york.jpeg',
+          'Los Angeles':
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816b832313b105328530_los-angeles.jpeg',
+          'San Francisco':
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128b1a98f26083098dab81_san-francisco.jpeg',
+          Miami: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816a690c4993dc06dccd_miami.jpeg',
+          Austin: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128168c36d3f66eed0d4f8_austin.jpeg',
+          Dallas: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128168c50c612f2ad1747a_dallas.jpeg',
+          Denver: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128169832313676d328515_denver.jpeg',
+          Spain: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816cffb1b4ea8821471c_spain.jpeg',
+          Germany: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128168261e408d0c7a6b6d_germany.jpeg',
+          France: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/611281688039a7d80f852cda_france.jpeg',
+          Netherlands:
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/611281685d86b352b06778da_amsterdam.jpeg',
+          Japan: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816aef730b398c6db3bc_japan.jpeg',
+          Luxembourg:
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816a690c4916d106dcce_luxembourg.jpeg',
+          Singapore: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816b7f1f74e0291d1411_singapore.jpeg',
+          Switzerland:
+            'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816bb5fb045c37200870_switzerland.jpeg',
+          UAE: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816cc38d4f4ba4c82cae_uae.jpeg',
+          UK: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128169c36d3f1319d0d4fa_london.jpeg',
+          Australia: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6112816997079e399090f627_australia.jpeg',
+          Ireland: 'https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/61128169c36d3f0b25d0d4f9_ireland.jpeg'
+        }
       },
       methods: {
         next: function () {
