@@ -82,6 +82,7 @@
     width: fit-content;
     position: relative;
     margin-top: 0;
+    cursor: pointer;
   }
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
@@ -565,7 +566,7 @@
 
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
-    <div class="home-widget__inner-items">
+    <div class="home-widget__inner-items" @click="document.getElementById('moving-from').focus()">
       <div id="widget-icon__move-from" class="home-widget__moving-icon--title home-widget__moving-icon--move">
         <svg
           width="13"
@@ -594,7 +595,7 @@
     </div>
   </div>
   <div class="home-widget__moving-to--wrapper">
-    <div class="home-widget__inner-items">
+    <div class="home-widget__inner-items" @click="document.getElementById('moving-to').focus()">
       <div id="widget-icon__move-to" class="home-widget__moving-icon--title home-widget__moving-icon--move">
         <svg
           width="13"
@@ -623,7 +624,7 @@
     </div>
   </div>
   <div class="home-widget__moving-date--wrapper">
-    <div class="home-widget__inner-items">
+    <div class="home-widget__inner-items" @click="document.getElementById('moving-date').focus()">
       <div id="widget-icon__moving-date" class="home-widget__moving-icon--title home-widget__moving-icon--date">
         <svg
           width="13"
@@ -670,7 +671,7 @@
     <!-- Modal END-->
   </div>
   <div class="home-widget__moving-size--wrapper">
-    <div class="home-widget__inner-items">
+    <div class="home-widget__inner-items" @click="document.getElementById('moving-size').focus()">
       <div id="widget-icon__moving-size" class="home-widget__moving-icon--title home-widget__moving-icon--size">
         <svg
           width="13"
@@ -820,6 +821,7 @@
   </div>
 </div>
 <!-- --------------- Vue code------------------------- -->
+
 <script>
   var app = new Vue({
     el: '#home-widget',
