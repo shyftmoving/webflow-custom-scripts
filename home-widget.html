@@ -452,7 +452,7 @@
       width: 100%;
       grid-template-columns: 1fr;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 8px 8px 0 0;
       min-height: calc(70vh - 70px);
       padding: 16px 0;
     }
@@ -881,6 +881,8 @@
             window.location.href == 'https://www.shyftmoving.com/long-distance-moving#long-distance-hero'
           ) {
             window.location.href = '/long-distance-moving-get-quote'
+          } else if (window.location.href == 'https://www.shyftmoving.com/move-now-pay-later') {
+            window.location.href = '/move-now-pay-later-get-quote'
           } else {
             window.location.href = '/get-quote'
           }
