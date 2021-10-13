@@ -413,6 +413,10 @@
   otherBusiness.addEventListener('change', calcTotalBusiness)
 
   function calcTotalBusiness() {
-    totalBusiness.value = residentalBusiness.value + corporateBusiness.value + rmcBusiness.value + otherBusiness.value
+    totalBusiness.value =
+      (parseInt(residentalBusiness.value) || 0) +
+      (parseInt(corporateBusiness.value) || 0) +
+      (parseInt(rmcBusiness.value) || 0) +
+      (parseInt(otherBusiness.value) || 0)
   }
 </script>
