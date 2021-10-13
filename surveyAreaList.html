@@ -406,6 +406,7 @@
   const rmcBusiness = document.getElementById('RMC-Business')
   const otherBusiness = document.getElementById('Other-non-HHG-business')
   const totalBusiness = document.getElementById('TOTAL-Company-Revenue')
+  totalBusiness.readOnly = true
 
   residentalBusiness.addEventListener('change', calcTotalBusiness)
   corporateBusiness.addEventListener('change', calcTotalBusiness)
@@ -426,6 +427,7 @@
   const interstateHHG = document.getElementById('Interstate-HHG-Moving')
   const internationalHHG = document.getElementById('International-HHG-Moving')
   const totalHHG = document.getElementById('TOTAL-HHG-Revenue')
+  totalHHG.readOnly = true
 
   localHHG.addEventListener('change', calcTotalHHG)
   intrastateHHG.addEventListener('change', calcTotalHHG)
