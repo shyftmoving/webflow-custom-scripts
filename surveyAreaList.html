@@ -408,6 +408,10 @@
   const totalBusiness = document.getElementById('TOTAL-Company-Revenue')
 
   residentalBusiness.addEventListener('change', calcTotalBusiness)
+  corporateBusiness.addEventListener('change', calcTotalBusiness)
+  rmcBusiness.addEventListener('change', calcTotalBusiness)
+  otherBusiness.addEventListener('change', calcTotalBusiness)
+
   function calcTotalBusiness() {
     totalBusiness.value = residentalBusiness.value + corporateBusiness.value + rmcBusiness.value + otherBusiness.value
   }
