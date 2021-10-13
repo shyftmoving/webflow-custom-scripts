@@ -401,17 +401,10 @@
     select_elem.appendChild(option_elem)
   })
 
-  var app = new Vue({
-    el: '#survey-app',
-    components: {},
-    data: {
-      residentalBusiness: 0
-    },
-    methods: {},
-    computed: {
-      totalBusiness: function () {
-        return this.residentalBusiness
-      }
-    }
+  const residentalBusiness = document.getElementById('Residential-Private-COD-business')
+  const totalBusiness = document.getElementById('TOTAL-Company-Revenue')
+
+  residentalBusiness.addEventListener('change', {
+    //totalBusiness.value = residentalBusiness.value
   })
 </script>
