@@ -400,4 +400,18 @@
     // Append option_elem to select_elem
     select_elem.appendChild(option_elem)
   })
+
+  var app = new Vue({
+    el: '#survey-app',
+    components: {},
+    data: {
+      residentalBusiness: 0
+    },
+    methods: {},
+    computed: {
+      totalBusiness: function () {
+        return residentalBusiness
+      }
+    }
+  })
 </script>
