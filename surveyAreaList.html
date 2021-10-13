@@ -400,7 +400,7 @@
     // Append option_elem to select_elem
     select_elem.appendChild(option_elem)
   })
-
+  // Total company revenue sum
   const residentalBusiness = document.getElementById('Residential-Private-COD-business')
   const corporateBusiness = document.getElementById('Corporate-Business')
   const rmcBusiness = document.getElementById('RMC-Business')
@@ -418,5 +418,25 @@
       (parseInt(corporateBusiness.value) || 0) +
       (parseInt(rmcBusiness.value) || 0) +
       (parseInt(otherBusiness.value) || 0)
+  }
+
+  // Total hhg revenue sum
+  const localHHG = document.getElementById('Local-HHG-Moving')
+  const intrastateHHG = document.getElementById('Intrastate-HHG-Moving')
+  const interstateHHG = document.getElementById('Interstate-HHG-Moving')
+  const internationalHHG = document.getElementById('International-HHG-Moving')
+  const totalHHG = document.getElementById('TOTAL-HHG-Revenue')
+
+  localHHG.addEventListener('change', calcTotalHHG)
+  intrastateHHG.addEventListener('change', calcTotalHHG)
+  interstateHHG.addEventListener('change', calcTotalHHG)
+  internationalHHG.addEventListener('change', calcTotalHHG)
+
+  function calcTotalHHG() {
+    totalHHG.value =
+      (parseInt(localHHG.value) || 0) +
+      (parseInt(intrastateHHG.value) || 0) +
+      (parseInt(interstateHHG.value) || 0) +
+      (parseInt(internationalHHG.value) || 0)
   }
 </script>
