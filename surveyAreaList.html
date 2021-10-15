@@ -457,14 +457,14 @@
   // Average days recievable calc
   const accountsReceivableBalance = document.getElementById('Accounts-Receivable-Balance-as-of-last-month-closing')
   const annualRevenue2021 = document.getElementById('Annual-Revenue-2021-Est-Full-Year') // used in next calculation too
-  const calcCurrentRatio = document.getElementById('Average-Days-Receivable')
+  const averageDaysReceivable = document.getElementById('Average-Days-Receivable')
   averageDaysReceivable.readOnly = true
 
   accountsReceivableBalance.addEventListener('change', calcAverageDaysReceivable)
   annualRevenue2021.addEventListener('change', calcAverageDaysReceivable)
 
   function calcAverageDaysReceivable() {
-    calcCurrentRatio.value = (
+    averageDaysReceivable.value = (
       ((parseInt(annualRevenue2021.value) || 1) / (parseInt(accountsReceivableBalance.value) || 1)) *
       365
     ).toFixed(2)
