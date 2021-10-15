@@ -1,0 +1,171 @@
+<!-- Advanced Forms Code -->
+<script src="https://cdn.jsdelivr.net/gh/brotame/advanced-webflow-forms@1/dist/awf.js"></script>
+
+<!-- Advanced Forms Init -->
+<script>
+  var Webflow = Webflow || []
+  Webflow.push(function () {
+    new AWF.MSF({
+      hiddeButtonsOnSubmit: true,
+      scrollTopOnStepChange: true,
+      formSelector: '#wf-form-Moving-companies-survey',
+      nextSelector: '#surveyNext',
+      backSelector: '#surveyBack',
+      alertSelector: '#surveyAlert',
+      warningClass: 'surveyErrorField'
+    })
+  })
+  // General information
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Registered-Business-Name', operator: 'empty' },
+          { selector: '#Registered-Business-Address', operator: 'empty' },
+          { selector: '#Website-Address', operator: 'empty' },
+          { selector: '#Primary-Contact-Name', operator: 'empty' },
+          { selector: '#Primary-Contact-Number', operator: 'empty' },
+          { selector: '#Primary-Contact-Email', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Company Information
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Year-Founded-2', operator: 'empty' },
+          { selector: '#US-DOT-registration-number', operator: 'empty' },
+          { selector: '#Number-of-Employees-Total', operator: 'empty' },
+          { selector: '#Number-of-HHG-employees', operator: 'empty' },
+          { selector: '#Annual-Revenue', operator: 'empty' },
+          { selector: '#Annual-Revenue-2', operator: 'empty' },
+          { selector: '#Annual-Revenue-2021-Est-Full-Year', operator: 'empty' },
+          { selector: '#Average-Gross-Profit-Margin', operator: 'empty' },
+          { selector: '#Residential-Private-COD-business', operator: 'empty' },
+          { selector: '#Corporate-Business', operator: 'empty' },
+          { selector: '#RMC-Business', operator: 'empty' },
+          { selector: '#Other-non-HHG-business', operator: 'empty' },
+          { selector: '#Local-HHG-Moving', operator: 'empty' },
+          { selector: '#Intrastate-HHG-Moving', operator: 'empty' },
+          { selector: '#Interstate-HHG-Moving', operator: 'empty' },
+          { selector: '#International-HHG-Moving', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Financial Structure
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Current-Assets', operator: 'empty' },
+          { selector: '#Current-Liabilities', operator: 'empty' },
+          { selector: '#Accounts-Receivable-Balance-as-of-last-month-closing', operator: 'empty' },
+          { selector: '#Accounts-Payable-Balance-as-of-last-month-closing', operator: 'empty' },
+          { selector: '#Credit-Card-Processing-Expense', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Premises
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Head-Office-Location---Metro-Area', operator: 'empty' },
+          { selector: '#Head-Office-Zip-Code', operator: 'empty' },
+          { selector: '#Total-approximate-square-feet-of-HHG-storage-space---all-facilities', operator: 'empty' },
+          { selector: '#SprinklerFire-Control-System', operator: 'empty' },
+          { selector: '#Monitored-Security-System', operator: 'empty' },
+          { selector: '#Perm-Regular-Storage-Available', operator: 'empty' },
+          { selector: '#Perm-Air-Con-Storage-Available', operator: 'empty' },
+          { selector: '#Perm-Heated-Storage-Available', operator: 'empty' },
+          { selector: '#Oversized-Item-Storage-Area', operator: 'empty' },
+          { selector: '#Number-of-US-Branch-Offices-HHG-Services-only', operator: 'empty' },
+          { selector: '#Number-of-Worldwide-Branch-Offices-HHG-Services-only', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Equipment
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Number-of-53-HHG-Trailers', operator: 'empty' },
+          { selector: '#Number-of-Power-Units', operator: 'empty' },
+          { selector: '#Number-of-Straight-TrucksLorries', operator: 'empty' },
+          { selector: '#Number-of-Forklifts', operator: 'empty' },
+          { selector: '#Approximate-of-storage-vaults-in-warehouse', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Capacity Information
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Total-average-number-of-jobs-per-week', operator: 'empty' },
+          { selector: '#Total-average-number-of-jobs-per-month', operator: 'empty' },
+          { selector: '#Total-average-number-of-jobs-per-year', operator: 'empty' },
+          { selector: '#Number-of-Jobs-you-can-handle-for-Shyft-per-week', operator: 'empty' },
+          { selector: '#Number-of-Jobs-you-can-handle-for-Shyft-per-month', operator: 'empty' },
+          { selector: '#Approx.-number-of-Jobs-you-can-handle-for-Shyft-per-year', operator: 'empty' },
+          { selector: '#Approx.-number-of-Jobs-you-can-handle-for-Shyft-per-year', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+  // Claim Statistics
+  new AWF.Logic({
+    logicList: [
+      {
+        conditions: [
+          { selector: '#Number-of-policies', operator: 'empty' },
+          { selector: '#Number-of-policies-2', operator: 'empty' },
+          { selector: '#Number-of-policies-3', operator: 'empty' },
+          { selector: '#Total-Insured-Value', operator: 'empty' },
+          { selector: '#Total-Insured-Value-2', operator: 'empty' },
+          { selector: '#Total-Insured-Value-3', operator: 'empty' },
+          { selector: '#Number-of-Claims', operator: 'empty' },
+          { selector: '#Number-of-Claims-2', operator: 'empty' },
+          { selector: '#Number-of-Claims-3', operator: 'empty' },
+          { selector: '#Total-Claim-Value', operator: 'empty' },
+          { selector: '#Total-Claim-Value-2', operator: 'empty' },
+          { selector: '#Total-Claim-Value-3', operator: 'empty' }
+        ],
+        operator: 'and',
+        actions: [{ selector: '#surveyNext', action: 'disable', clear: false }]
+      }
+    ],
+    submitHiddenInputs: false,
+    checkConditionsOnLoad: true
+  })
+</script>
