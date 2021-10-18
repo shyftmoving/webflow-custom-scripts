@@ -465,7 +465,7 @@
 
   function calcAverageDaysReceivable() {
     averageDaysReceivable.value = (
-      ((parseInt(annualRevenue2021.value) || 1) / (parseInt(accountsReceivableBalance.value) || 1)) *
+      ((parseInt(accountsReceivableBalance.value) || 1) / (parseInt(annualRevenue2021.value) || 1)) *
       365
     ).toFixed(2)
   }
@@ -483,6 +483,6 @@
   function calcAverageDaysPayable() {
     averageDaysPayable.value =
       (parseInt(accountsPayableBalance.value) || 1) /
-      (((parseInt(annualRevenue2021.value) || 1) * (1 - (parseInt(averageGrossProfitMargin.value) || 1))) / 365)
+      (((parseInt(annualRevenue2021.value) || 1) * (1 - (parseInt(averageGrossProfitMargin.value) || 1) / 100)) / 365)
   }
 </script>
