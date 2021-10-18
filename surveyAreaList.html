@@ -481,8 +481,9 @@
   annualRevenue2021.addEventListener('change', calcAverageDaysPayable)
 
   function calcAverageDaysPayable() {
-    averageDaysPayable.value =
+    averageDaysPayable.value = (
       (parseInt(accountsPayableBalance.value) || 1) /
       (((parseInt(annualRevenue2021.value) || 1) * (1 - (parseInt(averageGrossProfitMargin.value) || 1) / 100)) / 365)
+    ).toFixed(2)
   }
 </script>
