@@ -414,11 +414,12 @@
   otherBusiness.addEventListener('change', calcTotalBusiness)
 
   function calcTotalBusiness() {
-    totalBusiness.value =
-      (parseInt(residentalBusiness.value) || 0) +
-      (parseInt(corporateBusiness.value) || 0) +
-      (parseInt(rmcBusiness.value) || 0) +
-      (parseInt(otherBusiness.value) || 0)
+    totalBusiness.value = (
+      (parseFloat(residentalBusiness.value) || 0) +
+      (parseFloat(corporateBusiness.value) || 0) +
+      (parseFloat(rmcBusiness.value) || 0) +
+      (parseFloat(otherBusiness.value) || 0)
+    ).toFixed(2)
   }
 
   // Total hhg revenue sum
@@ -435,11 +436,12 @@
   internationalHHG.addEventListener('change', calcTotalHHG)
 
   function calcTotalHHG() {
-    totalHHG.value =
-      (parseInt(localHHG.value) || 0) +
-      (parseInt(intrastateHHG.value) || 0) +
-      (parseInt(interstateHHG.value) || 0) +
-      (parseInt(internationalHHG.value) || 0)
+    totalHHG.value = (
+      (parseFloat(localHHG.value) || 0) +
+      (parseFloat(intrastateHHG.value) || 0) +
+      (parseFloat(interstateHHG.value) || 0) +
+      (parseFloat(internationalHHG.value) || 0)
+    ).toFixed(2)
   }
   // Curent assets calc
   const currentAsset = document.getElementById('Current-Assets')
@@ -451,7 +453,9 @@
   currentLiabilities.addEventListener('change', calcCurrentRatio)
 
   function calcCurrentRatio() {
-    currentRatio.value = ((parseInt(currentAsset.value) || 1) / (parseInt(currentLiabilities.value) || 1)).toFixed(2)
+    currentRatio.value = ((parseFloat(currentAsset.value) || 1) / (parseFloat(currentLiabilities.value) || 1)).toFixed(
+      2
+    )
   }
 
   // Average days recievable calc
@@ -465,7 +469,7 @@
 
   function calcAverageDaysReceivable() {
     averageDaysReceivable.value = (
-      ((parseInt(accountsReceivableBalance.value) || 1) / (parseInt(annualRevenue2021.value) || 1)) *
+      ((parseFloat(accountsReceivableBalance.value) || 1) / (parseFloat(annualRevenue2021.value) || 1)) *
       365
     ).toFixed(2)
   }
@@ -482,8 +486,9 @@
 
   function calcAverageDaysPayable() {
     averageDaysPayable.value = (
-      (parseInt(accountsPayableBalance.value) || 1) /
-      (((parseInt(annualRevenue2021.value) || 1) * (1 - (parseInt(averageGrossProfitMargin.value) || 1) / 100)) / 365)
+      (parseFloat(accountsPayableBalance.value) || 1) /
+      (((parseFloat(annualRevenue2021.value) || 1) * (1 - (parseFloat(averageGrossProfitMargin.value) || 1) / 100)) /
+        365)
     ).toFixed(2)
   }
 </script>
