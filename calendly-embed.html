@@ -1,0 +1,58 @@
+<style>
+  iframe {
+    min-height: 1200px;
+  }
+</style>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+
+<script>
+  let firstName = localStorage.getItem('firstName') ? localStorage.getItem('firstName') : ''
+  let lastName = localStorage.getItem('lastName') ? localStorage.getItem('lastName') : ''
+  let emailAddress = localStorage.getItem('email') ? localStorage.getItem('email') : ''
+  let phoneNo = localStorage.getItem('phone') ? localStorage.getItem('phone') : ''
+  let movingFrom = localStorage.getItem('movingFrom') ? localStorage.getItem('movingFrom') : ''
+  let movingTo = localStorage.getItem('movingTo') ? localStorage.getItem('movingTo') : ''
+
+  let movingSize = localStorage.getItem('movingSize') ? JSON.parse(localStorage.getItem('movingSize')) : {}
+  let movingDate = localStorage.getItem('movingDate') ? localStorage.getItem('movingDate') : ''
+
+  let additionalInfo = movingDate ? 'Moving date: ' + movingDate + '\r\n' : ''
+  additionalInfo += movingSize.moveObjects ? movingSize.moveObjects + '\r\n' : ''
+  additionalInfo += movingSize.moveType ? movingSize.moveType + '\r\n' : ''
+  additionalInfo += movingSize.movePets ? 'Moving pets\r\n' : ''
+  additionalInfo += movingSize.moveStorage ? 'Needed Storage\r\n' : ''
+  additionalInfo += movingSize.housingAssist ? 'Needed housing assistance\r\n' : ''
+  additionalInfo += movingSize.moveVehicle ? movingSize.moveVehicle + '\r\n' : ''
+
+  let checkboxesValue
+  if (
+    movingSize.moveObjects == 'Just a few boxes' ||
+    movingSize.moveObjects == 'Studio' ||
+    movingSize.moveObjects == '1 bedroom'
+  ) {
+    checkboxesValue = 1 // 1. checkbox
+  } else if (movingSize.moveObjects == '2 bedrooms') {
+    checkboxesValue = 2 // 2. checkbox
+  } else if (movingSize.moveObjects == '3 bedrooms') {
+    checkboxesValue = 3 // 3. checkbox
+  } else {
+    checkboxesValue = 4 // 3. checkbox
+  }
+
+  Calendly.initInlineWidget({
+    url: 'https://calendly.com/start-your-relocation/virtual-moving-estimate',
+    prefill: {
+      firstName: firstName,
+      lastName: lastName,
+      email: emailAddress,
+      customAnswers: {
+        a1: phoneNo, // phone
+        a2: checkboxesValue, // checkboxes
+        a3: movingFrom, // origin/from
+        a4: movingTo, // destination/to
+        a5: additionalInfo // additional
+      }
+    }
+  })
+</script>
