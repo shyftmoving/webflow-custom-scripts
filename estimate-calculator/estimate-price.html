@@ -26,33 +26,27 @@
       init: function () {
         if (localStorage.movingFromCountry != 'US' || localStorage.movingToCountry != 'US') {
           this.hideCalc()
-          console.log('no usa')
           return
         }
         if (localStorage.distance && localStorage.distance != '0') {
           this.distance = localStorage.distance
-          console.log('distance')
         } else {
           this.hideCalc()
-          console.log('no distance')
           return
         }
         if (localStorage.movingSize) {
           movingSize = JSON.parse(localStorage.movingSize)
           if (movingSize.moveObjects == '4+ bedrooms') {
             this.hideCalc()
-            console.log('4+ bedrooms')
             return
           }
           if (movingSize.moveType == 'House' && movingSize.moveObjects == 'Studio') {
             this.hideCalc()
-            console.log('house/studio')
             return
           }
           this.weight = this.calcWeight(movingSize.moveType, movingSize.moveObjects)
         } else {
           this.hideCalc()
-          console.log('no moving size')
           return
         }
         console.log('OK calculate')
