@@ -877,28 +877,15 @@
           // growth flow or regular Home page flow or Senior moves
           if (window.location.href.includes('/free-quotes')) {
             window.location.href = '/get-free-quote'
-          } else if (window.location.href == 'https://www.shyftmoving.com/senior-moves-v2') {
+          } else if (window.location.href.includes('/senior-moves-v2')) {
             window.location.href = '/senior-moves-v2-get-quote'
-          } else if (
-            window.location.href == 'https://www.shyftmoving.com/long-distance-moving' ||
-            window.location.href == 'https://shyftmoving.com/long-distance-moving' ||
-            window.location.href == 'https://www.shyftmoving.com/long-distance-moving#long-distance-hero' ||
-            window.location.href == 'https://shyftmoving.com/long-distance-moving#long-distance-hero'
-          ) {
+          } else if (window.location.href.includes('/long-distance-moving')) {
             window.location.href = '/long-distance-moving-get-quote'
-          } else if (
-            window.location.href == 'https://www.shyftmoving.com/google/relocation' ||
-            window.location.href == 'https://shyftmoving.com/google/relocation' ||
-            window.location.href == 'https://www.shyftmoving.com/google/relocation#google-top-page' ||
-            window.location.href == 'https://shyftmoving.com/google/relocation#google-top-page'
-          ) {
+          } else if (window.location.href.includes('/google/relocation')) {
             window.location.href = '/google/get-quote-google'
-          } else if (
-            window.location.href == 'https://www.shyftmoving.com/corporate-moves' ||
-            window.location.href == 'https://www.shyftmoving.com/corporate-moves#corporate-move-hero'
-          ) {
+          } else if (window.location.href.includes('/corporate-moves')) {
             window.location.href = '/corporate-moves-get-quote'
-          } else if (window.location.href == 'https://www.shyftmoving.com/move-now-pay-later') {
+          } else if (window.location.href.includes('/move-now-pay-later')) {
             window.location.href = '/move-now-pay-later-get-quote'
           } else {
             window.location.href = '/get-quote'
