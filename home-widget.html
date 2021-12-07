@@ -875,7 +875,7 @@
           localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // growth flow or regular Home page flow or Senior moves
-          if (window.location.href == 'https://www.shyftmoving.com/free-quotes') {
+          if (window.location.href.includes('/free-quotes')) {
             window.location.href = '/get-free-quote'
           } else if (window.location.href == 'https://www.shyftmoving.com/senior-moves-v2') {
             window.location.href = '/senior-moves-v2-get-quote'
