@@ -45,12 +45,13 @@
   .home-widget__moving-icon--title {
     width: 14px;
     height: 14px;
-    margin-right: 0;
+    margin-right: 12px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     display: inline-block;
     position: relative;
+    top: 2px;
   }
   /* .home-widget__moving-icon--move {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
@@ -836,10 +837,10 @@
         type: 'string',
         mask: 'MM/DD/YYYY'
       },
-      widgetIconMoveFrom: '#0E30A5',
-      widgetIconMoveTo: '#0E30A5',
-      widgetIconMovingDate: '#0E30A5',
-      widgetIconMovingSize: '#0E30A8'
+      widgetIconMoveFrom: '#808080',
+      widgetIconMoveTo: '#808080',
+      widgetIconMovingDate: '#808080',
+      widgetIconMovingSize: '#808080'
     },
     methods: {
       goToQuote: function () {
@@ -854,21 +855,12 @@
           localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // ROUTER
-          if (window.location.href.includes('/free-quotes')) {
-            window.location.href = '/get-free-quote'
-          } else if (window.location.href.includes('/senior-moves-v2')) {
-            window.location.href = '/senior-moves-v2-get-quote'
-          } else if (window.location.href.includes('/long-distance-moving')) {
-            window.location.href = '/long-distance-moving-get-quote'
-          } else if (window.location.href.includes('/google/relocation')) {
-            window.location.href = '/google/get-quote-google'
-          } else if (window.location.href.includes('/corporate-moves')) {
-            window.location.href = '/corporate-moves-get-quote'
-          } else if (window.location.href.includes('/move-now-pay-later')) {
-            window.location.href = '/move-now-pay-later-get-quote'
-          } else {
-            window.location.href = '/get-quote'
-          }
+          // if (window.location.href.includes('/free-quotes')) {
+          //   window.location.href = '/get-free-quote'
+          // } else {
+          //   window.location.href = '/get-quote'
+          // }
+          window.location.href = '/get-quote'
         }
       },
       dataComplete: function () {
