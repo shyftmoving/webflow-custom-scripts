@@ -1,0 +1,260 @@
+<style>
+  .get-quote__details-selected-items {
+    margin-right: 14px;
+    margin-bottom: 14px;
+    padding: 6px 16px 6px 44px;
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    border: 1px solid #d6d6d6;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .lower-details__type {
+    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaabc1a4659872fce8d_icon-type.svg');
+  }
+  .lower-details__objects {
+    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aa91c14e477138c6c2f_icon-objects.svg');
+  }
+  .lower-details__vehicles {
+    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaad85b32c881ea6725_icon-vehicle.svg');
+  }
+  .lower-details__pets {
+    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaa6e11605f4938748d_icon-pet.svg');
+  }
+  .lower-details__storage {
+    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaa10d7469bc79a7f6d_icon-storage.svg');
+  }
+  .image-35 {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    margin-right: 6px;
+    -webkit-align-self: flex-start;
+    -ms-flex-item-align: start;
+    align-self: flex-start;
+  }
+
+  .div-block-34 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 12px;
+    padding-right: 22px;
+  }
+
+  .div-block-61 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 12px;
+  }
+
+  .lower-section-wrapper {
+    margin-top: 11px;
+    padding-top: 18px;
+    border-top: 1px solid #d6d6d6;
+  }
+
+  .get-quote__details-selected-location {
+    color: #0e30a8;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .get-quote__details-selected-location.title {
+    display: inline-block;
+    color: #000;
+  }
+
+  .get-quote__details-selected-location.date-value {
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .image-36 {
+    border-radius: 20px;
+  }
+
+  .get-quote__move-details {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 32px;
+  }
+
+  .get-quote__move-details.lower-setion {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    padding: 32px;
+  }
+
+  .get-quote__frame {
+    width: 48%;
+    padding-right: 0px;
+    border-radius: 20px;
+    background-color: #fff;
+  }
+  #showMap {
+    min-height: 300px;
+    min-width: 400px;
+    border-radius: 20px 20px 0 0;
+  }
+  @media (max-width: 991px) {
+    #showMap {
+      min-width: auto;
+    }
+    .get-quote__frame {
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="move-details" class="get-quote__move-details--wrapper">
+  <div id="showMap"></div>
+  <div class="get-quote__move-details">
+    <div class="div-block-34">
+      <img
+        src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87e762827a7367a213668_icon-location.svg"
+        loading="lazy"
+        width="15"
+        alt=""
+        class="image-35"
+      />
+      <div>
+        <div class="get-quote__details-selected-location title">Moving from:</div>
+        <div class="get-quote__details-selected-location">{{movingFrom}}</div>
+      </div>
+    </div>
+    <div class="div-block-61">
+      <img
+        src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87e762827a7367a213668_icon-location.svg"
+        loading="lazy"
+        width="15"
+        alt=""
+        class="image-35"
+      />
+      <div>
+        <div class="get-quote__details-selected-location title">Moving to:</div>
+        <div class="get-quote__details-selected-location">{{movingTo}}</div>
+      </div>
+    </div>
+    <div class="div-block-61">
+      <img
+        src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87e76710b69fe9addfaa9_icon-calendar.svg"
+        loading="lazy"
+        width="15"
+        alt=""
+        class="image-35"
+      />
+      <div>
+        <div class="get-quote__details-selected-location title">Moving date:</div>
+        <div class="get-quote__details-selected-location date-value">{{movingDate}}</div>
+        <div v-if="movingDateFlexible" class="get-quote__details-selected-location date-value">(flexibile)</div>
+      </div>
+    </div>
+  </div>
+  <div class="lower-section-wrapper">
+    <div class="get-quote__move-details lower-setion">
+      <div class="get-quote__details-selected-items lower-details__type">{{movingSize.moveType}}</div>
+      <div class="get-quote__details-selected-items lower-details__objects">{{movingSize.moveObjects}}</div>
+      <div v-if="movingSize.moveVehicle" class="get-quote__details-selected-items lower-details__vehicles">
+        {{movingSize.moveVehicle}}
+      </div>
+      <div v-if="movingSize.movePets" class="get-quote__details-selected-items lower-details__pets">Pet(s)</div>
+      <div v-if="movingSize.moveStorage" class="get-quote__details-selected-items lower-details__storage">Storage</div>
+    </div>
+  </div>
+</div>
+
+<!-- --------------- Vue code------------------------- -->
+<script>
+  var app = new Vue({
+    el: '#move-details',
+    data: {
+      movingFrom: localStorage.movingFrom,
+      movingFromCoord: { lat: parseFloat(localStorage.movingFromLat), lng: parseFloat(localStorage.movingFromLng) },
+      movingTo: localStorage.movingTo,
+      movingToCoord: { lat: parseFloat(localStorage.movingToLat), lng: parseFloat(localStorage.movingToLng) },
+      movingDate: localStorage.movingDate,
+      movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
+      movingSize: JSON.parse(localStorage.movingSize)
+    },
+    methods: {
+      displayDirections: async function () {
+        let directionsService = new google.maps.DirectionsService()
+        let directionsRenderer = new google.maps.DirectionsRenderer()
+        let mapOptions = {
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.IMPERIAL
+        }
+        let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+        directionsRenderer.setMap(map)
+        let request = {
+          origin: this.movingFrom,
+          destination: this.movingTo,
+          travelMode: 'DRIVING'
+        }
+        try {
+          await directionsService.route(request, function (result, status) {
+            if (status == 'OK') {
+              localStorage.distance = parseInt(result.routes[0].legs[0].distance.text.replace(/,/g, ''))
+              directionsRenderer.setDirections(result)
+            }
+          })
+        } catch (err) {
+          localStorage.distance = 0
+          this.displayFailsafeMap()
+        }
+      },
+      displayFailsafeMap: async function () {
+        let mapOptions = {
+          zoom: 1,
+          minZoom: 1,
+          center: new google.maps.LatLng(0, 0)
+        }
+        let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+        const marker1 = new google.maps.Marker({
+          position: this.movingFromCoord,
+          map: failsafeMap
+        })
+        const marker2 = new google.maps.Marker({
+          position: this.movingToCoord,
+          map: failsafeMap
+        })
+      }
+    },
+    mounted() {
+      this.displayDirections()
+    }
+  })
+</script>
