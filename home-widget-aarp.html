@@ -1,7 +1,7 @@
 <style>
   .home-widget__inner-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 50px;
+    grid-template-columns: 1fr 1fr 1fr 1fr / 1fr;
     margin: 0 auto;
   }
   .home-widget__inner-wrapper input,
@@ -28,10 +28,10 @@
     pointer-events: none;
   }
   .home-widget__moving-go--button {
-    height: 46px;
-    width: 46px;
+    height: 50px;
+    width: auto;
     background-color: #ff005c;
-    border-radius: 50%;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,13 +39,6 @@
   }
   .home-widget__moving-go--button-complete {
     background-color: #1be07f;
-  }
-  .home-widget__moving-go--button img {
-    width: 18px;
-    height: 15px;
-  }
-  .home-widget__moving-go--button .get-quote-text {
-    display: none;
   }
   .home-widget__moving-icon--title {
     width: 14px;
@@ -56,7 +49,6 @@
     background-size: contain;
     display: inline-block;
     position: relative;
-    top: 1px;
   }
   /* .home-widget__moving-icon--move {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
@@ -433,7 +425,7 @@
     }
     .home-widget__moving-go--button {
       height: 50px;
-      width: 50px;
+      width: auto;
     }
     .home-widget__moving-date--modal,
     .home-widget__moving-size--modal {
@@ -583,14 +575,13 @@
           />
         </svg>
       </div>
-      <div class="home-widget__moving--title">Moving from</div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Enter city"
+        placeholder="Moving from"
         ref="origin"
       />
     </div>
@@ -612,14 +603,13 @@
           />
         </svg>
       </div>
-      <div class="home-widget__moving--title">Moving to</div>
       <input
         v-model="movingTo"
         @input="dataComplete"
         type="text"
         name="moving-to"
         id="moving-to"
-        placeholder="Enter city"
+        placeholder="Moving to"
         ref="destination"
       />
     </div>
@@ -641,14 +631,13 @@
           />
         </svg>
       </div>
-      <div class="home-widget__moving--title">Moving date</div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
         type="text"
         name="moving-date"
         id="moving-date"
-        placeholder="Select Date"
+        placeholder="Moving date"
         readonly
       />
     </div>
@@ -686,14 +675,13 @@
           />
         </svg>
       </div>
-      <div class="home-widget__moving--title">Move size</div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
         type="text"
         name="moving-size"
         id="moving-size"
-        placeholder="Please select"
+        placeholder="Move size"
         readonly
       />
     </div>
@@ -818,11 +806,7 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Get Quote</span>
-      <img
-        src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
-        alt="white arrow right"
-      />
+      <span class="get-quote-text">Get Free Quotes Now</span>
     </div>
   </div>
 </div>
