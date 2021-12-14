@@ -1,9 +1,8 @@
 <style>
   .home-widget__inner-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 20px;
-    margin: 24px auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr 50px;
+    margin: 0 auto;
   }
   .home-widget__inner-wrapper input,
   .home-widget__inner-wrapper input:focus {
@@ -25,13 +24,14 @@
     color: #000;
     font-size: 1.2em;
     background-color: transparent;
+    max-width: 150px;
     pointer-events: none;
   }
   .home-widget__moving-go--button {
     height: 46px;
-    width: auto;
+    width: 46px;
     background-color: #ff005c;
-    border-radius: 10px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,17 +45,18 @@
     height: 15px;
   }
   .home-widget__moving-go--button .get-quote-text {
-    color: #fff;
+    display: none;
   }
   .home-widget__moving-icon--title {
     width: 14px;
     height: 14px;
-    margin-right: 6px;
+    margin-right: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     display: inline-block;
     position: relative;
+    top: 1px;
   }
   /* .home-widget__moving-icon--move {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
@@ -69,9 +70,7 @@
   .home-widget__moving-from--wrapper,
   .home-widget__moving-to--wrapper,
   .home-widget__moving-date--wrapper {
-    border: 1px solid #bec4d8;
-    border-radius: 10px;
-    display: flex;
+    border-right: 1px solid #bec4d8;
   }
   .home-widget__moving-from--wrapper,
   .home-widget__moving-to--wrapper,
@@ -80,21 +79,20 @@
     padding-left: 16px;
   }
   .home-widget__inner-items {
+    /* margin: 0 auto; */
+    width: fit-content;
     position: relative;
+    margin-top: 0;
     cursor: pointer;
-    display: flex;
-    align-items: center;
   }
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
     background-color: #fff;
     position: absolute;
-    top: 82px;
-    border-radius: 10px;
+    top: 64px;
+    border-radius: 20px;
     padding: 24px;
     text-align: center;
-    margin-left: -16px;
-    border: 1px #ff005c solid;
   }
   .home-widget__moving-size--modal {
     width: 860px;
@@ -433,6 +431,14 @@
     .home-widget__inner-items input {
       font-size: 1.4em;
     }
+    .home-widget__moving-go--button {
+      height: 50px;
+      width: 50px;
+    }
+    .home-widget__moving-date--modal,
+    .home-widget__moving-size--modal {
+      top: 88px;
+    }
     .home-widget__moving--title {
       margin-bottom: 5px;
     }
@@ -488,7 +494,7 @@
       height: 100%;
     }
     .home-widget__moving-go--button {
-      border-radius: 10px;
+      border-radius: 12px;
       min-width: 220px;
     }
     .home-widget__moving-go--button img {
@@ -497,7 +503,7 @@
     .home-widget__moving-go--button .get-quote-text {
       display: inline-block;
       color: #fff;
-      font-size: 1.2em;
+      font-size: 16px;
       font-weight: 500;
     }
     .vc-weeks {
@@ -577,13 +583,14 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving from</div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Moving from"
+        placeholder="Enter city"
         ref="origin"
       />
     </div>
@@ -605,6 +612,7 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving to</div>
       <input
         v-model="movingTo"
         @input="dataComplete"
@@ -633,6 +641,7 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving date</div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
@@ -662,13 +671,158 @@
     </div>
     <!-- Modal END-->
   </div>
+  <div class="home-widget__moving-size--wrapper">
+    <div class="home-widget__inner-items" @click="showSizeModalHandler">
+      <div id="widget-icon__moving-size" class="home-widget__moving-icon--title home-widget__moving-icon--size">
+        <svg
+          width="13"
+          height="14"
+          viewBox="0 0 13 14"
+          v-bind:fill="widgetIconMovingSize"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.53541 12.291V10.3799C4.53541 9.89203 4.93378 9.49656 5.42519 9.49656H7.22155C7.45754 9.49656 7.68386 9.58962 7.85073 9.75528C8.01759 9.92093 8.11134 10.1456 8.11134 10.3799V12.291C8.10985 12.4938 8.18996 12.6888 8.3339 12.8327C8.47784 12.9767 8.6737 13.0576 8.87801 13.0576H10.1036C10.6759 13.0591 11.2254 12.8344 11.6307 12.4331C12.0359 12.0318 12.2637 11.487 12.2637 10.9188V5.4744C12.2637 5.0154 12.0587 4.58002 11.7041 4.28554L7.53494 0.980035C6.80971 0.400468 5.77062 0.419181 5.06704 1.02448L0.993055 4.28554C0.621635 4.57134 0.399642 5.00801 0.388672 5.4744V10.9132C0.388672 12.0975 1.35579 13.0576 2.54878 13.0576H3.74635C4.17069 13.0576 4.51554 12.7178 4.51862 12.2965L4.53541 12.291Z"
+          />
+        </svg>
+      </div>
+      <div class="home-widget__moving--title">Move size</div>
+      <input
+        v-model="movingSize.moveType"
+        @click="showSizeModalHandler"
+        type="text"
+        name="moving-size"
+        id="moving-size"
+        placeholder="Please select"
+        readonly
+      />
+    </div>
+    <!-- Modal -->
+    <div v-if="showSizeModal" class="home-widget__moving-size--modal">
+      <div class="home-widget__moving-size--inner">
+        <div class="home-widget__moving-size--column01">
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input v-model="movingSize.moveType" type="radio" name="moveType" value="Apartment" id="apartment" />
+              <label for="apartment">Apartment</label>
+            </li>
+            <li>
+              <input v-model="movingSize.moveType" type="radio" name="moveType" value="House" id="house" />
+              <label for="house">House</label>
+            </li>
+          </ul>
+        </div>
+        <div class="home-widget__moving-size--column02">
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="boxes"
+                name="move-size__selector"
+                value="Just a few boxes"
+              />
+              <label for="boxes">Just a few boxes</label>
+            </li>
+            <li v-if="movingSize.moveType == 'Apartment'">
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="studio"
+                name="move-size__selector"
+                value="Studio"
+              />
+              <label for="studio">Studio</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="1bedroom"
+                name="move-size__selector"
+                value="1 bedroom"
+              />
+              <label for="1bedroom">1 bedroom</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="2bedroom"
+                name="move-size__selector"
+                value="2 bedrooms"
+              />
+              <label for="2bedroom">2 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="3bedroom"
+                name="move-size__selector"
+                value="3 bedrooms"
+              />
+              <label for="3bedroom">3 bedrooms</label>
+            </li>
+            <li li v-if="movingSize.moveType == 'House'">
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="4bedroom"
+                name="move-size__selector"
+                value="4+ bedrooms"
+              />
+              <label for="4bedroom">4+ bedrooms</label>
+            </li>
+          </ul>
+        </div>
+        <div class="home-widget__moving-size--column03">
+          <label class="b-contain">
+            <span>I’m moving with my pets</span>
+            <input v-model="movingSize.movePets" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need storage</span>
+            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need housing assistance</span>
+            <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I’m moving my vehicle</span>
+            <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <input
+            v-if="movingVehicle"
+            v-model="movingSize.moveVehicle"
+            type="text"
+            class="modal__moving-vehicle"
+            placeholder="Make, model, year"
+          />
+        </div>
+      </div>
+      <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
+    </div>
+    <!-- Modal END-->
+  </div>
   <div class="home-widget__moving-go--wrapper">
     <div
       @click="goToQuote"
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Book your move</span>
+      <span class="get-quote-text">Get Quote</span>
+      <img
+        src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
+        alt="white arrow right"
+      />
     </div>
   </div>
 </div>
@@ -683,7 +837,7 @@
       movingFrom: '',
       movingFromLat: '',
       movingFromLng: '',
-      movingTo: 'Miami, FL, USA',
+      movingTo: '',
       movingToLat: '',
       movingToLng: '',
       movingDate: null,
