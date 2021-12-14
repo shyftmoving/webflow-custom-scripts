@@ -86,7 +86,7 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    background-color: #8d8d8ded;
+    background-color: #2c2c2ced;
     z-index: 9999;
     display: flex;
     align-content: center;
@@ -105,11 +105,12 @@
     border-radius: 10px;
   }
   .home-widget__moving-size--modal-wrap {
-    padding: 24px;
+    padding: 100px;
     max-width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
+    text-align: right;
   }
   .home-modal__widget--last-row {
     display: flex;
@@ -126,6 +127,9 @@
     cursor: pointer;
     transition: all 0.2s;
     display: inline-block;
+  }
+  .home-widget__moving-size--modal-wrap .home-widget__modal-btn {
+    margin-top: 42px;
   }
   .home-widget__modal-btn:hover {
     background-color: #bd0045;
@@ -360,7 +364,7 @@
   }
   .move-size__selector--wrapper input[type='radio']:checked + label,
   .Checked + label {
-    background: #0e30a5;
+    background: #ee342a;
     color: #fff;
   }
   .move-size__selector--wrapper label {
