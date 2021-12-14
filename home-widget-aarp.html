@@ -97,6 +97,20 @@
     display: flex;
     justify-content: center;
   }
+  .home-widget__moving-date--modal-wrap {
+    padding: 24px;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  .home-widget__moving-size--modal-wrap {
+    padding: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+  }
   .home-modal__widget--last-row {
     display: flex;
     flex-direction: row;
@@ -104,7 +118,7 @@
     justify-content: space-between;
   }
   .home-widget__modal-btn {
-    background-color: #ff005c;
+    background-color: #ee342a;
     border-radius: 20px;
     padding: 10px 50px;
     color: #fff;
@@ -669,116 +683,118 @@
     </div>
     <!-- Modal -->
     <div v-if="showSizeModal" class="home-widget__moving-size--modal">
-      <div class="home-widget__moving-size--inner">
-        <div class="home-widget__moving-size--column01">
-          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-          <ul class="move-size__selector--wrapper">
-            <li>
-              <input v-model="movingSize.moveType" type="radio" name="moveType" value="Apartment" id="apartment" />
-              <label for="apartment">Apartment</label>
-            </li>
-            <li>
-              <input v-model="movingSize.moveType" type="radio" name="moveType" value="House" id="house" />
-              <label for="house">House</label>
-            </li>
-          </ul>
+      <div class="home-widget__moving-size--modal-wrap">
+        <div class="home-widget__moving-size--inner">
+          <div class="home-widget__moving-size--column01">
+            <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+            <ul class="move-size__selector--wrapper">
+              <li>
+                <input v-model="movingSize.moveType" type="radio" name="moveType" value="Apartment" id="apartment" />
+                <label for="apartment">Apartment</label>
+              </li>
+              <li>
+                <input v-model="movingSize.moveType" type="radio" name="moveType" value="House" id="house" />
+                <label for="house">House</label>
+              </li>
+            </ul>
+          </div>
+          <div class="home-widget__moving-size--column02">
+            <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+            <ul class="move-size__selector--wrapper">
+              <li>
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="boxes"
+                  name="move-size__selector"
+                  value="Just a few boxes"
+                />
+                <label for="boxes">Just a few boxes</label>
+              </li>
+              <li v-if="movingSize.moveType == 'Apartment'">
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="studio"
+                  name="move-size__selector"
+                  value="Studio"
+                />
+                <label for="studio">Studio</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="1bedroom"
+                  name="move-size__selector"
+                  value="1 bedroom"
+                />
+                <label for="1bedroom">1 bedroom</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="2bedroom"
+                  name="move-size__selector"
+                  value="2 bedrooms"
+                />
+                <label for="2bedroom">2 bedrooms</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="3bedroom"
+                  name="move-size__selector"
+                  value="3 bedrooms"
+                />
+                <label for="3bedroom">3 bedrooms</label>
+              </li>
+              <li li v-if="movingSize.moveType == 'House'">
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="4bedroom"
+                  name="move-size__selector"
+                  value="4+ bedrooms"
+                />
+                <label for="4bedroom">4+ bedrooms</label>
+              </li>
+            </ul>
+          </div>
+          <div class="home-widget__moving-size--column03">
+            <label class="b-contain">
+              <span>I’m moving with my pets</span>
+              <input v-model="movingSize.movePets" value="true" type="checkbox" />
+              <div class="b-input"></div>
+            </label>
+            <label class="b-contain">
+              <span>I need storage</span>
+              <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+              <div class="b-input"></div>
+            </label>
+            <label class="b-contain">
+              <span>I need housing assistance</span>
+              <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
+              <div class="b-input"></div>
+            </label>
+            <label class="b-contain">
+              <span>I’m moving my vehicle</span>
+              <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
+              <div class="b-input"></div>
+            </label>
+            <input
+              v-if="movingVehicle"
+              v-model="movingSize.moveVehicle"
+              type="text"
+              class="modal__moving-vehicle"
+              placeholder="Make, model, year"
+            />
+          </div>
         </div>
-        <div class="home-widget__moving-size--column02">
-          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
-          <ul class="move-size__selector--wrapper">
-            <li>
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="boxes"
-                name="move-size__selector"
-                value="Just a few boxes"
-              />
-              <label for="boxes">Just a few boxes</label>
-            </li>
-            <li v-if="movingSize.moveType == 'Apartment'">
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="studio"
-                name="move-size__selector"
-                value="Studio"
-              />
-              <label for="studio">Studio</label>
-            </li>
-            <li>
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="1bedroom"
-                name="move-size__selector"
-                value="1 bedroom"
-              />
-              <label for="1bedroom">1 bedroom</label>
-            </li>
-            <li>
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="2bedroom"
-                name="move-size__selector"
-                value="2 bedrooms"
-              />
-              <label for="2bedroom">2 bedrooms</label>
-            </li>
-            <li>
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="3bedroom"
-                name="move-size__selector"
-                value="3 bedrooms"
-              />
-              <label for="3bedroom">3 bedrooms</label>
-            </li>
-            <li li v-if="movingSize.moveType == 'House'">
-              <input
-                v-model="movingSize.moveObjects"
-                type="radio"
-                id="4bedroom"
-                name="move-size__selector"
-                value="4+ bedrooms"
-              />
-              <label for="4bedroom">4+ bedrooms</label>
-            </li>
-          </ul>
-        </div>
-        <div class="home-widget__moving-size--column03">
-          <label class="b-contain">
-            <span>I’m moving with my pets</span>
-            <input v-model="movingSize.movePets" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
-          <label class="b-contain">
-            <span>I need storage</span>
-            <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
-          <label class="b-contain">
-            <span>I need housing assistance</span>
-            <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
-          <label class="b-contain">
-            <span>I’m moving my vehicle</span>
-            <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
-            <div class="b-input"></div>
-          </label>
-          <input
-            v-if="movingVehicle"
-            v-model="movingSize.moveVehicle"
-            type="text"
-            class="modal__moving-vehicle"
-            placeholder="Make, model, year"
-          />
-        </div>
+        <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
       </div>
-      <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
     </div>
     <!-- Modal END-->
   </div>
