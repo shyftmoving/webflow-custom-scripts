@@ -1,4 +1,7 @@
 <style>
+  * {
+    font-family: 'Inter', sans-serif;
+  }
   .home-widget__inner-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr / 1fr;
@@ -99,29 +102,29 @@
   }
   .home-widget__moving-date--modal-wrap {
     padding: 24px;
-    max-width: 500px;
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
   }
   .home-widget__moving-size--modal-wrap {
-    padding: 100px;
-    max-width: 1000px;
+    padding: 42px;
+    max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
-    text-align: right;
+    text-align: center;
   }
   .home-modal__widget--last-row {
     display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
   }
   .home-widget__modal-btn {
     background-color: #ee342a;
     border-radius: 20px;
-    padding: 10px 50px;
+    padding: 10px 82px;
     color: #fff;
     text-align: center;
     cursor: pointer;
@@ -138,15 +141,16 @@
     width: auto;
     display: flex;
     justify-content: center;
+    margin-bottom: 32px;
   }
   .vc-container {
     border: none !important;
   }
   .vc-highlight {
-    background-color: #0e30a5 !important;
+    background-color: #ee342a !important;
   }
   .vc-day-content:focus {
-    background-color: #0e30a5 !important;
+    background-color: #ee342a !important;
   }
   .home-widget__radio-wrapper {
     display: flex;
@@ -341,7 +345,11 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: center;
   }
   .move-size__selector--wrapper li {
     margin: 0 16px 12px 0;
@@ -364,7 +372,7 @@
   }
   .move-size__selector--wrapper input[type='radio']:checked + label,
   .Checked + label {
-    background: #ee342a;
+    background: #000;
     color: #fff;
   }
   .move-size__selector--wrapper label {
@@ -386,39 +394,42 @@
   .home-widget__moving-date--modal h5 {
     color: rgba(135, 149, 161, 1);
     font-weight: 500;
-    text-align: center;
+    text-align: left;
   }
   .modal-required__text {
     color: rgba(135, 149, 161, 0.6);
   }
   .home-widget__moving-size--inner {
     display: flex;
+    flex-direction: column;
   }
   .home-widget__moving-size--column03 {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 18px;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 32px;
+  }
+  .home-widget__moving-size--column03 .b-contain {
+    margin-right: 24px;
   }
   .home-widget__moving-size--column01,
   .home-widget__moving-size--column02 {
-    border-right: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
     text-align: left;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
   .home-widget__moving-size--column01,
   .home-widget__moving-size--column03 {
-    width: 25%;
+    width: 100%;
   }
   .home-widget__moving-size--column01 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  }
-  .home-widget__moving-size--column02 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
   }
   .vc-weeks {
     min-width: 300px !important;
@@ -508,19 +519,28 @@
     .home-widget__moving-size--modal {
       width: auto;
     }
-    .home-widget__moving-size--inner {
-      flex-direction: column;
-    }
     .home-widget__moving-size--column01,
     .home-widget__moving-size--column02,
     .home-widget__moving-size--column03 {
       width: 100%;
       border-right: none;
     }
+    .home-widget__moving-size--column02 {
+      flex-wrap: wrap;
+    }
     .home-widget__moving-size--column03 {
       padding-left: 0;
       max-width: 200px;
       margin: 0 auto;
+    }
+    .home-widget__moving-size--column04 {
+      display: flex;
+      align-content: center;
+      align-items: center;
+      min-height: 42px;
+    }
+    .home-widget__moving-size--column04 .b-contain {
+      margin-right: 24px;
     }
     .home-widget__moving-size--column01 {
       align-items: center;
@@ -555,6 +575,17 @@
     .widgetOnTop .home-widget__moving-from--wrapper {
       padding-left: 0;
     }
+  }
+  .home-widget__moving-date--title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4em;
+  }
+  .home-widget__moving-date--title h5 {
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    font-size: 1.8em;
+    margin: 0;
   }
 </style>
 
@@ -645,19 +676,25 @@
     <!-- Modal -->
     <div v-if="showDateModal" class="home-widget__moving-date--modal">
       <div class="home-widget__moving-date--modal-wrap">
-        <h5>Moving date</h5>
+        <div class="home-widget__moving-date--title">
+          <h5>Moving date</h5>
+          <img
+            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b23848567aa29678aad294_AARP_Shyft.svg"
+            alt="AARP logo"
+          />
+        </div>
         <div class="home-widget__moving-date--modal-inner">
           <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" :min-date="new Date()" />
         </div>
         <div class="home-modal__widget--last-row">
           <div class="home-widget__checkbox-wrapper">
             <label class="b-contain">
-              <span>I'm flexibile</span>
+              <span>Flexible move dates</span>
               <input @click="movingDateFlexible = !movingDateFlexible" type="checkbox" />
               <div class="b-input"></div>
             </label>
           </div>
-          <div @click="endDateModal" class="home-widget__modal-btn">OK</div>
+          <div @click="endDateModal" class="home-widget__modal-btn">Confirm</div>
         </div>
       </div>
     </div>
@@ -691,6 +728,13 @@
     <!-- Modal -->
     <div v-if="showSizeModal" class="home-widget__moving-size--modal">
       <div class="home-widget__moving-size--modal-wrap">
+        <div class="home-widget__moving-date--title">
+          <h5>Move size</h5>
+          <img
+            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b23848567aa29678aad294_AARP_Shyft.svg"
+            alt="AARP logo"
+          />
+        </div>
         <div class="home-widget__moving-size--inner">
           <div class="home-widget__moving-size--column01">
             <h5>Please select: <span class="modal-required__text">(required)</span></h5>
@@ -786,6 +830,8 @@
               <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
               <div class="b-input"></div>
             </label>
+          </div>
+          <div class="home-widget__moving-size--column04">
             <label class="b-contain">
               <span>I’m moving my vehicle</span>
               <input @click="movingVehicle = !movingVehicle" value="true" type="checkbox" />
@@ -800,7 +846,7 @@
             />
           </div>
         </div>
-        <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
+        <div @click="endSizeModal" class="home-widget__modal-btn">Confirm</div>
       </div>
     </div>
     <!-- Modal END-->
@@ -816,7 +862,6 @@
   </div>
 </div>
 <!-- --------------- Vue code------------------------- -->
-
 <script>
   var app = new Vue({
     el: '#home-widget',
