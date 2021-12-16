@@ -110,7 +110,7 @@
   }
   .home-widget__moving-size--modal-wrap {
     padding: 42px;
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
@@ -254,11 +254,11 @@
     background: rgb(231, 238, 243);
   }
   .b-contain input:focus ~ .b-input {
-    box-shadow: 0 0 0 2px #b65a56;
+    box-shadow: 0 0 0 2px #000;
   }
   .b-contain input:checked ~ .b-input {
-    background: #ee342a;
-    border-color: #b65a56;
+    background: #000;
+    border-color: #000;
   }
   .b-contain input[type='checkbox']:disabled ~ .b-input {
     background: rgba(241, 245, 248, 1);
@@ -277,8 +277,8 @@
   }
   .b-contain input:checked:focus ~ .b-input,
   .b-contain:hover input:not([disabled]):checked ~ .b-input {
-    background: #ee342a;
-    border-color: #b65a56;
+    background: #000;
+    border-color: #000;
   }
   .b-contain .b-input::before {
     content: '';
@@ -290,7 +290,7 @@
     height: 3rem;
     margin-left: -0.85rem;
     margin-top: -0.85rem;
-    background: #b65a56;
+    background: #000;
     border-radius: 2rem;
     opacity: 0.6;
     z-index: 99999;
@@ -748,8 +748,8 @@
               </li>
             </ul>
           </div>
+          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
           <div class="home-widget__moving-size--column02">
-            <h5>Please select: <span class="modal-required__text">(required)</span></h5>
             <ul class="move-size__selector--wrapper">
               <li>
                 <input
