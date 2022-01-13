@@ -29,6 +29,7 @@
     font-size: 1.2em;
     background-color: transparent;
     pointer-events: none;
+    width: 100%;
   }
   .home-widget__moving-go--button {
     height: 50px;
@@ -39,9 +40,12 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-top: 32px;
   }
   .home-widget__moving-go--button .get-quote-text {
-    color: #fff;
+    color: #e32727;
+    font-size: 1.2em;
+    font-weight: 600;
   }
   .home-widget__moving-go--button-complete {
     background-color: #1be07f;
@@ -75,6 +79,7 @@
     border-radius: 10px;
     margin-bottom: 1em;
     position: relative;
+    background: #fff;
   }
   .home-widget__inner-items {
     position: relative;
@@ -860,7 +865,7 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Get Free Quotes Now</span>
+      <span class="get-quote-text">Get Free Quotes Now &#10095;</span>
     </div>
   </div>
 </div>
