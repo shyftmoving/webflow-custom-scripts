@@ -719,7 +719,7 @@
           localStorage.movingToLng = this.movingToLng
           localStorage.movingDate = this.movingDate
           localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
-          localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
+          //localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // ROUTER
           // if (window.location.href.includes('/free-quotes')) {
           //   window.location.href = '/get-free-quote'
@@ -747,9 +747,10 @@
           this.movingTo &&
           this.movingToLat &&
           this.movingToLng &&
-          this.movingDate &&
-          this.movingSize.moveType &&
-          this.movingSize.moveObjects
+          this.movingDate
+          // this.movingDate &&
+          // this.movingSize.moveType &&
+          // this.movingSize.moveObjects
         ) {
           return (this.completed = true)
         }
