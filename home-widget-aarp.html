@@ -2,6 +2,15 @@
   * {
     font-family: 'Inter', sans-serif;
   }
+  h6 {
+    font-size: 1.4em;
+    font-weight: 400;
+    line-height: 1.2;
+    max-width: 40ch;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 12 0;
+  }
   .home-widget__inner-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr / 1fr;
@@ -467,6 +476,10 @@
     /* Microsoft Edge */
     color: #5e5e5e;
   }
+  .home-widget__moving-date--title img {
+    max-width: 300px;
+  }
+
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input {
@@ -588,7 +601,8 @@
   .home-widget__moving-date--title {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 4em;
+    align-items: flex-start;
+    margin-bottom: 1em;
   }
   .home-widget__moving-date--title h5 {
     font-family: 'Inter', sans-serif;
@@ -686,9 +700,10 @@
     <div v-if="showDateModal" class="home-widget__moving-date--modal">
       <div class="home-widget__moving-date--modal-wrap">
         <div class="home-widget__moving-date--title">
-          <h5>Moving date</h5>
+          <h5>What’s Your Move Date</h5>
+          <h6>Let Shyft know when you would prefer to move.</h6>
           <img
-            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b23848567aa29678aad294_AARP_Shyft.svg"
+            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/620bb62c24058a2e92d0c318_aarp-shyft-logo.svg"
             alt="AARP logo"
           />
         </div>
@@ -738,9 +753,12 @@
     <div v-if="showSizeModal" class="home-widget__moving-size--modal">
       <div class="home-widget__moving-size--modal-wrap">
         <div class="home-widget__moving-date--title">
-          <h5>Move size</h5>
+          <div class="">
+            <h5>Tell Shyft about your move</h5>
+            <h6>Shyft just needs a few details about your move to provide you a personalized experience.</h6>
+          </div>
           <img
-            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b23848567aa29678aad294_AARP_Shyft.svg"
+            src="https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/620bb62c24058a2e92d0c318_aarp-shyft-logo.svg"
             alt="AARP logo"
           />
         </div>
@@ -834,11 +852,11 @@
               <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
               <div class="b-input"></div>
             </label>
-            <label class="b-contain">
+            <!-- <label class="b-contain">
               <span>I need housing assistance</span>
               <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
               <div class="b-input"></div>
-            </label>
+            </label> -->
           </div>
           <div class="home-widget__moving-size--column04">
             <label class="b-contain">
