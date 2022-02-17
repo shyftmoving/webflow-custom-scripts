@@ -1021,9 +1021,6 @@
       },
       endSizeModal: function () {
         let vehicleSelectedAndEntered = this.movingVehicle == (this.movingSize.moveVehicle != '')
-        console.log(vehicleSelectedAndEntered)
-        console.log(this.movingSize.moveVehicle)
-        console.log(this.movingVehicle)
         if (this.movingSize.moveType && this.movingSize.moveObjects && vehicleSelectedAndEntered) {
           this.showSizeModal = false
           this.checkEntriesAndColor()
@@ -1095,6 +1092,7 @@
         this.movingFromLng = placeOrigin.geometry.location.lng()
         this.checkEntriesAndColor()
         this.$refs['destination'].focus()
+        console.log(placeOrigin)
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
