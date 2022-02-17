@@ -1079,6 +1079,12 @@
             if (addressObj.types[j] === 'country') {
               localStorage.movingFromCountry = addressObj.short_name
             }
+            if (addressObj.types[j] === 'locality') {
+              localStorage.currentResidenceCity = addressObj.long_name
+            }
+            if (addressObj.types[j] === 'administrative_area_level_1') {
+              localStorage.currentResidenceState = addressObj.long_name
+            }
           }
         }
 
@@ -1102,6 +1108,12 @@
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
               localStorage.movingToCountry = addressObj.short_name
+            }
+            if (addressObj.types[j] === 'locality') {
+              localStorage.destinationResidenceCity = addressObj.long_name
+            }
+            if (addressObj.types[j] === 'administrative_area_level_1') {
+              localStorage.destinationResidenceState = addressObj.long_name
             }
           }
         }
