@@ -1084,6 +1084,7 @@
             }
             if (addressObj.types[j] === 'administrative_area_level_1') {
               localStorage.currentResidenceState = addressObj.long_name
+              localStorage.currentResidenceStateCode = addressObj.short_name
             }
           }
         }
@@ -1114,6 +1115,7 @@
             }
             if (addressObj.types[j] === 'administrative_area_level_1') {
               localStorage.destinationResidenceState = addressObj.long_name
+              localStorage.destinationResidenceStateCode = addressObj.short_name
             }
           }
         }
