@@ -43,22 +43,24 @@
   .home-widget__moving-go--button {
     height: 50px;
     width: auto;
-    background-color: #fff;
+    color: #fff;
+    background-color: #000;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: not-allowed;
     margin-top: 32px;
   }
   .home-widget__moving-go--button .get-quote-text {
-    color: #e32727;
+    color: #fff;
     font-size: 1.2em;
     font-weight: 600;
   }
   .home-widget__moving-go--button-complete {
     /* background-color: #1be07f; */
-    background-color: #fff;
+    background-color: #000;
+    cursor: pointer;
   }
   .home-widget__moving-icon--title {
     width: 14px;
@@ -1099,7 +1101,6 @@
         this.movingFromLng = placeOrigin.geometry.location.lng()
         this.checkEntriesAndColor()
         this.$refs['destination'].focus()
-        console.log(placeOrigin)
       })
       this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
       this.destination.addListener('place_changed', () => {
