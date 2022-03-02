@@ -10,9 +10,28 @@
     input.intlTelInput({
       utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/9.0.6/js/utils.js'
     })
-    input.on('change', function () {
-      var formatedNumber = input.intlTelInput('getNumber')
-      input.val(formatedNumber)
+    function validatePhoneNumber() {
+      // validate phone number
+      if (input.intlTelInput('isValidNumber')) {
+        $('#invalidPhoneErrorMsg').css('display', 'none')
+        $('#btnFormSubmit').css('background', '')
+        $('#btnFormSubmit').prop('disabled', false)
+        var formatedNumber = input.intlTelInput('getNumber')
+        input.val(formatedNumber)
+        localStorage.phone = input.val()
+      } else {
+        $('#invalidPhoneErrorMsg').css('display', 'inline')
+        $('#btnFormSubmit').css('background', 'grey')
+        $('#btnFormSubmit').prop('disabled', true)
+        input.focus()
+      }
+    }
+    // validate phone number after user stops typing
+    let keypressDelay
+    input.on('keydown', function () {
+      clearTimeout(keypressDelay)
+      keypressDelay = setTimeout(validatePhoneNumber, 800)
+      // validate phone number
     })
   })
 
