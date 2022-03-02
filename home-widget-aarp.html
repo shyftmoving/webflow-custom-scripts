@@ -113,6 +113,7 @@
     align-content: center;
     justify-content: center;
     flex-direction: column;
+    transition: all 0.3s;
   }
   .home-widget__moving-date--modal-inner {
     display: flex;
@@ -491,6 +492,11 @@
     color: #ee342a;
     margin: 0;
   }
+  .modal-disabled {
+    opacity: 0;
+    transform: scale(0);
+    z-index: -999;
+  }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input {
@@ -747,7 +753,7 @@
       />
     </div>
     <!-- Modal -->
-    <div v-if="showDateModal" class="home-widget__moving-date--modal">
+    <div v-if="showDateModal" class="home-widget__moving-date--modal" :class="modal-disabled: !showDateModal">
       <div class="home-widget__moving-date--modal-wrap">
         <div class="home-widget__moving-date--title">
           <div class="">
