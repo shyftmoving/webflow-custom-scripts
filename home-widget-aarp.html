@@ -1023,7 +1023,7 @@
         this.showDateModal = false
         this.dataComplete()
         this.checkEntriesAndColor()
-        // this.showSizeModal = true
+        this.showSizeModal = true
       },
       endSizeModal: function () {
         let vehicleSelectedAndEntered = this.movingVehicle == (this.movingSize.moveVehicle != '')
@@ -1134,8 +1134,7 @@
         this.movingToLng = placeDestination.geometry.location.lng()
         this.checkEntriesAndColor()
         this.showSizeModal = false
-        // this.showDateModal = true
-        this.showDateModal = false
+        this.showDateModal = true
       })
     },
     watch: {
