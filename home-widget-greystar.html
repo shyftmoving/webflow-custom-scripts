@@ -664,8 +664,14 @@
 
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
-    <div class="home-widget__inner-items" @click="document.getElementById('moving-from').focus()">
-      <div id="widget-icon__move-from" class="home-widget__moving-icon--title home-widget__moving-icon--move">
+    <div
+      class="home-widget__inner-items"
+      @click="document.getElementById('moving-from').focus()"
+    >
+      <div
+        id="widget-icon__move-from"
+        class="home-widget__moving-icon--title home-widget__moving-icon--move"
+      >
         <svg
           width="13"
           height="14"
@@ -692,8 +698,14 @@
     </div>
   </div>
   <div class="home-widget__moving-to--wrapper">
-    <div class="home-widget__inner-items" @click="document.getElementById('moving-to').focus()">
-      <div id="widget-icon__move-to" class="home-widget__moving-icon--title home-widget__moving-icon--move">
+    <div
+      class="home-widget__inner-items"
+      @click="document.getElementById('moving-to').focus()"
+    >
+      <div
+        id="widget-icon__move-to"
+        class="home-widget__moving-icon--title home-widget__moving-icon--move"
+      >
         <svg
           width="13"
           height="14"
@@ -721,7 +733,10 @@
   </div>
   <div class="home-widget__moving-date--wrapper">
     <div class="home-widget__inner-items" @click="showDateModalHandler">
-      <div id="widget-icon__moving-date" class="home-widget__moving-icon--title home-widget__moving-icon--date">
+      <div
+        id="widget-icon__moving-date"
+        class="home-widget__moving-icon--title home-widget__moving-icon--date"
+      >
         <svg
           width="13"
           height="14"
@@ -760,17 +775,27 @@
           />
         </div>
         <div class="home-widget__moving-date--modal-inner">
-          <v-date-picker v-model="movingDate" :model-config="modelConfig" mode="date" :min-date="new Date()" />
+          <v-date-picker
+            v-model="movingDate"
+            :model-config="modelConfig"
+            mode="date"
+            :min-date="new Date()"
+          />
         </div>
         <div class="home-modal__widget--last-row">
           <div class="home-widget__checkbox-wrapper">
             <label class="b-contain">
               <span>Flexible move dates</span>
-              <input @click="movingDateFlexible = !movingDateFlexible" type="checkbox" />
+              <input
+                @click="movingDateFlexible = !movingDateFlexible"
+                type="checkbox"
+              />
               <div class="b-input"></div>
             </label>
           </div>
-          <div @click="endDateModal" class="home-widget__modal-btn">Confirm</div>
+          <div @click="endDateModal" class="home-widget__modal-btn">
+            Confirm
+          </div>
         </div>
       </div>
     </div>
@@ -778,7 +803,10 @@
   </div>
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__inner-items" @click="showSizeModalHandler">
-      <div id="widget-icon__moving-size" class="home-widget__moving-icon--title home-widget__moving-icon--size">
+      <div
+        id="widget-icon__moving-size"
+        class="home-widget__moving-icon--title home-widget__moving-icon--size"
+      >
         <svg
           width="13"
           height="14"
@@ -807,7 +835,10 @@
         <div class="home-widget__moving-date--title">
           <div class="">
             <h5>Tell Shyft about your move</h5>
-            <h6>Shyft just needs a few details about your move to provide you a personalized experience.</h6>
+            <h6>
+              Shyft just needs a few details about your move to provide you a
+              personalized experience.
+            </h6>
           </div>
           <img
             src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/6218c0b4a979391a82bd3c36_greystar-logo-vector.svg"
@@ -816,19 +847,36 @@
         </div>
         <div class="home-widget__moving-size--inner">
           <div class="home-widget__moving-size--column01">
-            <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+            <h5>
+              Please select:
+              <span class="modal-required__text">(required)</span>
+            </h5>
             <ul class="move-size__selector--wrapper">
               <li>
-                <input v-model="movingSize.moveType" type="radio" name="moveType" value="Apartment" id="apartment" />
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="Apartment"
+                  id="apartment"
+                />
                 <label for="apartment">Apartment</label>
               </li>
               <li>
-                <input v-model="movingSize.moveType" type="radio" name="moveType" value="House" id="house" />
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="House"
+                  id="house"
+                />
                 <label for="house">House</label>
               </li>
             </ul>
           </div>
-          <h5>Please select: <span class="modal-required__text">(required)</span></h5>
+          <h5>
+            Please select: <span class="modal-required__text">(required)</span>
+          </h5>
           <div class="home-widget__moving-size--column02">
             <ul class="move-size__selector--wrapper">
               <li>
@@ -896,17 +944,29 @@
           <div class="home-widget__moving-size--column03">
             <label class="b-contain">
               <span>I’m moving with my pets</span>
-              <input v-model="movingSize.movePets" value="true" type="checkbox" />
+              <input
+                v-model="movingSize.movePets"
+                value="true"
+                type="checkbox"
+              />
               <div class="b-input"></div>
             </label>
             <label class="b-contain">
               <span>I need storage</span>
-              <input v-model="movingSize.moveStorage" value="true" type="checkbox" />
+              <input
+                v-model="movingSize.moveStorage"
+                value="true"
+                type="checkbox"
+              />
               <div class="b-input"></div>
             </label>
             <label class="b-contain">
               <span>I need housing assistance</span>
-              <input v-model="movingSize.housingAssist" value="true" type="checkbox" />
+              <input
+                v-model="movingSize.housingAssist"
+                value="true"
+                type="checkbox"
+              />
               <div class="b-input"></div>
             </label>
           </div>
@@ -931,7 +991,9 @@
         </div>
         <div @click="endSizeModal" class="home-widget__modal-btn">Confirm</div>
         <div style="min-height: 24px; margin-top: 12px">
-          <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">Please fill all required data!</p>
+          <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">
+            Please fill all required data!
+          </p>
         </div>
       </div>
     </div>
@@ -943,7 +1005,7 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Get Free Quotes Now &#10095;</span>
+      <span class="get-quote-text">Get Quotes &#10095;</span>
     </div>
   </div>
 </div>
@@ -993,7 +1055,9 @@
           localStorage.movingToLat = this.movingToLat
           localStorage.movingToLng = this.movingToLng
           localStorage.movingDate = this.movingDate
-          localStorage.movingDateFlexible = JSON.stringify(this.movingDateFlexible)
+          localStorage.movingDateFlexible = JSON.stringify(
+            this.movingDateFlexible
+          )
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // ROUTER
           // if (window.location.href.includes('/free-quotes')) {
@@ -1026,8 +1090,13 @@
         this.showSizeModal = true
       },
       endSizeModal: function () {
-        let vehicleSelectedAndEntered = this.movingVehicle == (this.movingSize.moveVehicle != '')
-        if (this.movingSize.moveType && this.movingSize.moveObjects && vehicleSelectedAndEntered) {
+        let vehicleSelectedAndEntered =
+          this.movingVehicle == (this.movingSize.moveVehicle != '')
+        if (
+          this.movingSize.moveType &&
+          this.movingSize.moveObjects &&
+          vehicleSelectedAndEntered
+        ) {
           this.showSizeModal = false
           this.checkEntriesAndColor()
           this.dataComplete()
@@ -1106,10 +1175,16 @@
         this.checkEntriesAndColor()
         this.$refs['destination'].focus()
       })
-      this.destination = new google.maps.places.Autocomplete(this.$refs['destination'])
+      this.destination = new google.maps.places.Autocomplete(
+        this.$refs['destination']
+      )
       this.destination.addListener('place_changed', () => {
         let placeDestination = this.destination.getPlace()
-        for (var i = 0; i < placeDestination.address_components.length; i += 1) {
+        for (
+          var i = 0;
+          i < placeDestination.address_components.length;
+          i += 1
+        ) {
           var addressObj = placeDestination.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
