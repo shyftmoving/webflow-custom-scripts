@@ -1179,6 +1179,9 @@
             if (addressObj.types[j] === 'route') {
               localStorage.currentResidenceAddress = addressObj.long_name
             }
+            if (addressObj.types[j] === 'street_number') {
+              localStorage.currentResidenceStreetNumber = addressObj.long_name
+            }
           }
         }
 
@@ -1220,6 +1223,10 @@
             }
             if (addressObj.types[j] === 'route') {
               localStorage.destinationResidenceAddress = addressObj.long_name
+            }
+            if (addressObj.types[j] === 'street_number') {
+              localStorage.destinationResidenceStreetNumber =
+                addressObj.long_name
             }
           }
         }
