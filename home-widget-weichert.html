@@ -2,6 +2,21 @@
   * {
     font-family: 'Inter', sans-serif;
   }
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #c8c8c8;
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #c8c8c8;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #c8c8c8;
+  }
   h6 {
     font-size: 1.4em;
     font-weight: 400;
@@ -65,7 +80,7 @@
   }
   .home-widget__moving-go--button-complete {
     /* background-color: #1be07f; */
-    background-color: #000;
+    background-color: #fff200;
     cursor: pointer;
   }
   .home-widget__moving-icon--title {
@@ -582,7 +597,7 @@
     }
     .home-widget__moving-go--button {
       border-radius: 12px;
-      min-width: 220px;
+      /* min-width: 220px; */
       width: 100%;
     }
     .home-widget__moving-go--button img {
@@ -1085,12 +1100,12 @@
           )
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // ROUTER
-          if (window.location.href.includes('/strand')) {
-            window.location.href = '/strand/strand-get-quote'
-          } else {
-            window.location.href = '/get-quote'
-          }
-          // window.location.href = '/get-quote'
+          // if (window.location.href.includes('/strand')) {
+          //   window.location.href = '/strand/strand-get-quote'
+          // } else {
+          //   window.location.href = '/get-quote'
+          // }
+          window.location.href = '/weichert/weichert-get-quote'
         }
       },
       dataComplete: function () {
