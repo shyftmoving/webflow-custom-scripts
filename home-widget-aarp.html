@@ -1154,6 +1154,8 @@
       }
     },
     mounted() {
+      // clear localStorage
+      localStorage.clear()
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
