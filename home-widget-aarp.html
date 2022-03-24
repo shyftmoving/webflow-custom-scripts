@@ -1157,7 +1157,7 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
-        console.log(placeOrigin)
+        // console.log(placeOrigin)
         for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
           var addressObj = placeOrigin.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
@@ -1170,6 +1170,12 @@
             if (addressObj.types[j] === 'administrative_area_level_1') {
               localStorage.currentResidenceState = addressObj.long_name
               localStorage.currentResidenceStateCode = addressObj.short_name
+            }
+            if (addressObj.types[j] === 'postal_code') {
+              localStorage.currentResidenceZip = addressObj.long_name
+            }
+            if (addressObj.types[j] === 'route') {
+              localStorage.currentResidenceAddress = addressObj.long_name
             }
           }
         }
@@ -1206,6 +1212,12 @@
             if (addressObj.types[j] === 'administrative_area_level_1') {
               localStorage.destinationResidenceState = addressObj.long_name
               localStorage.destinationResidenceStateCode = addressObj.short_name
+            }
+            if (addressObj.types[j] === 'postal_code') {
+              localStorage.destinationResidenceZip = addressObj.long_name
+            }
+            if (addressObj.types[j] === 'route') {
+              localStorage.destinationResidenceAddress = addressObj.long_name
             }
           }
         }
