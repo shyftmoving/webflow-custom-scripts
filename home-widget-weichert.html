@@ -1,19 +1,7 @@
 <style>
-  * {
-    font-family: 'Inter', sans-serif;
-  }
-  h6 {
-    font-size: 1.4em;
-    font-weight: 400;
-    line-height: 1.2;
-    max-width: 40ch;
-    text-align: left;
-    color: rgba(0, 0, 0, 0.7);
-    margin: 12 0;
-  }
   .home-widget__inner-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr / 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 50px;
     margin: 0 auto;
   }
   .home-widget__inner-wrapper input,
@@ -22,7 +10,6 @@
     outline: none;
     display: block;
     font-weight: 500;
-    font-size: 1.2em;
   }
   .home-widget__moving--title {
     margin-bottom: 3px;
@@ -37,41 +24,39 @@
     color: #000;
     font-size: 1.2em;
     background-color: transparent;
+    max-width: 150px;
     pointer-events: none;
-    width: 100%;
   }
   .home-widget__moving-go--button {
     height: 60px;
-    width: auto;
-    color: #fff;
+    width: 60px;
     background-color: #fff200;
-    /* border-radius: 10px; */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: not-allowed;
-    margin-top: 32px;
-  }
-  .home-widget__moving-go--button .get-quote-text {
-    color: #fff;
-    font-size: 1.2em;
-    font-weight: 600;
+    cursor: pointer;
   }
   .home-widget__moving-go--button-complete {
-    /* background-color: #1be07f; */
-    background-color: #000;
-    cursor: pointer;
+    background-color: #1be07f;
+  }
+  .home-widget__moving-go--button img {
+    width: 18px;
+    height: 15px;
+  }
+  .home-widget__moving-go--button .get-quote-text {
+    display: none;
   }
   .home-widget__moving-icon--title {
     width: 14px;
     height: 14px;
-    margin-right: 12px;
+    margin-right: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     display: inline-block;
     position: relative;
-    top: 2px;
+    top: 1px;
   }
   /* .home-widget__moving-icon--move {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
@@ -84,96 +69,72 @@
   } */
   .home-widget__moving-from--wrapper,
   .home-widget__moving-to--wrapper,
+  .home-widget__moving-date--wrapper {
+    border-right: 1px solid #bec4d8;
+  }
+  .home-widget__moving-from--wrapper,
+  .home-widget__moving-to--wrapper,
   .home-widget__moving-date--wrapper,
   .home-widget__moving-size--wrapper {
-    padding: 16px;
-    border: 1px solid #dce0e1;
-    border-radius: 10px;
-    margin-bottom: 1em;
-    position: relative;
-    background: #fff;
+    padding-left: 16px;
   }
   .home-widget__inner-items {
+    /* margin: 0 auto; */
+    width: fit-content;
     position: relative;
     margin-top: 0;
     cursor: pointer;
-    display: flex;
   }
   .home-widget__moving-date--modal,
   .home-widget__moving-size--modal {
-    border-radius: 0;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    background-color: #2c2c2ced;
-    z-index: 9999;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
-    transition: all 0.3s ease-out;
+    background-color: #fff;
+    position: absolute;
+    top: 64px;
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+  }
+  .home-widget__moving-size--modal {
+    width: 860px;
+    right: 0;
+    z-index: 3;
   }
   .home-widget__moving-date--modal-inner {
     display: flex;
     justify-content: center;
   }
-  .home-widget__moving-date--modal-wrap {
-    padding: 24px;
-    max-width: 800px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .home-widget__moving-size--modal-wrap {
-    padding: 42px;
-    /* max-width: 880px; */
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 10px;
-    text-align: center;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
   .home-modal__widget--last-row {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
   }
   .home-widget__modal-btn {
-    background-color: #fff200;
+    background-color: #ff005c;
     border-radius: 20px;
-    padding: 10px 82px;
+    padding: 10px 50px;
     color: #fff;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
     display: inline-block;
   }
-  .home-widget__moving-size--modal-wrap .home-widget__modal-btn {
-    margin-top: 42px;
-  }
   .home-widget__modal-btn:hover {
-    background-color: #c2ba18;
+    background-color: #bd0045;
   }
   .home-widget__checkbox-wrapper {
     width: auto;
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
   }
   .vc-container {
     border: none !important;
   }
   .vc-highlight {
-    background-color: #fff200 !important;
+    background-color: #0e30a5 !important;
   }
   .vc-day-content:focus {
-    background-color: #fff200 !important;
+    background-color: #0e30a5 !important;
   }
   .home-widget__radio-wrapper {
     display: flex;
@@ -191,7 +152,6 @@
     line-height: 1.4;
     height: 32px;
     padding: 4px 12px;
-    min-width: 230px;
   }
   /* Checkbox and radio */
   .b-contain *,
@@ -206,7 +166,7 @@
   }
   .b-contain span {
     line-height: 1.54;
-    font-size: 1em;
+    font-size: 14px;
     font-weight: 500;
     font-family: inherit;
     color: #000;
@@ -278,11 +238,11 @@
     background: rgb(231, 238, 243);
   }
   .b-contain input:focus ~ .b-input {
-    box-shadow: 0 0 0 2px #000;
+    box-shadow: 0 0 0 2px rgba(52, 144, 220, 0.5);
   }
   .b-contain input:checked ~ .b-input {
-    background: #000;
-    border-color: #000;
+    background: rgba(14, 48, 165, 1);
+    border-color: rgba(0, 130, 243, 1);
   }
   .b-contain input[type='checkbox']:disabled ~ .b-input {
     background: rgba(241, 245, 248, 1);
@@ -301,8 +261,8 @@
   }
   .b-contain input:checked:focus ~ .b-input,
   .b-contain:hover input:not([disabled]):checked ~ .b-input {
-    background: #000;
-    border-color: #000;
+    background: rgba(14, 48, 165, 1);
+    border-color: rgba(82, 110, 255, 1);
   }
   .b-contain .b-input::before {
     content: '';
@@ -314,7 +274,7 @@
     height: 3rem;
     margin-left: -0.85rem;
     margin-top: -0.85rem;
-    background: #000;
+    background: rgba(0, 130, 243, 1);
     border-radius: 2rem;
     opacity: 0.6;
     z-index: 99999;
@@ -369,10 +329,7 @@
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: stretch;
-    align-content: center;
+    justify-content: center;
   }
   .move-size__selector--wrapper li {
     margin: 0 16px 12px 0;
@@ -395,7 +352,7 @@
   }
   .move-size__selector--wrapper input[type='radio']:checked + label,
   .Checked + label {
-    background: #000;
+    background: #0e30a5;
     color: #fff;
   }
   .move-size__selector--wrapper label {
@@ -417,121 +374,76 @@
   .home-widget__moving-date--modal h5 {
     color: rgba(135, 149, 161, 1);
     font-weight: 500;
-    text-align: left;
+    text-align: center;
   }
   .modal-required__text {
     color: rgba(135, 149, 161, 0.6);
   }
   .home-widget__moving-size--inner {
     display: flex;
-    flex-direction: column;
   }
   .home-widget__moving-size--column03 {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 32px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #dedede;
-  }
-  .home-widget__moving-size--column03 .b-contain {
-    margin-right: 24px;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 18px;
   }
   .home-widget__moving-size--column01,
   .home-widget__moving-size--column02 {
-    border-bottom: 1px solid #dedede;
+    border-right: 1px solid #dedede;
     text-align: left;
-    width: 100%;
-    min-width: 860px;
-    display: flex;
-    flex-wrap: wrap;
   }
   .home-widget__moving-size--column01,
   .home-widget__moving-size--column03 {
-    width: 100%;
+    width: 25%;
   }
   .home-widget__moving-size--column01 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
   }
-  .home-widget__moving-size--column04 {
+  .home-widget__moving-size--column02 {
     display: flex;
-    align-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 80px;
-    padding-top: 18px;
-  }
-  .home-widget__moving-size--column04 .b-contain {
-    margin-right: 24px;
+    width: 50%;
   }
   .vc-weeks {
     min-width: 300px !important;
   }
   ::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #5e5e5e;
+    color: #c4c4c4;
     opacity: 1; /* Firefox */
   }
 
   :-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: #5e5e5e;
+    color: #c4c4c4;
   }
 
   ::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: #5e5e5e;
-  }
-  .home-widget__moving-date--title img {
-    max-width: 300px;
-  }
-  .modalSizeModalErrorMsg {
-    color: #ff035b;
-    margin: 0;
+    color: #c4c4c4;
   }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
-    .home-widget__inner-items input,
-    .home-widget__inner-items input:focus {
+    .home-widget__inner-items input {
       font-size: 1.4em;
     }
     .home-widget__moving-go--button {
       height: 50px;
-      width: auto;
+      width: 50px;
+    }
+    .home-widget__moving-date--modal,
+    .home-widget__moving-size--modal {
+      top: 88px;
     }
     .home-widget__moving--title {
       margin-bottom: 5px;
     }
-    .home-widget__moving-icon--title {
-      top: 4px;
-    }
   }
   @media (max-width: 991px) {
-    .home-widget__moving-size--modal-wrap {
-      max-width: 100vw;
-    }
-    .home-widget__moving-date--title {
-      flex-direction: column-reverse;
-    }
-    .home-widget__moving-date--title img {
-      width: 100%;
-      margin-bottom: 32px;
-    }
-    .home-widget__moving-icon--title {
-      top: 10px;
-    }
-    .home-widget__moving-from--wrapper,
-    .home-widget__moving-to--wrapper,
-    .home-widget__moving-date--wrapper,
-    .home-widget__moving-size--wrapper {
-      padding: 0;
-      max-width: 450px;
-      width: 100%;
-      margin: 0 auto 1em auto;
-    }
     .home-hero__widget-wrapper,
     .home-hero__widget-inner {
       height: auto;
@@ -539,9 +451,9 @@
     .home-widget__inner-wrapper {
       width: 100%;
       grid-template-columns: 1fr;
-      background-color: transparent;
+      background-color: #fff;
       border-radius: 8px 8px 0 0;
-      min-height: auto;
+      min-height: calc(70vh - 70px);
       padding: 16px 0;
     }
     .home-widget__inner-items {
@@ -553,9 +465,9 @@
       margin: 0 auto;
     }
     .home-widget__inner-items input[type='text'] {
-      border: none;
+      border: 1px solid #d8d8d8;
       padding: 8px;
-      border-radius: 10px;
+      border-radius: 12px;
     }
     .home-modal__widget--last-row {
       flex-direction: column;
@@ -567,6 +479,20 @@
       display: flex;
       justify-content: center;
     }
+    .home-widget__moving-date--modal,
+    .home-widget__moving-size--modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      max-width: none;
+      min-height: 100vh;
+      border-radius: 0;
+      z-index: 1;
+      padding-top: 80px;
+      overflow: auto;
+      height: 100%;
+    }
     .home-widget__moving-go--button {
       border-radius: 12px;
       min-width: 220px;
@@ -576,6 +502,7 @@
     }
     .home-widget__moving-go--button .get-quote-text {
       display: inline-block;
+      color: #fff;
       font-size: 16px;
       font-weight: 500;
     }
@@ -583,7 +510,10 @@
       min-width: auto !important;
     }
     .home-widget__moving-size--modal {
-      width: 100%;
+      width: auto;
+    }
+    .home-widget__moving-size--inner {
+      flex-direction: column;
     }
     .home-widget__moving-size--column01,
     .home-widget__moving-size--column02,
@@ -591,19 +521,16 @@
       width: 100%;
       border-right: none;
     }
-    .home-widget__moving-size--column02 {
-      flex-wrap: wrap;
-    }
     .home-widget__moving-size--column03 {
       padding-left: 0;
-      /* max-width: 200px; */
-      /* margin: 0 auto; */
+      max-width: 200px;
+      margin: 0 auto;
     }
     .home-widget__moving-size--column01 {
-      /* align-items: center; */
+      align-items: center;
     }
-    .home-widget__moving-size--column01 {
-      align-content: flex-start;
+    .home-widget__moving-from--wrapper {
+      border-right: none;
     }
     .home-widget__moving--title {
       font-size: 1.2em;
@@ -620,9 +547,6 @@
     .home-widget__moving-size--wrapper {
       padding-left: 0;
     }
-    .move-size__selector--wrapper {
-      flex-direction: column;
-    }
   }
   @media (max-width: 320px) {
     .home-widget__inner-wrapper {
@@ -638,35 +562,6 @@
     .widgetOnTop .home-widget__moving-from--wrapper {
       padding-left: 0;
     }
-  }
-  .home-widget__moving-date--title {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1em;
-  }
-  .home-widget__moving-date--title h5 {
-    font-family: 'Inter', sans-serif;
-    color: #000;
-    font-size: 1.8em;
-    margin: 0;
-  }
-  @media (max-width: 768px) {
-    .home-widget__moving-size--column03 {
-      flex-direction: column;
-      align-content: flex-start;
-      align-items: flex-start;
-    }
-    .home-widget__moving-size--column01,
-    .home-widget__moving-size--column02 {
-      min-width: none;
-    }
-  }
-  .modalDisabled {
-    opacity: 0;
-    transform: scale(0);
-    z-index: -999;
-    transition: all 0.2s ease-out;
   }
 </style>
 
@@ -694,13 +589,14 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving from</div>
       <input
         v-model="movingFrom"
         @input="dataComplete"
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Moving from"
+        placeholder="Enter city"
         ref="origin"
       />
     </div>
@@ -728,13 +624,14 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving to</div>
       <input
         v-model="movingTo"
         @input="dataComplete"
         type="text"
         name="moving-to"
         id="moving-to"
-        placeholder="Moving to"
+        placeholder="Enter city"
         ref="destination"
       />
     </div>
@@ -759,51 +656,40 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Moving date</div>
       <input
         v-model="movingDate"
         @click="showDateModalHandler"
         type="text"
         name="moving-date"
         id="moving-date"
-        placeholder="Moving date"
+        placeholder="Select Date"
         readonly
       />
     </div>
     <!-- Modal -->
-    <div
-      class="home-widget__moving-date--modal"
-      :class="{modalDisabled: !showDateModal}"
-    >
-      <div class="home-widget__moving-date--modal-wrap">
-        <div class="home-widget__moving-date--title">
-          <div class="">
-            <h5>What’s Your Move Date</h5>
-            <h6>Let Shyft know when you would prefer to move.</h6>
-          </div>
+    <div v-if="showDateModal" class="home-widget__moving-date--modal">
+      <h5>Moving date</h5>
+      <div class="home-widget__moving-date--modal-inner">
+        <v-date-picker
+          v-model="movingDate"
+          :model-config="modelConfig"
+          mode="date"
+          :min-date="new Date()"
+        />
+      </div>
+      <div class="home-modal__widget--last-row">
+        <div class="home-widget__checkbox-wrapper">
+          <label class="b-contain">
+            <span>I'm flexibile</span>
+            <input
+              @click="movingDateFlexible = !movingDateFlexible"
+              type="checkbox"
+            />
+            <div class="b-input"></div>
+          </label>
         </div>
-        <div class="home-widget__moving-date--modal-inner">
-          <v-date-picker
-            v-model="movingDate"
-            :model-config="modelConfig"
-            mode="date"
-            :min-date="new Date()"
-          />
-        </div>
-        <div class="home-modal__widget--last-row">
-          <div class="home-widget__checkbox-wrapper">
-            <label class="b-contain">
-              <span>Flexible move dates</span>
-              <input
-                @click="movingDateFlexible = !movingDateFlexible"
-                type="checkbox"
-              />
-              <div class="b-input"></div>
-            </label>
-          </div>
-          <div @click="endDateModal" class="home-widget__modal-btn">
-            Confirm
-          </div>
-        </div>
+        <div @click="endDateModal" class="home-widget__modal-btn">OK</div>
       </div>
     </div>
     <!-- Modal END-->
@@ -826,182 +712,157 @@
           />
         </svg>
       </div>
+      <div class="home-widget__moving--title">Move size</div>
       <input
         v-model="movingSize.moveType"
         @click="showSizeModalHandler"
         type="text"
         name="moving-size"
         id="moving-size"
-        placeholder="Move size"
+        placeholder="Please select"
         readonly
       />
     </div>
     <!-- Modal -->
-    <div
-      class="home-widget__moving-size--modal"
-      :class="{modalDisabled: !showSizeModal}"
-    >
-      <div class="home-widget__moving-size--modal-wrap">
-        <div class="home-widget__moving-date--title">
-          <div class="">
-            <h5>Tell Shyft about your move</h5>
-            <h6>
-              Shyft just needs a few details about your move to provide you a
-              personalized experience.
-            </h6>
-          </div>
-        </div>
-        <div class="home-widget__moving-size--inner">
-          <div class="home-widget__moving-size--column01">
-            <h5>
-              Please select:
-              <span class="modal-required__text">(required)</span>
-            </h5>
-            <ul class="move-size__selector--wrapper">
-              <li>
-                <input
-                  v-model="movingSize.moveType"
-                  type="radio"
-                  name="moveType"
-                  value="Apartment"
-                  id="apartment"
-                />
-                <label for="apartment">Apartment</label>
-              </li>
-              <li>
-                <input
-                  v-model="movingSize.moveType"
-                  type="radio"
-                  name="moveType"
-                  value="House"
-                  id="house"
-                />
-                <label for="house">House</label>
-              </li>
-            </ul>
-          </div>
+    <div v-if="showSizeModal" class="home-widget__moving-size--modal">
+      <div class="home-widget__moving-size--inner">
+        <div class="home-widget__moving-size--column01">
           <h5>
             Please select: <span class="modal-required__text">(required)</span>
           </h5>
-          <div class="home-widget__moving-size--column02">
-            <ul class="move-size__selector--wrapper">
-              <li>
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="boxes"
-                  name="move-size__selector"
-                  value="Just a few boxes"
-                />
-                <label for="boxes">Just a few boxes</label>
-              </li>
-              <li v-if="movingSize.moveType == 'Apartment'">
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="studio"
-                  name="move-size__selector"
-                  value="Studio"
-                />
-                <label for="studio">Studio</label>
-              </li>
-              <li>
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="1bedroom"
-                  name="move-size__selector"
-                  value="1 bedroom"
-                />
-                <label for="1bedroom">1 bedroom</label>
-              </li>
-              <li>
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="2bedroom"
-                  name="move-size__selector"
-                  value="2 bedrooms"
-                />
-                <label for="2bedroom">2 bedrooms</label>
-              </li>
-              <li>
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="3bedroom"
-                  name="move-size__selector"
-                  value="3 bedrooms"
-                />
-                <label for="3bedroom">3 bedrooms</label>
-              </li>
-              <li li v-if="movingSize.moveType == 'House'">
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="4bedroom"
-                  name="move-size__selector"
-                  value="4+ bedrooms"
-                />
-                <label for="4bedroom">4+ bedrooms</label>
-              </li>
-            </ul>
-          </div>
-          <div class="home-widget__moving-size--column03">
-            <label class="b-contain">
-              <span>I’m moving with my pets</span>
+          <ul class="move-size__selector--wrapper">
+            <li>
               <input
-                v-model="movingSize.movePets"
-                value="true"
-                type="checkbox"
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="Apartment"
+                id="apartment"
               />
-              <div class="b-input"></div>
-            </label>
-            <label class="b-contain">
-              <span>I need storage</span>
+              <label for="apartment">Apartment</label>
+            </li>
+            <li>
               <input
-                v-model="movingSize.moveStorage"
-                value="true"
-                type="checkbox"
+                v-model="movingSize.moveType"
+                type="radio"
+                name="moveType"
+                value="House"
+                id="house"
               />
-              <div class="b-input"></div>
-            </label>
-            <label class="b-contain">
-              <span>I need housing assistance</span>
-              <input
-                v-model="movingSize.housingAssist"
-                value="true"
-                type="checkbox"
-              />
-              <div class="b-input"></div>
-            </label>
-          </div>
-          <div class="home-widget__moving-size--column04">
-            <label class="b-contain">
-              <span>I’m moving my vehicle</span>
-              <input
-                @click="movingVehicle = !movingVehicle; movingSize.moveVehicle = ''"
-                value="true"
-                type="checkbox"
-              />
-              <div class="b-input"></div>
-            </label>
-            <input
-              v-if="movingVehicle"
-              v-model="movingSize.moveVehicle"
-              type="text"
-              class="modal__moving-vehicle"
-              placeholder="Make, model, year (required)"
-            />
-          </div>
+              <label for="house">House</label>
+            </li>
+          </ul>
         </div>
-        <div @click="endSizeModal" class="home-widget__modal-btn">Confirm</div>
-        <div style="min-height: 24px; margin-top: 12px">
-          <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">
-            Please fill all required data!
-          </p>
+        <div class="home-widget__moving-size--column02">
+          <h5>
+            Please select: <span class="modal-required__text">(required)</span>
+          </h5>
+          <ul class="move-size__selector--wrapper">
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="boxes"
+                name="move-size__selector"
+                value="Just a few boxes"
+              />
+              <label for="boxes">Just a few boxes</label>
+            </li>
+            <li v-if="movingSize.moveType == 'Apartment'">
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="studio"
+                name="move-size__selector"
+                value="Studio"
+              />
+              <label for="studio">Studio</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="1bedroom"
+                name="move-size__selector"
+                value="1 bedroom"
+              />
+              <label for="1bedroom">1 bedroom</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="2bedroom"
+                name="move-size__selector"
+                value="2 bedrooms"
+              />
+              <label for="2bedroom">2 bedrooms</label>
+            </li>
+            <li>
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="3bedroom"
+                name="move-size__selector"
+                value="3 bedrooms"
+              />
+              <label for="3bedroom">3 bedrooms</label>
+            </li>
+            <li li v-if="movingSize.moveType == 'House'">
+              <input
+                v-model="movingSize.moveObjects"
+                type="radio"
+                id="4bedroom"
+                name="move-size__selector"
+                value="4+ bedrooms"
+              />
+              <label for="4bedroom">4+ bedrooms</label>
+            </li>
+          </ul>
+        </div>
+        <div class="home-widget__moving-size--column03">
+          <label class="b-contain">
+            <span>I’m moving with my pets</span>
+            <input v-model="movingSize.movePets" value="true" type="checkbox" />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need storage</span>
+            <input
+              v-model="movingSize.moveStorage"
+              value="true"
+              type="checkbox"
+            />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I need housing assistance</span>
+            <input
+              v-model="movingSize.housingAssist"
+              value="true"
+              type="checkbox"
+            />
+            <div class="b-input"></div>
+          </label>
+          <label class="b-contain">
+            <span>I’m moving my vehicle</span>
+            <input
+              @click="movingVehicle = !movingVehicle"
+              value="true"
+              type="checkbox"
+            />
+            <div class="b-input"></div>
+          </label>
+          <input
+            v-if="movingVehicle"
+            v-model="movingSize.moveVehicle"
+            type="text"
+            class="modal__moving-vehicle"
+            placeholder="Make, model, year"
+          />
         </div>
       </div>
+      <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
     </div>
     <!-- Modal END-->
   </div>
@@ -1011,11 +872,14 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Get Quotes &#10095;</span>
+      <span class="get-quote-text">Get Quote</span>
+      <img
+        src="https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60affd3679d6eb226fe8715c_widget-arrow-right.svg"
+        alt="white arrow right"
+      />
     </div>
   </div>
 </div>
-
 <!-- --------------- Vue code------------------------- -->
 
 <script>
