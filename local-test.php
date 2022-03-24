@@ -24,6 +24,11 @@
   </head>
   <body>
     <div id="includedContent"></div>
+    <script
+  type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmXPM19Ep9PXLuA9f7-XbVJEwMMrVsWqQ&libraries=places"
+></script>
+<script src="https://unpkg.com/v-calendar"></script>
     <?php include "./home-widget-weichert.html" ?>
   </body>
 </html>

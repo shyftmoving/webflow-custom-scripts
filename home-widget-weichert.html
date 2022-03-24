@@ -1188,6 +1188,7 @@
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
+        console.log(placeOrigin)
         for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
           var addressObj = placeOrigin.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
