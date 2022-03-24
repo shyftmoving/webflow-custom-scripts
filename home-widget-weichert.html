@@ -46,10 +46,10 @@
     font-size: 1.2em;
   }
   .home-widget__moving--title {
-    margin-bottom: 3px;
+    margin-bottom: 8px;
     display: inline-block;
-    font-weight: 500;
-    color: #737373;
+    font-weight: 700;
+    color: #343434;
     font-size: 1.2em;
   }
   .home-widget__inner-items input {
@@ -524,12 +524,8 @@
     .home-widget__inner-items input:focus {
       font-size: 1.4em;
     }
-    .home-widget__moving-go--button {
-      height: 50px;
-      width: auto;
-    }
     .home-widget__moving--title {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
     .home-widget__moving-icon--title {
       top: 4px;
@@ -706,6 +702,7 @@
 
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
+    <div class="home-widget__moving--title">Moving from</div>
     <div
       class="home-widget__inner-items"
       @click="document.getElementById('moving-from').focus()"
@@ -734,12 +731,13 @@
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Moving from"
+        placeholder="Enter city"
         ref="origin"
       />
     </div>
   </div>
   <div class="home-widget__moving-to--wrapper">
+    <div class="home-widget__moving--title">Moving to</div>
     <div
       class="home-widget__inner-items"
       @click="document.getElementById('moving-to').focus()"
@@ -768,12 +766,13 @@
         type="text"
         name="moving-to"
         id="moving-to"
-        placeholder="Moving to"
+        placeholder="Enter city"
         ref="destination"
       />
     </div>
   </div>
   <div class="home-widget__moving-date--wrapper">
+    <div class="home-widget__moving--title">Moving date</div>
     <div class="home-widget__inner-items" @click="showDateModalHandler">
       <div
         id="widget-icon__moving-date"
@@ -799,7 +798,7 @@
         type="text"
         name="moving-date"
         id="moving-date"
-        placeholder="Moving date"
+        placeholder="Pick a date"
         readonly
       />
     </div>
@@ -843,6 +842,7 @@
     <!-- Modal END-->
   </div>
   <div class="home-widget__moving-size--wrapper">
+    <div class="home-widget__moving--title">Movie size</div>
     <div class="home-widget__inner-items" @click="showSizeModalHandler">
       <div
         id="widget-icon__moving-size"
@@ -866,7 +866,7 @@
         type="text"
         name="moving-size"
         id="moving-size"
-        placeholder="Move size"
+        placeholder="Click to select"
         readonly
       />
     </div>
