@@ -1066,10 +1066,12 @@
           )
           localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
           // ROUTER
-          if (window.location.href.includes('/publishers')) {
-            window.location.href = '/publishers/publishers-get-quote'
+          if (window.location.href.includes('/publishers/246')) {
+            window.location.href = '/publishers/246/246-publishers-get-quote'
+          } else if (window.location.href.includes('/publishers/347')) {
+            window.location.href = '/publishers/347/347-publishers-get-quote'
           } else {
-            window.location.href = '/get-quote'
+            window.location.href = '/publishers/publishers-get-quote'
           }
           // window.location.href = '/get-quote'
         }
