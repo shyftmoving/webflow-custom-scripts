@@ -573,7 +573,9 @@
       /* border-bottom: 1px solid #c5cdec; */
       box-sizing: border-box;
       max-width: 400px;
-      margin: 0 auto;
+      /* margin: 0 auto; */
+      border: 1px solid #fff200;
+      border-radius: 12px;
     }
     .home-widget__inner-items input[type='text'] {
       border: none;
@@ -625,9 +627,6 @@
       /* margin: 0 auto; */
     }
     .home-widget__moving-size--column01 {
-      /* align-items: center; */
-    }
-    .home-widget__moving-size--column01 {
       align-content: flex-start;
     }
     .home-widget__moving--title {
@@ -652,6 +651,7 @@
     .home-widget__moving-to--wrapper,
     .home-widget__moving-date--wrapper {
       border-right: none;
+      /* border-bottom: 1px solid #fff200; */
     }
   }
   @media (max-width: 320px) {
@@ -705,7 +705,7 @@
     <div class="home-widget__moving--title">Moving from</div>
     <div
       class="home-widget__inner-items"
-      @click="document.getElementById('moving-from').focus()"
+      @click="this.$refs['moving-from'].focus()"
     >
       <div
         id="widget-icon__move-from"
@@ -730,6 +730,7 @@
         @input="dataComplete"
         type="text"
         name="moving-from"
+        ref="moving-from"
         id="moving-from"
         placeholder="Enter city"
         ref="origin"
@@ -740,7 +741,7 @@
     <div class="home-widget__moving--title">Moving to</div>
     <div
       class="home-widget__inner-items"
-      @click="document.getElementById('moving-to').focus()"
+      @click="this.$refs['moving-to'].focus()"
     >
       <div
         id="widget-icon__move-to"
@@ -766,6 +767,7 @@
         type="text"
         name="moving-to"
         id="moving-to"
+        ref="moving-to"
         placeholder="Enter city"
         ref="destination"
       />
@@ -878,9 +880,9 @@
       <div class="home-widget__moving-size--modal-wrap">
         <div class="home-widget__moving-date--title">
           <div class="">
-            <h5>Tell us about your move</h5>
+            <h5>Tell us about your housing requirements (1/2)</h5>
             <h6>
-              We just needs a few details about your move to provide you a
+              We just need a few details about your move to provide you a
               personalized experience.
             </h6>
           </div>
@@ -897,20 +899,60 @@
                   v-model="movingSize.moveType"
                   type="radio"
                   name="moveType"
-                  value="Apartment"
-                  id="apartment"
+                  value="Studio Apartment"
+                  id="studioApartment"
                 />
-                <label for="apartment">Apartment</label>
+                <label for="apartment">Studio Apartment</label>
               </li>
               <li>
                 <input
                   v-model="movingSize.moveType"
                   type="radio"
                   name="moveType"
-                  value="House"
-                  id="house"
+                  value="Apartment"
+                  id="apartment"
                 />
-                <label for="house">House</label>
+                <label for="house">Apartment</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="Condominium"
+                  id="condominium"
+                />
+                <label for="house">Condominium</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="Townhome"
+                  id="townhome"
+                />
+                <label for="house">Townhome</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="Single-story House"
+                  id="singleStoryHouse"
+                />
+                <label for="house">Single-story House</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveType"
+                  type="radio"
+                  name="moveType"
+                  value="Multi-story House"
+                  id="multiStoryHouse"
+                />
+                <label for="house">Multi-story House</label>
               </li>
             </ul>
           </div>
@@ -929,25 +971,15 @@
                 />
                 <label for="boxes">Just a few boxes</label>
               </li>
-              <li v-if="movingSize.moveType == 'Apartment'">
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="studio"
-                  name="move-size__selector"
-                  value="Studio"
-                />
-                <label for="studio">Studio</label>
-              </li>
               <li>
                 <input
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="1bedroom"
                   name="move-size__selector"
-                  value="1 bedroom"
+                  value="Studio"
                 />
-                <label for="1bedroom">1 bedroom</label>
+                <label for="1bedroom">Studio</label>
               </li>
               <li>
                 <input
@@ -955,9 +987,9 @@
                   type="radio"
                   id="2bedroom"
                   name="move-size__selector"
-                  value="2 bedrooms"
+                  value="1 bedroom"
                 />
-                <label for="2bedroom">2 bedrooms</label>
+                <label for="2bedroom">1 bedroom</label>
               </li>
               <li>
                 <input
@@ -965,19 +997,19 @@
                   type="radio"
                   id="3bedroom"
                   name="move-size__selector"
-                  value="3 bedrooms"
+                  value="2 bedrooms"
                 />
-                <label for="3bedroom">3 bedrooms</label>
+                <label for="3bedroom">2 bedrooms</label>
               </li>
-              <li li v-if="movingSize.moveType == 'House'">
+              <li>
                 <input
                   v-model="movingSize.moveObjects"
                   type="radio"
-                  id="4bedroom"
+                  id="3bedroom"
                   name="move-size__selector"
-                  value="4+ bedrooms"
+                  value="+3 bedrooms"
                 />
-                <label for="4bedroom">4+ bedrooms</label>
+                <label for="3bedroom">+3 bedrooms</label>
               </li>
             </ul>
           </div>
@@ -1000,7 +1032,7 @@
               />
               <div class="b-input"></div>
             </label>
-            <label class="b-contain">
+            <!-- <label class="b-contain">
               <span>I need housing assistance</span>
               <input
                 v-model="movingSize.housingAssist"
@@ -1008,7 +1040,7 @@
                 type="checkbox"
               />
               <div class="b-input"></div>
-            </label>
+            </label> -->
           </div>
           <div class="home-widget__moving-size--column04">
             <label class="b-contain">
@@ -1038,233 +1070,372 @@
       </div>
     </div>
     <!-- Modal END-->
-  </div>
-  <div class="home-widget__moving-go--wrapper">
+    <!-- Modal -->
     <div
-      @click="goToQuote"
-      class="home-widget__moving-go--button"
-      :class="{'home-widget__moving-go--button-complete': completed}"
+      class="home-widget__moving-size--modal"
+      :class="{modalDisabled: !showSizeModal2}"
     >
-      <span class="get-quote-text">&#10095;</span>
+      <div class="home-widget__moving-size--modal-wrap">
+        <div class="home-widget__moving-date--title">
+          <div class="">
+            <h5>Tell us about your housing requirements (2/2)</h5>
+            <h6>
+              Let us know about your requirements, and we’ll connect you with
+              verified providers
+            </h6>
+          </div>
+        </div>
+        <div class="home-widget__moving-size2--inner">
+          <div class="home-widget__moving-size2--column01">
+            <h3>Housing requirements?</h3>
+            <div class="home-widget__moving-size2--wrap">
+              <label class="b-contain">
+                <span>Rent</span>
+                <input
+                  v-model="housingRequirements.rent"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span>Buy or Sell</span>
+                <input
+                  v-model="housingRequirements.buyOrSell"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span>Temporary Housing</span>
+                <input
+                  v-model="housingRequirements.temporaryHousing"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span>Mortgage</span>
+                <input
+                  v-model="housingRequirements.mortgage"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+            </div>
+          </div>
+          <div class="home-widget__moving-size2--column02">
+            <h3>Additional services?</h3>
+            <div class="home-widget__moving-size2--wrap">
+              <label class="b-contain">
+                <span
+                  >Insurance - home, auto, renters’ or any other insurance
+                  needs.</span
+                >
+                <input
+                  v-model="additionalServices.insurance"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span
+                  >Settling in services - support services including government
+                  registrations, connecting appliances, utilities, setting up a
+                  bank account, finding skilled labor for small jobs and more.
+                </span>
+                <input
+                  v-model="additionalServices.settling"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span>Lifestyle - packing supplies, dog walking, </span>
+                <input
+                  v-model="additionalServices.lifestyle"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+            </div>
+          </div>
+          <div @click="endSizeModal2" class="home-widget__modal-btn">
+            Confirm
+          </div>
+          <div style="min-height: 24px; margin-top: 12px">
+            <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">
+              Please fill all required data!
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- Modal END-->
+    </div>
+    <div class="home-widget__moving-go--wrapper">
+      <div
+        @click="goToQuote"
+        class="home-widget__moving-go--button"
+        :class="{'home-widget__moving-go--button-complete': completed}"
+      >
+        <span class="get-quote-text">&#10095;</span>
+      </div>
     </div>
   </div>
-</div>
-<!-- --------------- Vue code------------------------- -->
-<script>
-  var app = new Vue({
-    el: '#home-widget',
-    components: {},
-    data: {
-      completed: false,
-      movingFrom: '',
-      movingFromLat: '',
-      movingFromLng: '',
-      movingTo: '',
-      movingToLat: '',
-      movingToLng: '',
-      movingDate: null,
-      movingDateFlexible: false,
-      movingSize: {
-        moveType: '',
-        moveObjects: '',
-        moveVehicle: '',
-        movePets: false,
-        moveStorage: false,
-        housingAssist: false
-      },
-      showDateModal: false,
-      showSizeModal: false,
-      movingVehicle: false,
-      modelConfig: {
-        type: 'string',
-        mask: 'MM/DD/YYYY'
-      },
-      widgetIconMoveFrom: '#808080',
-      widgetIconMoveTo: '#808080',
-      widgetIconMovingDate: '#808080',
-      widgetIconMovingSize: '#808080',
-      sizeModalCompleteError: false
-    },
-    methods: {
-      goToQuote: function () {
-        if (this.completed) {
-          localStorage.movingFrom = this.movingFrom
-          localStorage.movingFromLat = this.movingFromLat
-          localStorage.movingFromLng = this.movingFromLng
-          localStorage.movingTo = this.movingTo
-          localStorage.movingToLat = this.movingToLat
-          localStorage.movingToLng = this.movingToLng
-          localStorage.movingDate = this.movingDate
-          localStorage.movingDateFlexible = JSON.stringify(
-            this.movingDateFlexible
-          )
-          localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
-          // ROUTER
-          // if (window.location.href.includes('/strand')) {
-          //   window.location.href = '/strand/strand-get-quote'
-          // } else {
-          //   window.location.href = '/get-quote'
-          // }
-          window.location.href = '/weichert/weichert-get-quote'
+  <!-- --------------- Vue code------------------------- -->
+  <script>
+    var app = new Vue({
+      el: '#home-widget',
+      components: {},
+      data: {
+        completed: false,
+        movingFrom: '',
+        movingFromLat: '',
+        movingFromLng: '',
+        movingTo: '',
+        movingToLat: '',
+        movingToLng: '',
+        movingDate: null,
+        movingDateFlexible: false,
+        movingSize: {
+          moveType: '',
+          moveObjects: '',
+          moveVehicle: '',
+          movePets: false,
+          moveStorage: false,
+          housingAssist: false
+        },
+        showDateModal: false,
+        showSizeModal: false,
+        showSizeModal2: false,
+        movingVehicle: false,
+        modelConfig: {
+          type: 'string',
+          mask: 'MM/DD/YYYY'
+        },
+        widgetIconMoveFrom: '#808080',
+        widgetIconMoveTo: '#808080',
+        widgetIconMovingDate: '#808080',
+        widgetIconMovingSize: '#808080',
+        sizeModalCompleteError: false,
+        housingRequirements: {
+          rent: false,
+          buyOrSell: false,
+          temporaryHousing: false,
+          mortgage: false
+        },
+        additionalServices: {
+          insurance: false,
+          settling: false,
+          lifestyle: false
         }
       },
-      dataComplete: function () {
-        if (
-          this.movingFrom &&
-          this.movingFromLat &&
-          this.movingFromLng &&
-          this.movingTo &&
-          this.movingToLat &&
-          this.movingToLng &&
-          this.movingDate &&
-          this.movingSize.moveType &&
-          this.movingSize.moveObjects
-        ) {
-          return (this.completed = true)
-        }
-      },
-      endDateModal: function () {
-        this.showDateModal = false
-        this.dataComplete()
-        this.checkEntriesAndColor()
-        this.showSizeModal = true
-      },
-      endSizeModal: function () {
-        let vehicleSelectedAndEntered =
-          this.movingVehicle == (this.movingSize.moveVehicle != '')
-        if (
-          this.movingSize.moveType &&
-          this.movingSize.moveObjects &&
-          vehicleSelectedAndEntered
-        ) {
+      methods: {
+        goToQuote: function () {
+          if (this.completed) {
+            localStorage.movingFrom = this.movingFrom
+            localStorage.movingFromLat = this.movingFromLat
+            localStorage.movingFromLng = this.movingFromLng
+            localStorage.movingTo = this.movingTo
+            localStorage.movingToLat = this.movingToLat
+            localStorage.movingToLng = this.movingToLng
+            localStorage.movingDate = this.movingDate
+            localStorage.movingDateFlexible = JSON.stringify(
+              this.movingDateFlexible
+            )
+            localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
+            // ROUTER
+            // if (window.location.href.includes('/strand')) {
+            //   window.location.href = '/strand/strand-get-quote'
+            // } else {
+            //   window.location.href = '/get-quote'
+            // }
+            window.location.href = '/weichert/weichert-get-quote'
+          }
+        },
+        dataComplete: function () {
+          if (
+            this.movingFrom &&
+            this.movingFromLat &&
+            this.movingFromLng &&
+            this.movingTo &&
+            this.movingToLat &&
+            this.movingToLng &&
+            this.movingDate &&
+            this.movingSize.moveType &&
+            this.movingSize.moveObjects
+          ) {
+            return (this.completed = true)
+          }
+        },
+        endDateModal: function () {
+          this.showDateModal = false
+          this.dataComplete()
+          this.checkEntriesAndColor()
+          this.showSizeModal = true
+        },
+        endSizeModal: function () {
+          let vehicleSelectedAndEntered =
+            this.movingVehicle == (this.movingSize.moveVehicle != '')
+          if (
+            this.movingSize.moveType &&
+            this.movingSize.moveObjects &&
+            vehicleSelectedAndEntered
+          ) {
+            this.showSizeModal = false
+            this.showSizeModal2 = true
+            this.checkEntriesAndColor()
+            this.dataComplete()
+          } else {
+            this.sizeModalCompleteError = true
+          }
+        },
+        endSizeModal2: function () {
+          // if (
+          //   this.movingSize.moveType &&
+          //   this.movingSize.moveObjects &&
+          //   vehicleSelectedAndEntered
+          // ) {
           this.showSizeModal = false
+          this.showSizeModal2 = false
           this.checkEntriesAndColor()
           this.dataComplete()
-        } else {
-          this.sizeModalCompleteError = true
-        }
-      },
-      showDateModalHandler: function () {
-        this.showSizeModal = false
-        this.showDateModal = !this.showDateModal
-      },
-      showSizeModalHandler: function () {
-        this.showDateModal = false
-        this.showSizeModal = !this.showSizeModal
-      },
-      allRedIcons: function () {
-        if (inputStarted) {
-          let redColor = '#FF005C'
-          this.widgetIconMoveFrom = redColor
-          this.widgetIconMoveTo = redColor
-          this.widgetIconMovingDate = redColor
-          this.widgetIconMovingSize = redColor
-        }
-      },
-      checkEntriesAndColor: function () {
-        if (this.movingFrom && this.movingFromLat && this.movingFromLng) {
-          this.widgetIconMoveFrom = '#1BE07F'
-        } else {
-          this.widgetIconMoveFrom = '#FF005C'
-        }
-        if (this.movingTo && this.movingToLat && this.movingToLng) {
-          this.widgetIconMoveTo = '#1BE07F'
-        } else {
-          this.widgetIconMoveTo = '#FF005C'
-        }
-        if (this.movingDate) {
-          this.widgetIconMovingDate = '#1BE07F'
-        } else {
-          this.widgetIconMovingDate = '#FF005C'
-        }
-        if (this.movingSize.moveType && this.movingSize.moveObjects) {
-          this.widgetIconMovingSize = '#1BE07F'
-        } else {
-          this.widgetIconMovingSize = '#FF005C'
-        }
-      }
-    },
-    mounted() {
-      this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
-      this.origin.addListener('place_changed', () => {
-        let placeOrigin = this.origin.getPlace()
-        console.log(placeOrigin)
-        for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
-          var addressObj = placeOrigin.address_components[i]
-          for (var j = 0; j < addressObj.types.length; j += 1) {
-            if (addressObj.types[j] === 'country') {
-              localStorage.movingFromCountry = addressObj.short_name
-            }
-            if (addressObj.types[j] === 'locality') {
-              localStorage.currentResidenceCity = addressObj.long_name
-            }
-            if (addressObj.types[j] === 'administrative_area_level_1') {
-              localStorage.currentResidenceState = addressObj.long_name
-              localStorage.currentResidenceStateCode = addressObj.short_name
-            }
+          // } else {
+          //   this.sizeModalCompleteError = true
+          // }
+        },
+        showDateModalHandler: function () {
+          this.showSizeModal = false
+          this.showSizeModal2 = false
+          this.showDateModal = !this.showDateModal
+        },
+        showSizeModalHandler: function () {
+          this.showDateModal = false
+          this.showSizeModal = !this.showSizeModal
+        },
+        allRedIcons: function () {
+          if (inputStarted) {
+            let redColor = '#FF005C'
+            this.widgetIconMoveFrom = redColor
+            this.widgetIconMoveTo = redColor
+            this.widgetIconMovingDate = redColor
+            this.widgetIconMovingSize = redColor
+          }
+        },
+        checkEntriesAndColor: function () {
+          if (this.movingFrom && this.movingFromLat && this.movingFromLng) {
+            this.widgetIconMoveFrom = '#1BE07F'
+          } else {
+            this.widgetIconMoveFrom = '#FF005C'
+          }
+          if (this.movingTo && this.movingToLat && this.movingToLng) {
+            this.widgetIconMoveTo = '#1BE07F'
+          } else {
+            this.widgetIconMoveTo = '#FF005C'
+          }
+          if (this.movingDate) {
+            this.widgetIconMovingDate = '#1BE07F'
+          } else {
+            this.widgetIconMovingDate = '#FF005C'
+          }
+          if (this.movingSize.moveType && this.movingSize.moveObjects) {
+            this.widgetIconMovingSize = '#1BE07F'
+          } else {
+            this.widgetIconMovingSize = '#FF005C'
           }
         }
+      },
+      mounted() {
+        this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
+        this.origin.addListener('place_changed', () => {
+          let placeOrigin = this.origin.getPlace()
+          console.log(placeOrigin)
+          for (var i = 0; i < placeOrigin.address_components.length; i += 1) {
+            var addressObj = placeOrigin.address_components[i]
+            for (var j = 0; j < addressObj.types.length; j += 1) {
+              if (addressObj.types[j] === 'country') {
+                localStorage.movingFromCountry = addressObj.short_name
+              }
+              if (addressObj.types[j] === 'locality') {
+                localStorage.currentResidenceCity = addressObj.long_name
+              }
+              if (addressObj.types[j] === 'administrative_area_level_1') {
+                localStorage.currentResidenceState = addressObj.long_name
+                localStorage.currentResidenceStateCode = addressObj.short_name
+              }
+            }
+          }
 
-        // if (placeOrigin.address_components[3]) {
-        //   localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
-        // } else {
-        //   localStorage.movingFromCountry = 'No location'
-        // }
-        this.movingFrom = placeOrigin.formatted_address
-        this.movingFromLat = placeOrigin.geometry.location.lat()
-        this.movingFromLng = placeOrigin.geometry.location.lng()
-        this.checkEntriesAndColor()
-        this.$refs['destination'].focus()
-      })
-      this.destination = new google.maps.places.Autocomplete(
-        this.$refs['destination']
-      )
-      this.destination.addListener('place_changed', () => {
-        let placeDestination = this.destination.getPlace()
-        for (
-          var i = 0;
-          i < placeDestination.address_components.length;
-          i += 1
-        ) {
-          var addressObj = placeDestination.address_components[i]
-          for (var j = 0; j < addressObj.types.length; j += 1) {
-            if (addressObj.types[j] === 'country') {
-              localStorage.movingToCountry = addressObj.short_name
-            }
-            if (addressObj.types[j] === 'locality') {
-              localStorage.destinationResidenceCity = addressObj.long_name
-            }
-            if (addressObj.types[j] === 'administrative_area_level_1') {
-              localStorage.destinationResidenceState = addressObj.long_name
-              localStorage.destinationResidenceStateCode = addressObj.short_name
+          // if (placeOrigin.address_components[3]) {
+          //   localStorage.movingFromCountry = placeOrigin.address_components[3].short_name
+          // } else {
+          //   localStorage.movingFromCountry = 'No location'
+          // }
+          this.movingFrom = placeOrigin.formatted_address
+          this.movingFromLat = placeOrigin.geometry.location.lat()
+          this.movingFromLng = placeOrigin.geometry.location.lng()
+          this.checkEntriesAndColor()
+          this.$refs['destination'].focus()
+        })
+        this.destination = new google.maps.places.Autocomplete(
+          this.$refs['destination']
+        )
+        this.destination.addListener('place_changed', () => {
+          let placeDestination = this.destination.getPlace()
+          for (
+            var i = 0;
+            i < placeDestination.address_components.length;
+            i += 1
+          ) {
+            var addressObj = placeDestination.address_components[i]
+            for (var j = 0; j < addressObj.types.length; j += 1) {
+              if (addressObj.types[j] === 'country') {
+                localStorage.movingToCountry = addressObj.short_name
+              }
+              if (addressObj.types[j] === 'locality') {
+                localStorage.destinationResidenceCity = addressObj.long_name
+              }
+              if (addressObj.types[j] === 'administrative_area_level_1') {
+                localStorage.destinationResidenceState = addressObj.long_name
+                localStorage.destinationResidenceStateCode =
+                  addressObj.short_name
+              }
             }
           }
-        }
-        // if (placeDestination.address_components[3]) {
-        //   localStorage.movingToCountry = placeDestination.address_components[3].short_name
-        // } else {
-        //   localStorage.movingToCountry = 'No location'
-        // }
-        this.movingTo = placeDestination.formatted_address
-        this.movingToLat = placeDestination.geometry.location.lat()
-        this.movingToLng = placeDestination.geometry.location.lng()
-        this.checkEntriesAndColor()
-        this.showSizeModal = false
-        this.showDateModal = true
-      })
-    },
-    watch: {
-      movingDate: function (val) {
-        if (val) {
-          this.widgetIconMovingDate = '#1BE07F'
-        } else {
-          this.widgetIconMovingDate = '#FF005C'
-        }
+          // if (placeDestination.address_components[3]) {
+          //   localStorage.movingToCountry = placeDestination.address_components[3].short_name
+          // } else {
+          //   localStorage.movingToCountry = 'No location'
+          // }
+          this.movingTo = placeDestination.formatted_address
+          this.movingToLat = placeDestination.geometry.location.lat()
+          this.movingToLng = placeDestination.geometry.location.lng()
+          this.checkEntriesAndColor()
+          this.showSizeModal = false
+          this.showSizeModal2 = false
+          this.showDateModal = true
+        })
       },
-      movingSize: {
-        deep: true,
-        handler: 'checkEntriesAndColor'
+      watch: {
+        movingDate: function (val) {
+          if (val) {
+            this.widgetIconMovingDate = '#1BE07F'
+          } else {
+            this.widgetIconMovingDate = '#FF005C'
+          }
+        },
+        movingSize: {
+          deep: true,
+          handler: 'checkEntriesAndColor'
+        }
       }
-    }
-  })
-</script>
+    })
+  </script>
+</div>
