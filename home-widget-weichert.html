@@ -680,6 +680,7 @@
     color: #000;
     font-size: 1.8em;
     margin: 0;
+    line-height: 1.1;
   }
   @media (max-width: 768px) {
     .home-widget__moving-size--column03 {
@@ -1249,6 +1250,9 @@
               this.movingDateFlexible
             )
             localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
+            localStorage.housingRequirements = JSON.stringify(this.housingRequirements)
+            localStorage.additionalServices = JSON.stringify(this.additionalServices)
+
             // ROUTER
             // if (window.location.href.includes('/strand')) {
             //   window.location.href = '/strand/strand-get-quote'
