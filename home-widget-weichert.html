@@ -900,7 +900,7 @@
                   value="Studio Apartment"
                   id="studioApartment"
                 />
-                <label for="apartment">Studio Apartment</label>
+                <label for="studioApartment">Studio Apartment</label>
               </li>
               <li>
                 <input
@@ -910,7 +910,7 @@
                   value="Apartment"
                   id="apartment"
                 />
-                <label for="house">Apartment</label>
+                <label for="apartment">Apartment</label>
               </li>
               <li>
                 <input
@@ -920,7 +920,7 @@
                   value="Condominium"
                   id="condominium"
                 />
-                <label for="house">Condominium</label>
+                <label for="condominium">Condominium</label>
               </li>
               <li>
                 <input
@@ -930,7 +930,7 @@
                   value="Townhome"
                   id="townhome"
                 />
-                <label for="house">Townhome</label>
+                <label for="townhome">Townhome</label>
               </li>
               <li>
                 <input
@@ -940,7 +940,7 @@
                   value="Single-story House"
                   id="singleStoryHouse"
                 />
-                <label for="house">Single-story House</label>
+                <label for="singleStoryHouse">Single-story House</label>
               </li>
               <li>
                 <input
@@ -950,7 +950,7 @@
                   value="Multi-story House"
                   id="multiStoryHouse"
                 />
-                <label for="house">Multi-story House</label>
+                <label for="multiStoryHouse">Multi-story House</label>
               </li>
             </ul>
           </div>
@@ -973,11 +973,21 @@
                 <input
                   v-model="movingSize.moveObjects"
                   type="radio"
-                  id="1bedroom"
+                  id="Studio"
                   name="move-size__selector"
                   value="Studio"
                 />
-                <label for="1bedroom">Studio</label>
+                <label for="Studio">Studio</label>
+              </li>
+              <li>
+                <input
+                  v-model="movingSize.moveObjects"
+                  type="radio"
+                  id="1bedroom"
+                  name="move-size__selector"
+                  value="1 bedroom"
+                />
+                <label for="1bedroom">1 bedroom</label>
               </li>
               <li>
                 <input
@@ -985,19 +995,9 @@
                   type="radio"
                   id="2bedroom"
                   name="move-size__selector"
-                  value="1 bedroom"
-                />
-                <label for="2bedroom">1 bedroom</label>
-              </li>
-              <li>
-                <input
-                  v-model="movingSize.moveObjects"
-                  type="radio"
-                  id="3bedroom"
-                  name="move-size__selector"
                   value="2 bedrooms"
                 />
-                <label for="3bedroom">2 bedrooms</label>
+                <label for="2bedroom">2 bedrooms</label>
               </li>
               <li>
                 <input
