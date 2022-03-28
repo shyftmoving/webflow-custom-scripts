@@ -705,7 +705,7 @@
     <div class="home-widget__moving--title">Moving from</div>
     <div
       class="home-widget__inner-items"
-      @click="this.$refs['moving-from'].focus()"
+      @click="document.getElementById('moving-from').focus()"
     >
       <div
         id="widget-icon__move-from"
@@ -730,7 +730,6 @@
         @input="dataComplete"
         type="text"
         name="moving-from"
-        ref="moving-from"
         id="moving-from"
         placeholder="Enter city"
         ref="origin"
@@ -741,7 +740,7 @@
     <div class="home-widget__moving--title">Moving to</div>
     <div
       class="home-widget__inner-items"
-      @click="this.$refs['moving-to'].focus()"
+      @click="document.getElementById('moving-to').focus()"
     >
       <div
         id="widget-icon__move-to"
@@ -767,7 +766,6 @@
         type="text"
         name="moving-to"
         id="moving-to"
-        ref="moving-to"
         placeholder="Enter city"
         ref="destination"
       />
