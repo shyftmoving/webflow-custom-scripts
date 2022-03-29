@@ -157,7 +157,7 @@
   }
   .home-widget__moving-size--modal-wrap {
     padding: 42px;
-    /* max-width: 880px; */
+    max-width: 1000px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px;
@@ -518,6 +518,17 @@
     color: #ff035b;
     margin: 0;
   }
+  .home-widget__moving-size2--inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 32px;
+    grid-row-gap: 0px;
+  }
+  .home-widget__moving-size2--inner h3 {
+    font-size: 1.5em;
+    line-height: 1.2;
+  }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input,
@@ -653,6 +664,9 @@
       border-right: none;
       /* border-bottom: 1px solid #fff200; */
     }
+    .home-widget__moving-size2--inner {
+      display: block;
+    }
   }
   @media (max-width: 320px) {
     .home-widget__inner-wrapper {
@@ -699,6 +713,7 @@
     z-index: -999;
     transition: all 0.2s ease-out;
   }
+
 </style>
 
 <div id="home-widget" class="home-widget__inner-wrapper">
@@ -1165,6 +1180,7 @@
               </label>
             </div>
           </div>
+        </div>
           <div @click="endSizeModal2" class="home-widget__modal-btn">
             Confirm
           </div>
@@ -1173,7 +1189,6 @@
               Please fill all required data!
             </p>
           </div>
-        </div>
       </div>
       </div>
       <!-- Modal END-->
