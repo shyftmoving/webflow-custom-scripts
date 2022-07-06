@@ -1166,6 +1166,9 @@
       localStorage.clear()
       // get UTM parameter
       localStorage.utmSource = this.getSearchParams('utm_source') || 'unknown'
+      localStorage.utmMedium = this.getSearchParams('utm_medium') || 'unknown'
+      localStorage.utmCampaign =
+        this.getSearchParams('utm_campaign') || 'unknown'
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
