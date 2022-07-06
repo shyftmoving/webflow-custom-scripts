@@ -1151,11 +1151,21 @@
         } else {
           this.widgetIconMovingSize = '#FF005C'
         }
+      },
+      // get URL parameters
+      getSearchParams: function (k) {
+        var p = {}
+        location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (s, k, v) {
+          p[k] = v
+        })
+        return k ? p[k] : p
       }
     },
     mounted() {
       // clear localStorage
       localStorage.clear()
+      // get UTM parameter
+      localStorage.utmSource = this.getSearchParams('utm_source') || 'unknown'
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
