@@ -15,7 +15,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin: 0 auto;
-    align-items: baseline;
   }
   .home-widget__inner-wrapper input,
   .home-widget__inner-wrapper input:focus {
@@ -34,8 +33,8 @@
   }
   .home-widget__inner-items input {
     cursor: pointer;
-    font-weight: 500;
-    color: #000;
+    font-weight: 800;
+    color: #009fcc;
     font-size: 1.2em;
     background-color: transparent;
     pointer-events: none;
@@ -46,12 +45,12 @@
     width: 92px;
     color: #fff;
     background-color: #ff9800;
-    border-radius: 10px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: not-allowed;
-    margin-top: 32px;
+    margin: 0 auto;
   }
   .home-widget__moving-go--button .get-quote-text {
     color: #fff;
@@ -73,6 +72,7 @@
     display: inline-block;
     position: relative;
     top: 2px;
+    display: none;
   }
   /* .home-widget__moving-icon--move {
     background-image: url('https://uploads-ssl.webflow.com/6087d5a85b7a0ab16e57710a/60aff5f79d45f77742eb3fc1_Location-icon.svg');
@@ -92,6 +92,9 @@
     margin-bottom: 1em;
     position: relative;
     background: #fff;
+  }
+  .home-widget__moving-size--wrapper {
+    border-right: none;
   }
   .home-widget__inner-items {
     position: relative;
