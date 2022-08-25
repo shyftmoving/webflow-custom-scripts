@@ -42,10 +42,10 @@
     width: 100%;
   }
   .home-widget__moving-go--button {
-    height: 50px;
-    width: auto;
+    height: 92px;
+    width: 92px;
     color: #fff;
-    background-color: #000;
+    background-color: #ff9800;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -88,8 +88,7 @@
   .home-widget__moving-date--wrapper,
   .home-widget__moving-size--wrapper {
     padding: 16px;
-    border: 1px solid #dce0e1;
-    border-radius: 10px;
+    border-right: 1px solid #c9eaf4;
     margin-bottom: 1em;
     position: relative;
     background: #fff;
@@ -668,10 +667,15 @@
     z-index: -999;
     transition: all 0.2s ease-out;
   }
+  /* CitySwitcher */
+  .home-widget__label {
+    margin-bottom: 16px;
+  }
 </style>
 
 <div id="home-widget" class="home-widget__inner-wrapper">
   <div class="home-widget__moving-from--wrapper">
+    <div class="home-widget__label">Move from</div>
     <div
       class="home-widget__inner-items"
       @click="document.getElementById('moving-from').focus()"
@@ -700,12 +704,13 @@
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Moving from"
+        placeholder="Enter location"
         ref="origin"
       />
     </div>
   </div>
   <div class="home-widget__moving-to--wrapper">
+    <div class="home-widget__label">Move to</div>
     <div
       class="home-widget__inner-items"
       @click="document.getElementById('moving-to').focus()"
@@ -734,12 +739,13 @@
         type="text"
         name="moving-to"
         id="moving-to"
-        placeholder="Moving to"
+        placeholder="Enter location"
         ref="destination"
       />
     </div>
   </div>
   <div class="home-widget__moving-date--wrapper">
+    <div class="home-widget__label">Moving date</div>
     <div class="home-widget__inner-items" @click="showDateModalHandler">
       <div
         id="widget-icon__moving-date"
@@ -765,7 +771,7 @@
         type="text"
         name="moving-date"
         id="moving-date"
-        placeholder="Moving date"
+        placeholder="Select date"
         readonly
       />
     </div>
@@ -810,6 +816,7 @@
     <!-- Modal END-->
   </div>
   <div class="home-widget__moving-size--wrapper">
+    <div class="home-widget__label">Choose</div>
     <div class="home-widget__inner-items" @click="showSizeModalHandler">
       <div
         id="widget-icon__moving-size"
@@ -833,7 +840,7 @@
         type="text"
         name="moving-size"
         id="moving-size"
-        placeholder="Move size"
+        placeholder="Click to select"
         readonly
       />
     </div>
@@ -1009,7 +1016,21 @@
       class="home-widget__moving-go--button"
       :class="{'home-widget__moving-go--button-complete': completed}"
     >
-      <span class="get-quote-text">Get Free Quotes Now &#10095;</span>
+      <!-- <span class="get-quote-text">Get Free Quotes Now &#10095;</span> -->
+      <svg
+        width="28"
+        height="14"
+        viewBox="0 0 28 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.99512 7.07031H25.0851M25.0851 7.07031L19.8234 1.80859M25.0851 7.07031L19.8234 12.332"
+          stroke="white"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+      </svg>
     </div>
   </div>
 </div>
