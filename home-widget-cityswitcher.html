@@ -13,7 +13,7 @@
   }
   .home-widget__inner-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 120px;
+    grid-template-columns: 1fr 1fr 1fr 120px;
     margin: 0 auto;
     padding-top: 16px;
   }
@@ -820,6 +820,7 @@
     </div>
     <!-- Modal END-->
   </div>
+  <!--
   <div class="home-widget__moving-size--wrapper">
     <div class="home-widget__label">Choose</div>
     <div class="home-widget__inner-items" @click="showSizeModalHandler">
@@ -849,6 +850,29 @@
         readonly
       />
     </div>
+  -->  <div class="home-widget__moving-go--wrapper">
+    <div
+      @click="goToQuote"
+      class="home-widget__moving-go--button"
+      :class="{'home-widget__moving-go--button-complete': completed}"
+    >
+      <!-- <span class="get-quote-text">Get Free Quotes Now &#10095;</span> -->
+      <svg
+        width="28"
+        height="14"
+        viewBox="0 0 28 14"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.99512 7.07031H25.0851M25.0851 7.07031L19.8234 1.80859M25.0851 7.07031L19.8234 12.332"
+          stroke="white"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+      </svg>
+    </div>
+  </div>
     <!-- Modal -->
     <div
       class="home-widget__moving-size--modal"
@@ -1015,29 +1039,7 @@
     </div>
     <!-- Modal END-->
   </div>
-  <div class="home-widget__moving-go--wrapper">
-    <div
-      @click="goToQuote"
-      class="home-widget__moving-go--button"
-      :class="{'home-widget__moving-go--button-complete': completed}"
-    >
-      <!-- <span class="get-quote-text">Get Free Quotes Now &#10095;</span> -->
-      <svg
-        width="28"
-        height="14"
-        viewBox="0 0 28 14"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M1.99512 7.07031H25.0851M25.0851 7.07031L19.8234 1.80859M25.0851 7.07031L19.8234 12.332"
-          stroke="white"
-          stroke-width="3"
-          stroke-linecap="round"
-        />
-      </svg>
-    </div>
-  </div>
+
 </div>
 <!-- DELETE FOR PRODUCTION -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -1053,36 +1055,38 @@
   var app = new Vue({
     el: '#home-widget',
     components: {},
-    data: {
-      completed: false,
-      movingFrom: '',
-      movingFromLat: '',
-      movingFromLng: '',
-      movingTo: '',
-      movingToLat: '',
-      movingToLng: '',
-      movingDate: null,
-      movingDateFlexible: false,
-      movingSize: {
-        moveType: '',
-        moveObjects: '',
-        moveVehicle: '',
-        movePets: false,
-        moveStorage: false,
-        housingAssist: false
-      },
-      showDateModal: false,
-      showSizeModal: false,
-      movingVehicle: false,
-      modelConfig: {
-        type: 'string',
-        mask: 'MM/DD/YYYY'
-      },
-      widgetIconMoveFrom: '#808080',
-      widgetIconMoveTo: '#808080',
-      widgetIconMovingDate: '#808080',
-      widgetIconMovingSize: '#808080',
-      sizeModalCompleteError: false
+    data() { 
+      return {
+        completed: false,
+        movingFrom: '',
+        movingFromLat: '',
+        movingFromLng: '',
+        movingTo: '',
+        movingToLat: '',
+        movingToLng: '',
+        movingDate: null,
+        movingDateFlexible: false,
+        movingSize: {
+          moveType: '',
+          moveObjects: '',
+          moveVehicle: '',
+          movePets: false,
+          moveStorage: false,
+          housingAssist: false
+        },
+        showDateModal: false,
+        showSizeModal: false,
+        movingVehicle: false,
+        modelConfig: {
+          type: 'string',
+          mask: 'MM/DD/YYYY'
+        },
+        widgetIconMoveFrom: '#808080',
+        widgetIconMoveTo: '#808080',
+        widgetIconMovingDate: '#808080',
+        widgetIconMovingSize: '#808080',
+        sizeModalCompleteError: false
+      }
     },
     methods: {
       goToQuote: function () {
@@ -1104,7 +1108,10 @@
           // } else {
           //   window.location.href = '/get-quote'
           // }
-          window.location.href = '/get-quote'
+          this.showSizeModal = true
+
+          // GO TO 'get-quote' (summary and main form)
+          // window.location.href = '/get-quote'
         }
       },
       dataComplete: function () {
@@ -1115,9 +1122,9 @@
           this.movingTo &&
           this.movingToLat &&
           this.movingToLng &&
-          this.movingDate &&
-          this.movingSize.moveType &&
-          this.movingSize.moveObjects
+          this.movingDate 
+          // this.movingSize.moveType &&
+          // this.movingSize.moveObjects
         ) {
           return (this.completed = true)
         }
@@ -1126,7 +1133,7 @@
         this.showDateModal = false
         this.dataComplete()
         this.checkEntriesAndColor()
-        this.showSizeModal = true
+        // this.showSizeModal = true
       },
       endSizeModal: function () {
         let vehicleSelectedAndEntered =
