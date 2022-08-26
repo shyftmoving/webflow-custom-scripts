@@ -685,7 +685,7 @@
     <div class="home-widget__label">Move from</div>
     <div
       class="home-widget__inner-items"
-      @click="focusOrigin"
+      @click="$refs.origin.focus()"
     >
       <div
         id="widget-icon__move-from"
@@ -707,7 +707,7 @@
     <div class="home-widget__label">Move to</div>
     <div
       class="home-widget__inner-items"
-      @click="focusDestination"
+      @click="$refs.destination.focus()"
     >
       <div
         id="widget-icon__move-to"
@@ -743,7 +743,7 @@
         readonly
       />
     </div>
-    <!-- Modal -->
+    <!-- Modal DATE-->
     <div
       class="home-widget__moving-date--modal"
       :class="{modalDisabled: !showDateModal}"
@@ -754,7 +754,6 @@
             <h5>What’s Your Move Date</h5>
             <h6>Let Shyft know when you would prefer to move.</h6>
           </div>
-          <img src="#" alt="#" />
         </div>
         <div class="home-widget__moving-date--modal-inner">
           <v-date-picker
@@ -781,39 +780,9 @@
         </div>
       </div>
     </div>
-    <!-- Modal END-->
+    <!-- END Modal DATE-->
   </div>
-  <!--
-  <div class="home-widget__moving-size--wrapper">
-    <div class="home-widget__label">Choose</div>
-    <div class="home-widget__inner-items" @click="showSizeModalHandler">
-      <div
-        id="widget-icon__moving-size"
-        class="home-widget__moving-icon--title home-widget__moving-icon--size"
-      >
-        <svg
-          width="13"
-          height="14"
-          viewBox="0 0 13 14"
-          v-bind:fill="widgetIconMovingSize"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4.53541 12.291V10.3799C4.53541 9.89203 4.93378 9.49656 5.42519 9.49656H7.22155C7.45754 9.49656 7.68386 9.58962 7.85073 9.75528C8.01759 9.92093 8.11134 10.1456 8.11134 10.3799V12.291C8.10985 12.4938 8.18996 12.6888 8.3339 12.8327C8.47784 12.9767 8.6737 13.0576 8.87801 13.0576H10.1036C10.6759 13.0591 11.2254 12.8344 11.6307 12.4331C12.0359 12.0318 12.2637 11.487 12.2637 10.9188V5.4744C12.2637 5.0154 12.0587 4.58002 11.7041 4.28554L7.53494 0.980035C6.80971 0.400468 5.77062 0.419181 5.06704 1.02448L0.993055 4.28554C0.621635 4.57134 0.399642 5.00801 0.388672 5.4744V10.9132C0.388672 12.0975 1.35579 13.0576 2.54878 13.0576H3.74635C4.17069 13.0576 4.51554 12.7178 4.51862 12.2965L4.53541 12.291Z"
-          />
-        </svg>
-      </div>
-      <input
-        v-model="movingSize.moveType"
-        @click="showSizeModalHandler"
-        type="text"
-        name="moving-size"
-        id="moving-size"
-        placeholder="Click to select"
-        readonly
-      />
-    </div>
-  -->  <div class="home-widget__moving-go--wrapper">
+    <div class="home-widget__moving-go--wrapper">
     <div
       @click="goToQuote"
       class="home-widget__moving-go--button"
@@ -849,8 +818,7 @@
               Let us make your move simple and stress-free. Do you require moving services for your household goods?  
             </h6>
           </div>
-          <!-- <img src="#" alt="#" /> -->
-          <p>Step 1 of 2</p>
+          <p>Step 1 of 3</p>
         </div>
         <div class="home-widget__moving-size--inner">
           <div class="home-widget__moving-size--column01">
@@ -1063,10 +1031,13 @@
           // } else {
           //   window.location.href = '/get-quote'
           // }
+
+
+          // show Modal/Wizard
           this.showSizeModal = true
 
           // GO TO 'get-quote' (summary and main form)
-          // window.location.href = '/get-quote'
+          window.location.href = '/move-details'
         }
       },
       dataComplete: function () {
@@ -1152,12 +1123,6 @@
         })
         return k ? p[k] : p
       },
-      focusOrigin: function() {
-        this.$refs.origin.focus()
-      },
-      focusDestination: function() {
-        this.$refs.destination.focus()
-      }
     },
     mounted() {
       // clear localStorage
@@ -1269,3 +1234,4 @@
     }
   })
 </script>
+
