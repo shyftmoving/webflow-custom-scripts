@@ -1136,7 +1136,8 @@
           var addressObj = placeOrigin.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
-              localStorage.movingFromCountry = addressObj.short_name
+              localStorage.currentResidenceCountry = addressObj.long_name
+              localStorage.currentResidenceCountryCode = addressObj.short_name
             }
             if (addressObj.types[j] === 'locality') {
               localStorage.currentResidenceCity = addressObj.long_name
@@ -1181,7 +1182,8 @@
           var addressObj = placeDestination.address_components[i]
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === 'country') {
-              localStorage.movingToCountry = addressObj.short_name
+              localStorage.destinationResidenceCountry = addressObj.long_name
+              localStorage.destinationResidenceCountryCode = addressObj.short_name
             }
             if (addressObj.types[j] === 'locality') {
               localStorage.destinationResidenceCity = addressObj.long_name
