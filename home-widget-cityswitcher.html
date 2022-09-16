@@ -1,4 +1,3 @@
-
 <style>
   * {
     font-family: 'Inter', sans-serif;
@@ -135,6 +134,7 @@
     border-radius: 10px;
     overflow-y: auto;
     overflow-x: hidden;
+    position: relative;
   }
   .home-widget__moving-size--modal-wrap {
     padding: 42px;
@@ -502,6 +502,12 @@
   .home-widget__label {
     font-size: 1.1em;
   }
+  .home-widget__moving-date--modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    cursor: pointer;
+  }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input {
@@ -757,6 +763,11 @@
       :class="{modalDisabled: !showDateModal}"
     >
       <div class="home-widget__moving-date--modal-wrap">
+        <div 
+        class="home-widget__moving-date--modal-close"
+        @click="endDateModal"
+        >X
+        </div>
         <div class="home-widget__moving-date--title">
           <div class="">
             <h5>What’s Your Move Date</h5>
@@ -1243,4 +1254,3 @@
     }
   })
 </script>
-
