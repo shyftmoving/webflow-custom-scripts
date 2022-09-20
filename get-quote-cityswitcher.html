@@ -2,10 +2,10 @@
   .get-quote__details-selected-items {
     margin-right: 14px;
     margin-bottom: 14px;
-    padding: 6px 16px 6px 44px;
+    padding: 6px 16px 6px 6px;
     background-repeat: no-repeat;
     background-position: 12px center;
-    border: 1px solid #d6d6d6;
+    /* border: 1px solid #d6d6d6; */
     border-radius: 20px;
     font-weight: 600;
   }
@@ -13,6 +13,7 @@
     color: #249dc8;
   }
   .get-quote__move-details.lower-setion h5 {
+    margin: 0;
   }
   .image-35 {
     position: relative;
@@ -193,7 +194,7 @@
         <h4>Moving Services</h4>
         <h5>{{ typeOfProperty }}</h5>
         <h5>{{ moveSize }}</h5>
-        <h5 v-if="storage = 'true'">{{ storage }}</h5>
+        <h5 v-if="storage = 'true'">I need storage</h5>
       </div>
     </div>
   </div>
