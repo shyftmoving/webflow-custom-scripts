@@ -188,13 +188,30 @@
   <div class="lower-section-wrapper">
     <div class="get-quote__move-details lower-setion">
       <div
-        v-if="movingServices = 'true'"
+        v-if="movingServices == 'true'"
         class="get-quote__details-selected-items lower-details__type"
       >
         <h4>Moving Services</h4>
         <h5>{{ typeOfProperty }}</h5>
         <h5>{{ moveSize }}</h5>
-        <h5 v-if="storage = 'true'">I need storage</h5>
+        <h5 v-if="storage == 'true'">I need storage</h5>
+        <div v-if="movingVehicle == 'true'" class="">
+          <h5>Vehicle details: {{movingVehicleDetails}}</h5>
+          <h5>Vehicle moving date: {{movingVehicleDate}}</h5>
+        </div>
+      </div>
+      <div
+        v-if="housingServices == 'true'"
+        class="get-quote__details-selected-items lower-details__type"
+      >
+        <h4>Housing Services</h4>
+        <div v-if="rent == 'true'" class="">
+          <h5>Rent period: {{rentPeriod}}</h5>
+          <h5>Rent budget: {{rentBudget}}</h5>
+          <h5>Rent size: {{rentSize}}</h5>
+          <h5>Rent move-in date: {{rentDate}}</h5>
+        </div>
+        <h5 v-if="buyOrSell == 'true'">I'm selling or buying</h5>
       </div>
     </div>
   </div>
