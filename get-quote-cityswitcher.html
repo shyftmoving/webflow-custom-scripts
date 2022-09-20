@@ -211,7 +211,23 @@
           <h5>Rent size: {{rentSize}}</h5>
           <h5>Rent move-in date: {{rentDate}}</h5>
         </div>
-        <h5 v-if="buyOrSell == 'true'">I'm selling or buying</h5>
+        <h5 v-if="buyOrSell == 'true'">
+          I am selling or buying house/apartment
+        </h5>
+      </div>
+      <div
+        v-if="additionalServices == 'true'"
+        class="get-quote__details-selected-items lower-details__type"
+      >
+        <h4>Additional Services</h4>
+        <h5 v-if="settlingInServices == 'true'">Settling In Services</h5>
+        <h5 v-if="insurance == 'true'">Insurance</h5>
+        <h5 v-if="lifestyle == 'true'">Lifestyle</h5>
+        <div v-if="petMoving == 'true'" class="">
+          <h5>Pet's breed: {{petBreed}}</h5>
+          <h5>Pet's weight: {{petWeight}}</h5>
+          <h5>Pet's move-in date: {{petMoveDate}}</h5>
+        </div>
       </div>
     </div>
   </div>
