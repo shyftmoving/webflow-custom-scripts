@@ -9,21 +9,11 @@
     border-radius: 20px;
     font-weight: 600;
   }
-  /* .lower-details__type {
-    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaabc1a4659872fce8d_icon-type.svg');
+  .get-quote__move-details.lower-setion h4 {
+    color: #249dc8;
   }
-  .lower-details__objects {
-    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aa91c14e477138c6c2f_icon-objects.svg');
+  .get-quote__move-details.lower-setion h5 {
   }
-  .lower-details__vehicles {
-    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaad85b32c881ea6725_icon-vehicle.svg');
-  }
-  .lower-details__pets {
-    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaa6e11605f4938748d_icon-pet.svg');
-  }
-  .lower-details__storage {
-    background-image: url('https://uploads-ssl.webflow.com/61b1f8a5dab2e7090af82c10/61b87aaa10d7469bc79a7f6d_icon-storage.svg');
-  } */
   .image-35 {
     position: relative;
     top: 2px;
@@ -197,34 +187,13 @@
   <div class="lower-section-wrapper">
     <div class="get-quote__move-details lower-setion">
       <div
-        v-if="false"
+        v-if="movingServices = 'true'"
         class="get-quote__details-selected-items lower-details__type"
       >
-        {{movingSize.moveType}}
-      </div>
-      <div
-        v-if="false"
-        class="get-quote__details-selected-items lower-details__objects"
-      >
-        {{movingSize.moveObjects}}
-      </div>
-      <div
-        v-if="movingSize.moveVehicle"
-        class="get-quote__details-selected-items lower-details__vehicles"
-      >
-        {{movingSize.moveVehicle}}
-      </div>
-      <div
-        v-if="movingSize.movePets"
-        class="get-quote__details-selected-items lower-details__pets"
-      >
-        Pet(s)
-      </div>
-      <div
-        v-if="movingSize.moveStorage"
-        class="get-quote__details-selected-items lower-details__storage"
-      >
-        Storage
+        <h4>Moving Services</h4>
+        <h5>{{ typeOfProperty }}</h5>
+        <h5>{{ moveSize }}</h5>
+        <h5 v-if="storage = 'true">{{ storage }}</h5>
       </div>
     </div>
   </div>
@@ -247,7 +216,31 @@
       },
       movingDate: localStorage.movingDate,
       movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
-      movingSize: JSON.parse(localStorage.movingSize)
+      movingSize: JSON.parse(localStorage.movingSize),
+      // Details
+      movingServices: localStorage.movingServices,
+      typeOfProperty: localStorage.typeOfProperty,
+      moveSize: localStorage.moveSize,
+      storage: localStorage.storage,
+      movingVehicle: localStorage.movingVehicle,
+      movingVehicleDetails: localStorage.movingVehicleDetails,
+      movingVehicleDate: localStorage.movingVehicleDate,
+      housingServices: localStorage.housingServices,
+      rent: localStorage.rent,
+      rentPeriod: localStorage.rentPeriod,
+      rentBudget: localStorage.rentBudget,
+      rentSize: localStorage.rentSize,
+      rentFurnished: localStorage.rentFurnished,
+      rentDate: localStorage.rentDate,
+      buyOrSell: localStorage.buyOrSell,
+      additionalServices: localStorage.additionalServices,
+      settlingInServices: localStorage.settlingInServices,
+      insurance: localStorage.insurance,
+      lifestyle: localStorage.lifestyle,
+      petMoving: localStorage.petMoving,
+      petBreed: localStorage.petBreed,
+      petWeight: localStorage.petWeight,
+      petMoveDate: localStorage.petMoveDate
     },
     methods: {
       displayDirections: async function () {
