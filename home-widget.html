@@ -428,6 +428,10 @@
     /* Microsoft Edge */
     color: #c4c4c4;
   }
+  .modalSizeModalErrorMsg {
+    color: #ee342a;
+    margin: 0;
+  }
   @media (min-width: 1920px) {
     .home-widget__moving--title,
     .home-widget__inner-items input {
@@ -730,7 +734,8 @@
       <div class="home-widget__moving-size--inner">
         <div class="home-widget__moving-size--column01">
           <h5>
-            Please select: <span class="modal-required__text">(required)</span>
+            Please select:
+            <span class="modal-required__text">(required)</span>
           </h5>
           <ul class="move-size__selector--wrapper">
             <li>
@@ -757,7 +762,8 @@
         </div>
         <div class="home-widget__moving-size--column02">
           <h5>
-            Please select: <span class="modal-required__text">(required)</span>
+            Please select:
+            <span class="modal-required__text">(required)</span>
           </h5>
           <ul class="move-size__selector--wrapper">
             <li>
@@ -865,6 +871,11 @@
         </div>
       </div>
       <div @click="endSizeModal" class="home-widget__modal-btn">OK</div>
+      <div style="min-height: 24px; margin-top: 12px">
+        <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">
+          Please fill all required data!
+        </p>
+      </div>
     </div>
     <!-- Modal END-->
   </div>
@@ -916,7 +927,8 @@
       widgetIconMoveFrom: '#0E30A5',
       widgetIconMoveTo: '#0E30A5',
       widgetIconMovingDate: '#0E30A5',
-      widgetIconMovingSize: '#0E30A8'
+      widgetIconMovingSize: '#0E30A8',
+      sizeModalCompleteError: false
     },
     methods: {
       goToQuote: function () {
@@ -972,9 +984,13 @@
         this.showSizeModal = true
       },
       endSizeModal: function () {
-        this.showSizeModal = false
-        this.checkEntriesAndColor()
-        this.dataComplete()
+        if (this.movingSize.moveType && this.movingSize.moveObjects) {
+          this.showSizeModal = false
+          this.checkEntriesAndColor()
+          this.dataComplete()
+        } else {
+          this.sizeModalCompleteError = true
+        }
       },
       showDateModalHandler: function () {
         this.showSizeModal = false
