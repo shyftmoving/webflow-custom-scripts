@@ -440,14 +440,17 @@ input.modal__moving-vehicle:focus {
 ::placeholder {
   color: #c3c3c3;
   opacity: 1; /* Firefox */
+  font-size: 0.8em;
 }
 
 :-ms-input-placeholder {
   color: #c3c3c3;
+  font-size: 0.8em;
 }
 
 ::-ms-input-placeholder {
   color: #c3c3c3;
+  font-size: 0.8em;
 }
 .home-widget__moving-date--title img {
   max-width: 300px;
@@ -631,7 +634,7 @@ input.modal__moving-vehicle:focus {
         type="text"
         name="moving-from"
         id="moving-from"
-        placeholder="Address, Zip Code, City, State and Country"
+        placeholder="Address, City, Zip or Country"
         ref="origin"
       />
     </div>
@@ -653,7 +656,7 @@ input.modal__moving-vehicle:focus {
         type="text"
         name="moving-to"
         id="moving-to"
-        placeholder="Address, Zip Code, City, State and Country"
+        placeholder="Address, City, Zip or Country"
         ref="destination"
       />
     </div>
