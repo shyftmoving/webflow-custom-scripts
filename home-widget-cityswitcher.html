@@ -1160,10 +1160,33 @@
       // clear localStorage
       localStorage.clear()
       // get UTM parameter
-      localStorage.utmSource = this.getSearchParams('utm_source') || 'unknown'
-      localStorage.utmMedium = this.getSearchParams('utm_medium') || 'unknown'
-      localStorage.utmCampaign =
-        this.getSearchParams('utm_campaign') || 'unknown'
+      // utmSource
+      if (this.getSearchParams('utm_source') != undefined) {
+        localStorage.utmSource = this.getSearchParams('utm_source')
+      } else if (this.getSearchParams('UtmSource') != undefined) {
+        localStorage.utmSource = this.getSearchParams('UtmSource')
+      } else {
+        localStorage.utmSource = 'unknown'
+      }
+      // utmMedium
+      if (this.getSearchParams('utm_medium') != undefined) {
+        localStorage.utmMedium = this.getSearchParams('utm_medium')
+      } else if (this.getSearchParams('UtmMedium') != undefined) {
+        localStorage.utmMedium = this.getSearchParams('UtmMedium')
+      } else {
+        localStorage.utmMedium = 'unknown'
+      }
+      // utmCampaign
+      if (this.getSearchParams('utm_campaign') != undefined) {
+        localStorage.utmCampaign = this.getSearchParams('utm_campaign')
+      } else if (this.getSearchParams('UtmCampaign') != undefined) {
+        localStorage.utmCampaign = this.getSearchParams('UtmCampaign')
+      } else {
+        localStorage.utmCampaign = 'unknown'
+      }
+
+
+
       this.origin = new google.maps.places.Autocomplete(this.$refs['origin'])
       this.origin.addListener('place_changed', () => {
         let placeOrigin = this.origin.getPlace()
