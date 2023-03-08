@@ -4,23 +4,42 @@
   }
 </style>
 
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script
+  type="text/javascript"
+  src="https://assets.calendly.com/assets/external/widget.js"
+></script>
 
 <script>
-  let firstName = localStorage.getItem('firstName') ? localStorage.getItem('firstName') : ''
-  let lastName = localStorage.getItem('lastName') ? localStorage.getItem('lastName') : ''
-  let emailAddress = localStorage.getItem('email') ? localStorage.getItem('email') : ''
-  let phoneNo = localStorage.getItem('phone') ? localStorage.getItem('phone') : ''
-  let movingFrom = localStorage.getItem('movingFrom') ? localStorage.getItem('movingFrom') : ''
-  let movingTo = localStorage.getItem('movingTo') ? localStorage.getItem('movingTo') : ''
+  let firstName = localStorage.getItem('firstName')
+    ? localStorage.getItem('firstName')
+    : ''
+  let lastName = localStorage.getItem('lastName')
+    ? localStorage.getItem('lastName')
+    : ''
+  let emailAddress = localStorage.getItem('email')
+    ? localStorage.getItem('email')
+    : ''
+  let phoneNo = localStorage.getItem('phone')
+    ? localStorage.getItem('phone')
+    : ''
+  let movingFrom = localStorage.getItem('movingFrom')
+    ? localStorage.getItem('movingFrom')
+    : ''
+  let movingTo = localStorage.getItem('movingTo')
+    ? localStorage.getItem('movingTo')
+    : ''
 
-  let movingSize = localStorage.getItem('movingSize') ? JSON.parse(localStorage.getItem('movingSize')) : {}
-  let movingDate = localStorage.getItem('movingDate') ? localStorage.getItem('movingDate') : ''
+  let movingSize = localStorage.getItem('movingSize')
+    ? JSON.parse(localStorage.getItem('movingSize'))
+    : {}
+  let movingDate = localStorage.getItem('movingDate')
+    ? localStorage.getItem('movingDate')
+    : ''
 
   let movingFromTo = 'From: ' + movingFrom + '\r\n' + 'To: ' + movingTo + '\r\n'
 
   Calendly.initInlineWidget({
-    url: 'https://calendly.com/google-moves/google-move-coach-appointment',
+    url: 'XXX',
     prefill: {
       firstName: firstName,
       lastName: lastName,

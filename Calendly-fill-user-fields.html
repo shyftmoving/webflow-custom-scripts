@@ -1,9 +1,12 @@
 <script>
   ;(function ($) {
     $(document).ready(function () {
-      let baseUrl =
-        'https://calendly.com/start-your-relocation/virtual-moving-estimate?embed_domain=shyftmoving.com&amp;embed_type=Inline'
-      let name = '&full_name=' + localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName')
+      let baseUrl = 'XXX'
+      let name =
+        '&full_name=' +
+        localStorage.getItem('firstName') +
+        ' ' +
+        localStorage.getItem('lastName')
       let email = '&email=' + localStorage.getItem('email')
       let phone = '&a1=' + localStorage.getItem('phone')
       let from = '&a3=' + localStorage.getItem('movingFrom')
@@ -25,7 +28,10 @@
       }
 
       let size = '&a2='
-      if (movingSize.moveObjects == 'Studio' || movingSize.moveObjects == '1 bedroom') {
+      if (
+        movingSize.moveObjects == 'Studio' ||
+        movingSize.moveObjects == '1 bedroom'
+      ) {
         size += '1'
       } else if (movingSize.moveObjects == '2 bedrooms') {
         size += '2'
