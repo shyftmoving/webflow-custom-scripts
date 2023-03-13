@@ -1158,9 +1158,7 @@
               </label>
               <label class="b-contain">
                 <span
-                  >Settling in services - support services including government
-                  registrations, connecting appliances, utilities, setting up a
-                  bank account, finding skilled labor for small jobs and more.
+                  >Settling in services - support services including government registrations, setting up a bank account, finding skilled labor for small jobs and more. 
                 </span>
                 <input
                   v-model="additionalServices.settling"
@@ -1170,9 +1168,18 @@
                 <div class="b-input"></div>
               </label>
               <label class="b-contain">
-                <span>Lifestyle - packing supplies, dog walking, </span>
+                <span>Lifestyle - packing supplies, dog walking. </span>
                 <input
                   v-model="additionalServices.lifestyle"
+                  value="true"
+                  type="checkbox"
+                />
+                <div class="b-input"></div>
+              </label>
+              <label class="b-contain">
+                <span>Shyft Connect - free service to connect utilities and home services after a move. </span>
+                <input
+                  v-model="additionalServices.shyftConnect"
                   value="true"
                   type="checkbox"
                 />
@@ -1248,7 +1255,8 @@
         additionalServices: {
           insurance: false,
           settling: false,
-          lifestyle: false
+          lifestyle: false,
+          shyftConnect: false
         }
       },
       methods: {
