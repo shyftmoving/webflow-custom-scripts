@@ -80,7 +80,7 @@ sizeField.addEventListener('click', function () {
   if (fromAddress === '' || toAddress === '' || fromZip === '') {
     errorWrap.style.display = 'block'
     errorText.innerHTML =
-      'Please fill in the "Moving from" and "Moving to" fields first.'
+      'Please fill in the "Moving from" and "Moving to" fields first'
     return
   } else {
     errorWrap.style.display = 'none'
