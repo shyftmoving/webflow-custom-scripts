@@ -80,7 +80,7 @@ sizeField.addEventListener('click', function () {
   if (fromAddress === '' || toAddress === '' || fromZip === '') {
     errorWrap.style.display = 'block'
     errorText.innerHTML =
-      'Please fill in the "Moving from" and "Moving to" fields first'
+      'Please fill in the "Moving from" and "Moving to" fields first.'
     return
   } else {
     errorWrap.style.display = 'none'
@@ -111,7 +111,6 @@ dateModalSubmit.addEventListener('click', function (e) {
     dateModalError.style.display = 'none'
   }
   moveDateFlexible = getCheckboxValue(dateModalFlexibile)
-  console.log('moveDateFlexible: ' + moveDateFlexible)
   if (moveDate != '') {
     iconDate.style.color = '#3E9268'
   } else {
@@ -334,7 +333,6 @@ google.maps.event.addListener(
 // DISTANCE CALCULATOR
 async function calculateDistance() {
   if (fromCoords === null || toCoords === null) {
-    console.log('No coords')
     return
   }
   return new Promise((resolve, reject) => {
@@ -353,23 +351,20 @@ async function calculateDistance() {
 
           if (distance <= 50) {
             localMove = true
-            console.log('Local Move value changed: ' + localMove)
           } else {
             localMove = false
-            console.log('Local Move value changed: ' + localMove)
           }
-          console.log('DISTANCE')
-          console.log(distance)
-          console.log(typeof distance)
         } else {
-          console.log('Error: ' + status)
+          goBtn.style.cursor = 'not-allowed'
+          goBtn.style.backgroundColor = '#c7c7c7'
+          errorWrap.style.display = 'block'
+          errorText.innerHTML = 'Something went wrong. Please try again latter.'
           reject(new Error('Distance calculation failed'))
         }
       }
     )
   })
 }
-
 // DISTANCE CALCULATOR
 
 fromField.oninput = function () {
@@ -397,15 +392,6 @@ toField.oninput = function () {
 }
 
 function checkAllFieldsHaveData() {
-  console.log('checkAllFieldsHaveData')
-  // console.log('Local Move value: ' + localMove)
-  // console.log('fromAddress: ' + fromAddress)
-  // console.log('toAddress: ' + toAddress)
-  // console.log('moveDate: ' + moveDate)
-  // console.log('fromField.value: ' + fromField.value)
-  // console.log('sizeHouse: ' + sizeHouse)
-  // console.log('sizeCategory: ' + sizeCategory)
-
   if (localMove === true) {
     if (
       fromAddress &&
@@ -456,37 +442,42 @@ function checkAllFieldsHaveData() {
 
 goBtn.addEventListener('click', function (e) {
   e.preventDefault()
-  if (localMove === true) {
-    finalUrl =
-      'https://stage-journey.shyftmoving.com/' +
-      '?origin=' +
-      encodeURIComponent(fromAddress) +
-      '&destination=' +
-      encodeURIComponent(toAddress) +
-      '&date=' +
-      encodeURIComponent(moveDate) +
-      '&flexibleDate=' +
-      encodeURIComponent(moveDateFlexible) +
-      '&leadSource=aarp' +
-      '&homeSize=' +
-      encodeURIComponent(sizeFootage) +
-      '&homeSizeUnit=' +
-      encodeURIComponent(sizeFootageUnit) +
-      '&pets=' +
-      encodeURIComponent(sizePets) +
-      '&storage=' +
-      encodeURIComponent(sizeStorage) +
-      '&vehicleDetails=' +
-      encodeURIComponent(sizeVehicleDetails) +
-      '&homeCategory=' +
-      encodeURIComponent(sizeCategory)
+  if (allFieldsHaveData) {
+    if (localMove === true) {
+      finalUrl =
+        'https://stage-journey.shyftmoving.com/' +
+        '?origin=' +
+        encodeURIComponent(fromAddress) +
+        '&destination=' +
+        encodeURIComponent(toAddress) +
+        '&date=' +
+        encodeURIComponent(moveDate) +
+        '&flexibleDate=' +
+        encodeURIComponent(moveDateFlexible) +
+        '&leadSource=aarp' +
+        '&homeSize=' +
+        encodeURIComponent(sizeFootage) +
+        '&homeSizeUnit=' +
+        encodeURIComponent(sizeFootageUnit) +
+        '&pets=' +
+        encodeURIComponent(sizePets) +
+        '&storage=' +
+        encodeURIComponent(sizeStorage) +
+        '&vehicleDetails=' +
+        encodeURIComponent(sizeVehicleDetails) +
+        '&homeCategory=' +
+        encodeURIComponent(sizeCategory)
 
-    if (allFieldsHaveData) {
       window.location.href = finalUrl
+    } else {
+      toLocalStorage()
+      window.location.href = '/get-quote'
     }
   } else {
-    toLocalStorage()
-    window.location.href = '/get-quote'
+    goBtn.style.cursor = 'not-allowed'
+    goBtn.style.backgroundColor = '#c7c7c7'
+    errorWrap.style.display = 'block'
+    errorText.innerHTML = 'Please fill all the fields.'
   }
 })
 
