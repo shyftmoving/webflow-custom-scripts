@@ -277,7 +277,7 @@ google.maps.event.addListener(
     if (fromZip === '' && fromCountry === 'US') {
       errorWrap.style.display = 'block'
       errorText.innerHTML =
-        'We need your Zip code to proceed, please add a specific FROM address or Zip code'
+        'We need your Zip code to proceed, please add a specific FROM address or Zip code.'
       fromField.style.color = '#808080'
     } else {
       fromAddress = place.formatted_address
