@@ -16,6 +16,12 @@ const iconSize = document.querySelector('.phx2-widget-form-input-icon-size svg')
 
 const errorWrap = document.getElementById('phx2-error-outer')
 const errorText = document.getElementById('phx2-error-text')
+const errorFromFieldWrap = document.getElementById(
+  'phx2-error-from-field-outer'
+)
+const errorFromFieldText = document.getElementById('phx2-error-from-field-text')
+const errorToFieldWrap = document.getElementById('phx2-error-to-field-outer')
+const errorToFieldText = document.getElementById('phx2-error-to-field-text')
 const dateModal = document.getElementById('phx2-modal-date-wrap')
 const sizeModal = document.getElementById('phx2-modal-size-wrap')
 const dateModalSubmit = document.getElementById(
@@ -49,6 +55,11 @@ const sizeModalFootage = document.getElementById(
 const sizeModalFootageUnitRadio = document.querySelectorAll(
   '.phx2-modal-size-footage-radio-wrap'
 )
+const sizeModalVehicleWrap = document.getElementById(
+  'phx2-modal-additional-vehicle'
+)
+const errorIconFrom = document.getElementById('phx2-error-icon-from')
+const errorIconTo = document.getElementById('phx2-error-icon-to')
 
 let fromAddress = ''
 let fromZip = ''
@@ -72,6 +83,9 @@ let sizeVehicleDetails = ''
 let sizeFootage = ''
 let sizeFootageUnit = 'imperial'
 
+sizeField.setAttribute('readonly', '')
+sizeField.style.cursor = 'pointer'
+
 dateField.addEventListener('click', function () {
   dateModal.style.display = 'flex'
 })
@@ -81,20 +95,43 @@ sizeField.addEventListener('click', function () {
     errorWrap.style.display = 'block'
     errorText.innerHTML =
       'Please fill in the "Moving from" and "Moving to" fields first.'
+    if (fromAddress === '') {
+      errorFromFieldWrap.style.display = 'block'
+      errorFromFieldText.innerHTML =
+        'Please select from list when you start typing.'
+    }
+    if (toAddress === '') {
+      errorToFieldWrap.style.display = 'block'
+      errorToFieldText.innerHTML =
+        'Please select from list when you start typing.'
+      // fromField.focus()
+    }
     return
   } else {
     errorWrap.style.display = 'none'
+    errorToFieldWrap.style.display = 'none'
   }
   if (localMove === true) {
     localMoveFootage.style.display = 'block'
     longDinstanceHouse.style.display = 'none'
+    sizeModalVehicleWrap.style.display = 'none'
   } else {
     localMoveFootage.style.display = 'none'
     longDinstanceHouse.style.display = 'block'
+    sizeModalVehicleWrap.style.display = 'block'
   }
-  if (screen.height < 800) {
+
+  function isIPhone() {
+    return /iPhone/i.test(navigator.userAgent)
+  }
+
+  function isAndroid() {
+    return /Android/i.test(navigator.userAgent)
+  }
+
+  if (isIPhone() || isAndroid() || window.innerWidth < 768) {
     sizeModal.style.display = 'block'
-    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
   } else {
     sizeModal.style.display = 'flex'
   }
@@ -159,13 +196,19 @@ sizeModalSubmit.addEventListener('click', function (e) {
   sizeStorage = getCheckboxValue(sizeModalStorage)
   sizeVehicle = getCheckboxValue(sizeModalVehicle)
   if (sizeVehicle) {
-    sizeVehicleDetails = sizeModalVehicleDetails.value
+    if (sizeModalVehicleDetails.value !== '') {
+      sizeVehicleDetails = sizeModalVehicleDetails.value
+    } else {
+      sizeVehicleDetails = ''
+      sizeModalError.style.display = 'block'
+      return
+    }
   } else {
     sizeVehicleDetails = ''
   }
   iconSize.style.color = '#3E9268'
   sizeModal.style.display = 'none'
-  document.getElementsByTagName('body')[0].style.overflow = 'auto'
+  document.body.style.overflow = 'auto'
   checkAllFieldsHaveData()
 })
 
@@ -270,17 +313,24 @@ google.maps.event.addListener(
         if (addressObj.types[j] === 'street_number') {
           localStorage.currentResidenceStreetNumber = addressObj.long_name
         }
+        if (addressObj.types[j] === 'subpremise') {
+          localStorage.currentResidenceApartmentUnit = addressObj.long_name
+        }
       }
     }
     fromCoords = place.geometry.location
 
     if (fromZip === '' && fromCountry === 'US') {
-      errorWrap.style.display = 'block'
-      errorText.innerHTML =
+      errorFromFieldWrap.style.display = 'block'
+      errorFromFieldText.innerHTML =
         'We need your Zip code to proceed, please add a specific FROM address or Zip code.'
+      fromField.focus()
       fromField.style.color = '#808080'
+      errorIconFrom.style.display = 'block'
     } else {
       fromAddress = place.formatted_address
+      errorFromFieldWrap.style.display = 'none'
+      errorIconFrom.style.display = 'none'
       toField.focus()
       iconFrom.style.color = '#3E9268'
       fromField.style.color = '#000'
@@ -320,11 +370,15 @@ google.maps.event.addListener(
         if (addressObj.types[j] === 'street_number') {
           localStorage.destinationResidenceStreetNumber = addressObj.long_name
         }
+        if (addressObj.types[j] === 'subpremise') {
+          localStorage.destinationResidenceApartmentUnit = addressObj.long_name
+        }
       }
     }
     dateField.focus()
     dateField.click()
     iconTo.style.color = '#3E9268'
+    toField.style.color = '#000'
     await calculateDistance()
     checkAllFieldsHaveData()
   }
@@ -348,6 +402,7 @@ async function calculateDistance() {
         if (status === 'OK') {
           distance = response.rows[0].elements[0].distance.text
           distance = parseInt(distance.replace(/,/g, ''))
+          console.log('Distance: ' + distance)
 
           if (distance <= 50) {
             localMove = true
@@ -368,7 +423,7 @@ async function calculateDistance() {
 // DISTANCE CALCULATOR
 
 fromField.oninput = function () {
-  if (fromField.value == '') {
+  if (fromField.value === '') {
     iconFrom.style.color = '#FF0066'
     fromAddress = ''
   }
@@ -379,8 +434,49 @@ fromField.oninput = function () {
   checkAllFieldsHaveData()
 }
 
+fromField.onblur = function () {
+  setTimeout(function () {
+    if (fromAddress === '' && errorFromFieldWrap.style.display !== 'block') {
+      errorFromFieldWrap.style.display = 'block'
+      errorIconFrom.style.display = 'block'
+      errorFromFieldText.innerHTML =
+        'Please select from list when you start typing.'
+      // fromField.focus()
+      fromField.style.color = '#808080'
+    } else if (
+      errorFromFieldText.innerHTML ===
+      'Please select from list when you start typing.'
+    ) {
+      errorFromFieldWrap.style.display = 'none'
+      errorIconFrom.style.display = 'none'
+      fromField.style.color = '#000'
+      calculateDistance()
+      checkAllFieldsHaveData()
+    }
+  }, 500)
+}
+
+toField.onblur = function () {
+  setTimeout(function () {
+    if (toAddress === '') {
+      errorToFieldWrap.style.display = 'block'
+      errorIconTo.style.display = 'block'
+      errorToFieldText.innerHTML =
+        'Please select from list when you start typing.'
+      // toField.focus()
+      toField.style.color = '#808080'
+    } else {
+      errorToFieldWrap.style.display = 'none'
+      errorIconTo.style.display = 'none'
+      toField.style.color = '#000'
+      calculateDistance()
+      checkAllFieldsHaveData()
+    }
+  }, 500)
+}
+
 toField.oninput = function () {
-  if (toField.value == '') {
+  if (toField.value === '') {
     iconTo.style.color = '#FF0066'
     toAddress = ''
   }
@@ -444,8 +540,9 @@ goBtn.addEventListener('click', function (e) {
   e.preventDefault()
   if (allFieldsHaveData) {
     if (localMove === true) {
+      sizeVehicleDetails = ''
       finalUrl =
-        'https://stage-journey.shyftmoving.com/' +
+        'https://stage-journey.shyftmoving.com/user-info/' +
         '?origin=' +
         encodeURIComponent(fromAddress) +
         '&destination=' +
