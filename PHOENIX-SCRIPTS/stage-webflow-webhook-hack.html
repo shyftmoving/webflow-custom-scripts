@@ -1,0 +1,105 @@
+<script>
+  // custom web hook - enter webhook adress in action attribute of form
+  makeWebflowFormAjax = function (forms, successCallback, errorCallback) {
+    forms.each(function () {
+      var form = $(this)
+      form.on('submit', function () {
+        var container = form.parent()
+        var doneBlock = $('.w-form-done', container)
+        var failBlock = $('.w-form-fail', container)
+
+        var action = form.attr('action')
+        var method = form.attr('method')
+        var redirectTo = $(this).attr('redirect')
+
+        // Serialize the form data into an array of objects
+        var formData = {}
+        // Iterate over each form element
+        form.find('input, textarea, select').each(function () {
+          var inputType = $(this).attr('type')
+          var inputName = $(this).attr('name')
+
+          // Handle different input types
+          if (inputType === 'checkbox') {
+            inputValue = $(this).is(':checked')
+          } else {
+            inputValue = $(this).val()
+          }
+
+          // Add the key-value pair to the formData object
+          if (inputName) {
+            formData[inputName] = inputValue
+          }
+        })
+        console.log(formData)
+
+        // payload goes to data, name is not important
+        var formDataWithName = {
+          name: 'Webflow Form',
+          data: formData
+        }
+
+        console.log(formDataWithName)
+
+        // Convert the array of objects to a JSON string
+        var jsonData = JSON.stringify(formDataWithName)
+        console.log(jsonData)
+
+        // call via ajax
+        $.ajax({
+          type: method,
+          url: action,
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization:
+              'Basic ' + btoa('webflow-stage' + ':' + 'WebFLoDFWeoisor4534')
+          },
+          contentType: 'application/json',
+          data: jsonData,
+          success: function (resultData) {
+            if (typeof successCallback === 'function') {
+              // call custom callback
+              result = successCallback(resultData)
+              if (!result) {
+                // show error (fail) block
+                form.show()
+                doneBlock.hide()
+                failBlock.show()
+                console.log(e)
+
+                return
+              }
+            }
+
+            // show success (done) block
+            form.hide()
+            doneBlock.show()
+            failBlock.hide()
+            if (redirect != '') {
+              window.location.replace(redirectTo)
+            }
+          },
+
+          error: function (e) {
+            // call custom callback
+            if (typeof errorCallback === 'function') {
+              errorCallback(e)
+            }
+
+            // show error (fail) block
+            form.show()
+            doneBlock.hide()
+            failBlock.show()
+            console.log(e)
+          }
+        })
+
+        // prevent default webflow action
+        return false
+      })
+    })
+  }
+
+  makeWebflowFormAjax($('form'))
+</script>
