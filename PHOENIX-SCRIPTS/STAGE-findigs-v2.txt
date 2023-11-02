@@ -1,6 +1,6 @@
-const colorPrimary = '#0d2a8e'
-const colorError = '#ff0066'
-const colorSuccess = '#50e6ae'
+const colorPrimary = '#2960F2'
+const colorError = '#E22727'
+const colorSuccess = '#2960F2'
 const colorDisabled = '#808080'
 const colorBlack = '#000'
 
@@ -93,6 +93,7 @@ let sizeVehicle = false
 let sizeVehicleDetails = ''
 let sizeFootage = ''
 let sizeFootageUnit = 'imperial'
+let originId = ''
 
 iconFromWrap.addEventListener('click', function () {
   fromField.focus()
@@ -324,8 +325,6 @@ google.maps.event.addListener(
     errorWrap.style.display = 'none'
     fromField.style.color = colorBlack
     let place = fromFieldGPlaces.getPlace()
-    console.log('nesto')
-    console.log(place)
     for (var i = 0; i < place.address_components.length; i += 1) {
       var addressObj = place.address_components[i]
       for (var j = 0; j < addressObj.types.length; j += 1) {
@@ -355,6 +354,7 @@ google.maps.event.addListener(
         }
       }
     }
+    originId = place.place_id
     fromCoords = place.geometry.location
 
     if (fromZip === '' && fromCountry === 'US') {
@@ -437,9 +437,19 @@ async function calculateDistance() {
       },
       (response, status) => {
         if (status === 'OK') {
-          distance = response.rows[0].elements[0].distance.text
-          // console.log('dist:' + distance)
-          distance = parseInt(distance.replace(/,/g, ''))
+          // BUG - to is not USA
+          if (response.rows[0].elements[0].status === 'ZERO_RESULTS') {
+            distance = '1000 mi'
+          } else {
+            distance = response.rows[0].elements[0].distance.text
+          }
+          // END BUG
+
+          if (distance.includes('ft')) {
+            distance = 1
+          } else {
+            distance = parseInt(distance.replace(/,/g, ''))
+          }
           console.log('Distance: ' + distance)
 
           if (distance <= 50) {
@@ -601,12 +611,14 @@ goBtn.addEventListener('click', function (e) {
         '&vehicleDetails=' +
         encodeURIComponent(sizeVehicleDetails) +
         '&homeCategory=' +
-        encodeURIComponent(sizeCategory)
+        encodeURIComponent(sizeCategory) +
+        '&originId=' +
+        encodeURIComponent(originId)
 
       window.location.href = finalUrl
     } else {
       toLocalStorage()
-      window.location.href = '/findigs/get-quote'
+      window.location.href = '/findigs-stage/get-quote'
     }
   } else {
     goBtn.style.cursor = 'not-allowed'

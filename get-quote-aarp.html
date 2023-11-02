@@ -151,7 +151,9 @@
         class="image-35"
       />
       <div>
-        <div class="get-quote__details-selected-location title">Moving from:</div>
+        <div class="get-quote__details-selected-location title">
+          Moving from:
+        </div>
         <div class="get-quote__details-selected-location">{{movingFrom}}</div>
       </div>
     </div>
@@ -177,21 +179,47 @@
         class="image-35"
       />
       <div>
-        <div class="get-quote__details-selected-location title">Moving date:</div>
-        <div class="get-quote__details-selected-location date-value">{{movingDate}}</div>
-        <div v-if="movingDateFlexible" class="get-quote__details-selected-location date-value">(flexibile)</div>
+        <div class="get-quote__details-selected-location title">
+          Moving date:
+        </div>
+        <div class="get-quote__details-selected-location date-value">
+          {{movingDate}}
+        </div>
+        <div
+          v-if="movingDateFlexible"
+          class="get-quote__details-selected-location date-value"
+        >
+          (flexibile)
+        </div>
       </div>
     </div>
   </div>
   <div class="lower-section-wrapper">
     <div class="get-quote__move-details lower-setion">
-      <div class="get-quote__details-selected-items lower-details__type">{{movingSize.moveType}}</div>
-      <div class="get-quote__details-selected-items lower-details__objects">{{movingSize.moveObjects}}</div>
-      <div v-if="movingSize.moveVehicle" class="get-quote__details-selected-items lower-details__vehicles">
+      <div class="get-quote__details-selected-items lower-details__type">
+        {{movingSize.moveType}}
+      </div>
+      <div class="get-quote__details-selected-items lower-details__objects">
+        {{movingSize.moveObjects}}
+      </div>
+      <div
+        v-if="movingSize.moveVehicle"
+        class="get-quote__details-selected-items lower-details__vehicles"
+      >
         {{movingSize.moveVehicle}}
       </div>
-      <div v-if="movingSize.movePets" class="get-quote__details-selected-items lower-details__pets">Pet(s)</div>
-      <div v-if="movingSize.moveStorage" class="get-quote__details-selected-items lower-details__storage">Storage</div>
+      <div
+        v-if="movingSize.movePets"
+        class="get-quote__details-selected-items lower-details__pets"
+      >
+        Pet(s)
+      </div>
+      <div
+        v-if="movingSize.moveStorage"
+        class="get-quote__details-selected-items lower-details__storage"
+      >
+        Storage
+      </div>
     </div>
   </div>
 </div>
@@ -202,9 +230,15 @@
     el: '#move-details',
     data: {
       movingFrom: localStorage.movingFrom,
-      movingFromCoord: { lat: parseFloat(localStorage.movingFromLat), lng: parseFloat(localStorage.movingFromLng) },
+      movingFromCoord: {
+        lat: parseFloat(localStorage.movingFromLat),
+        lng: parseFloat(localStorage.movingFromLng)
+      },
       movingTo: localStorage.movingTo,
-      movingToCoord: { lat: parseFloat(localStorage.movingToLat), lng: parseFloat(localStorage.movingToLng) },
+      movingToCoord: {
+        lat: parseFloat(localStorage.movingToLat),
+        lng: parseFloat(localStorage.movingToLng)
+      },
       movingDate: localStorage.movingDate,
       movingDateFlexible: JSON.parse(localStorage.movingDateFlexible),
       movingSize: JSON.parse(localStorage.movingSize)
@@ -217,7 +251,10 @@
           travelMode: 'DRIVING',
           unitSystem: google.maps.UnitSystem.IMPERIAL
         }
-        let map = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+        let map = new google.maps.Map(
+          document.getElementById('showMap'),
+          mapOptions
+        )
         directionsRenderer.setMap(map)
         let request = {
           origin: this.movingFrom,
@@ -227,7 +264,16 @@
         try {
           await directionsService.route(request, function (result, status) {
             if (status == 'OK') {
-              localStorage.distance = parseInt(result.routes[0].legs[0].distance.text.replace(/,/g, ''))
+              let distance = result.routes[0].legs[0].distance.text
+              if (distance.includes('ft')) {
+                distance = 1
+              } else {
+                distance = parseInt(distance.replace(/,/g, ''))
+                if (distance < 1) {
+                  distance = 1
+                }
+              }
+              localStorage.distance = distance
               directionsRenderer.setDirections(result)
             }
           })
@@ -242,7 +288,10 @@
           minZoom: 1,
           center: new google.maps.LatLng(0, 0)
         }
-        let failsafeMap = new google.maps.Map(document.getElementById('showMap'), mapOptions)
+        let failsafeMap = new google.maps.Map(
+          document.getElementById('showMap'),
+          mapOptions
+        )
         const marker1 = new google.maps.Marker({
           position: this.movingFromCoord,
           map: failsafeMap

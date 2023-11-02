@@ -82,6 +82,7 @@ let sizeVehicle = false
 let sizeVehicleDetails = ''
 let sizeFootage = ''
 let sizeFootageUnit = 'imperial'
+let originId = ''
 
 sizeField.setAttribute('readonly', '')
 sizeField.style.cursor = 'pointer'
@@ -286,6 +287,7 @@ google.maps.event.addListener(
     fromZip = ''
     fromCountry = ''
     fromCoords = []
+    originId = ''
     errorWrap.style.display = 'none'
     fromField.style.color = '#000'
     let place = fromFieldGPlaces.getPlace()
@@ -318,6 +320,7 @@ google.maps.event.addListener(
         }
       }
     }
+    originId = place.place_id
     fromCoords = place.geometry.location
 
     if (fromZip === '' && fromCountry === 'US') {
@@ -401,7 +404,12 @@ async function calculateDistance() {
       (response, status) => {
         if (status === 'OK') {
           distance = response.rows[0].elements[0].distance.text
-          distance = parseInt(distance.replace(/,/g, ''))
+
+          if (distance.includes('ft')) {
+            distance = 1
+          } else {
+            distance = parseInt(distance.replace(/,/g, ''))
+          }
           console.log('Distance: ' + distance)
 
           if (distance <= 50) {
@@ -563,12 +571,14 @@ goBtn.addEventListener('click', function (e) {
         '&vehicleDetails=' +
         encodeURIComponent(sizeVehicleDetails) +
         '&homeCategory=' +
-        encodeURIComponent(sizeCategory)
+        encodeURIComponent(sizeCategory) +
+        '&originId=' +
+        encodeURIComponent(originId)
 
       window.location.href = finalUrl
     } else {
       toLocalStorage()
-      window.location.href = '/get-quote'
+      window.location.href = 'get-quote'
     }
   } else {
     goBtn.style.cursor = 'not-allowed'

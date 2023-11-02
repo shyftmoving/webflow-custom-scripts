@@ -4,6 +4,8 @@
     forms.each(function () {
       var form = $(this)
       form.on('submit', function () {
+        $(this).find('[type="submit"]').attr('disabled', true)
+        $(this).find('[type="submit"]').css('display', 'none')
         var container = form.parent()
         var doneBlock = $('.w-form-done', container)
         var failBlock = $('.w-form-fail', container)
@@ -73,12 +75,12 @@
             }
 
             // show success (done) block
+            if (redirectTo != '') {
+              window.location.replace(redirectTo)
+            }
             form.hide()
             doneBlock.show()
             failBlock.hide()
-            if (redirect != '') {
-              window.location.replace(redirectTo)
-            }
           },
 
           error: function (e) {

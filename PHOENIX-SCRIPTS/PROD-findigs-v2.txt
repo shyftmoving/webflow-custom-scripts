@@ -1,6 +1,6 @@
-const colorPrimary = '#0d2a8e'
-const colorError = '#ff0066'
-const colorSuccess = '#50e6ae'
+const colorPrimary = '#2960F2'
+const colorError = '#E22727'
+const colorSuccess = '#2960F2'
 const colorDisabled = '#808080'
 const colorBlack = '#000'
 
@@ -57,7 +57,7 @@ const sizeModalVehicleDetails = document.getElementById(
   'phx2-modal-size-vehicleDetails'
 )
 const sizeModalFootage = document.getElementById(
-  'phx2-modal-size-footage-input-field-2'
+  'phx2-modal-size-footage-input-field'
 )
 const sizeModalFootageUnitRadio = document.querySelectorAll(
   '.phx2-modal-size-footage-radio-wrap'
@@ -437,13 +437,21 @@ async function calculateDistance() {
       },
       (response, status) => {
         if (status === 'OK') {
-          distance = response.rows[0].elements[0].distance.text
+          // BUG - to is not USA
+          if (response.rows[0].elements[0].status === 'ZERO_RESULTS') {
+            distance = '1000 mi'
+          } else {
+            distance = response.rows[0].elements[0].distance.text
+          }
+          // END BUG
+
           if (distance.includes('ft')) {
             distance = 1
           } else {
             distance = parseInt(distance.replace(/,/g, ''))
           }
           console.log('Distance: ' + distance)
+
           if (distance <= 50) {
             localMove = true
           } else {
@@ -582,7 +590,7 @@ goBtn.addEventListener('click', function (e) {
     if (localMove === true) {
       sizeVehicleDetails = ''
       finalUrl =
-        'https://stage-journey.shyftmoving.com/user-info/' +
+        'https://journey.shyftmoving.com/user-info/' +
         '?origin=' +
         encodeURIComponent(fromAddress) +
         '&destination=' +
@@ -591,7 +599,7 @@ goBtn.addEventListener('click', function (e) {
         encodeURIComponent(moveDate) +
         '&flexibleDate=' +
         encodeURIComponent(moveDateFlexible) +
-        '&leadSource=shyftmoving' +
+        '&leadSource=findigs' +
         '&homeSize=' +
         encodeURIComponent(sizeFootage) +
         '&homeSizeUnit=' +
@@ -610,7 +618,7 @@ goBtn.addEventListener('click', function (e) {
       window.location.href = finalUrl
     } else {
       toLocalStorage()
-      window.location.href = '/get-quote'
+      window.location.href = '/findigs/get-quote'
     }
   } else {
     goBtn.style.cursor = 'not-allowed'
