@@ -1,0 +1,773 @@
+const colorPrimary = '#0d2a8e'
+const colorError = '#ff0066'
+const colorSuccess = '#50e6ae'
+const colorDisabled = '#808080'
+const colorBlack = '#000'
+
+const fromField = document.getElementById('phx2-field-from')
+const toField = document.getElementById('phx2-field-to')
+const dateField = document.getElementById('phx2-field-date')
+const dateFieldHidden = document.getElementById(
+  'phx2-modal-date-input-form-input-field'
+)
+const sizeField = document.getElementById('phx2-field-size')
+const goBtn = document.getElementById('phx2-widget-form-submit')
+const iconFrom = document.querySelector('.phx2-widget-form-input-icon-from svg')
+const iconTo = document.querySelector('.phx2-widget-form-input-icon-to svg')
+const iconDate = document.querySelector('.phx2-widget-form-input-icon-date svg')
+const iconSize = document.querySelector('.phx2-widget-form-input-icon-size svg')
+const iconFromWrap = document.querySelector('.phx2-widget-form-input-icon-from')
+const iconToWrap = document.querySelector('.phx2-widget-form-input-icon-to')
+const iconDateWrap = document.querySelector('.phx2-widget-form-input-icon-date')
+const iconSizeWrap = document.querySelector('.phx2-widget-form-input-icon-size')
+
+const errorWrap = document.getElementById('phx2-error-outer')
+const errorText = document.getElementById('phx2-error-text')
+const errorFromFieldWrap = document.getElementById(
+  'phx2-error-from-field-outer'
+)
+const errorFromFieldText = document.getElementById('phx2-error-from-field-text')
+const errorToFieldWrap = document.getElementById('phx2-error-to-field-outer')
+const errorToFieldText = document.getElementById('phx2-error-to-field-text')
+const dateModal = document.getElementById('phx2-modal-date-wrap')
+const sizeModal = document.getElementById('phx2-modal-size-wrap')
+const dateModalSubmit = document.getElementById(
+  'phx2-modal-date-input-form-submit'
+)
+const sizeModalSubmit = document.getElementById(
+  'phx2-modal-size-input-form-submit'
+)
+const longDinstanceHouse = document.getElementById(
+  'phx2-modal-size-house-input-wrap'
+)
+const localMoveFootage = document.getElementById('phx2-modal-size-footage-wrap')
+const sizeModalHouseRadio = document.querySelectorAll(
+  '.phx2-modal-size-house-radio-button'
+)
+const sizeModalCategoryRadio = document.querySelectorAll(
+  '.phx2-modal-size-rooms-radio-button'
+)
+const sizeModalError = document.getElementById('phx2-modal-size-error')
+const dateModalError = document.getElementById('phx2-modal-date-error')
+const dateModalFlexibile = document.getElementById('phx2-modal-date-flexible')
+const sizeModalPets = document.getElementById('phx2-modal-size-pets-wrap')
+const sizeModalStorage = document.getElementById('phx2-modal-size-storage-wrap')
+const sizeModalVehicle = document.getElementById('phx2-modal-size-vehicle-wrap')
+const sizeModalVehicleDetails = document.getElementById(
+  'phx2-modal-size-vehicleDetails'
+)
+const sizeModalFootage = document.getElementById(
+  'phx2-modal-size-footage-input-field-2'
+)
+const sizeModalFootageUnitRadio = document.querySelectorAll(
+  '.phx2-modal-size-footage-radio-wrap'
+)
+const sizeModalVehicleWrap = document.getElementById(
+  'phx2-modal-additional-vehicle'
+)
+const errorIconFrom = document.getElementById('phx2-error-icon-from')
+const errorIconTo = document.getElementById('phx2-error-icon-to')
+const labelFrom = document.getElementById('phx2-form-field-label-to')
+const labelTo = document.getElementById('phx2-form-field-label-from')
+const labelDate = document.getElementById('phx2-form-field-label-date')
+const labelSize = document.getElementById('phx2-form-field-label-size')
+
+let fromAddress = ''
+let fromZip = ''
+let fromCountry = ''
+let fromCoords = null
+let toAddress = ''
+let toCoords = null
+let distance = 0
+let localMove = false
+let moveDate = ''
+let moveDateFlexible = false
+let allFieldsHaveData = false
+let finalUrl = ''
+let range = 0
+let sizeHouse = ''
+let sizeCategory = ''
+let sizePets = false
+let sizeStorage = false
+let sizeVehicle = false
+let sizeVehicleDetails = ''
+let sizeFootage = ''
+let sizeFootageUnit = 'imperial'
+let originId = ''
+
+// new data for journey
+let originResidenceCountryCode = ''
+let originResidenceCity = ''
+let originResidenceStateCode = ''
+let originResidenceState = ''
+let originResidenceZip = ''
+let originResidenceStreetAddress = ''
+let originResidenceStreetNumber = ''
+let originApartmentUnit = ''
+
+let destinationResidenceCountryCode = ''
+let destinationResidenceCity = ''
+let destinationResidenceStateCode = ''
+let destinationResidenceState = ''
+let destinationResidenceZip = ''
+let destinationResidenceStreetAddress = ''
+let destinationResidenceStreetNumber = ''
+let destinationApartmentUnit = ''
+// end new data for journey
+
+iconFromWrap.addEventListener('click', function () {
+  fromField.focus()
+})
+iconToWrap.addEventListener('click', function () {
+  toField.focus()
+})
+iconDateWrap.addEventListener('click', function () {
+  dateField.click()
+})
+iconSizeWrap.addEventListener('click', function () {
+  sizeField.click()
+})
+labelFrom.addEventListener('click', function () {
+  fromField.focus()
+})
+labelTo.addEventListener('click', function () {
+  toField.focus()
+})
+labelDate.addEventListener('click', function () {
+  dateField.click()
+})
+labelSize.addEventListener('click', function () {
+  sizeField.click()
+})
+
+sizeField.setAttribute('readonly', '')
+sizeField.style.cursor = 'pointer'
+
+dateField.addEventListener('click', function () {
+  dateModal.style.display = 'flex'
+})
+
+sizeField.addEventListener('click', function () {
+  if (fromAddress === '' || toAddress === '' || fromZip === '') {
+    errorWrap.style.display = 'block'
+    errorText.innerHTML =
+      'Please fill in the "Moving from" and "Moving to" fields first.'
+    if (fromAddress === '') {
+      errorFromFieldWrap.style.display = 'block'
+      errorFromFieldText.innerHTML =
+        'Please select from list when you start typing.'
+    }
+    if (toAddress === '') {
+      errorToFieldWrap.style.display = 'block'
+      errorToFieldText.innerHTML =
+        'Please select from list when you start typing.'
+    }
+    return
+  } else {
+    errorWrap.style.display = 'none'
+    errorToFieldWrap.style.display = 'none'
+  }
+  if (localMove === true) {
+    localMoveFootage.style.display = 'block'
+    longDinstanceHouse.style.display = 'none'
+    sizeModalVehicleWrap.style.display = 'none'
+  } else {
+    localMoveFootage.style.display = 'none'
+    longDinstanceHouse.style.display = 'block'
+    sizeModalVehicleWrap.style.display = 'block'
+  }
+
+  function isIPhone() {
+    return /iPhone/i.test(navigator.userAgent)
+  }
+
+  function isAndroid() {
+    return /Android/i.test(navigator.userAgent)
+  }
+
+  if (isIPhone() || isAndroid() || window.innerWidth < 768) {
+    sizeModal.style.display = 'block'
+    document.body.style.overflow = 'hidden'
+  } else {
+    sizeModal.style.display = 'flex'
+  }
+})
+
+dateModalSubmit.addEventListener('click', function (e) {
+  e.preventDefault()
+  dateField.value = dateFieldHidden.value
+  moveDate = dateFieldHidden.value
+  if (moveDate === '') {
+    dateModalError.style.display = 'block'
+    return
+  } else {
+    dateModalError.style.display = 'none'
+  }
+  moveDateFlexible = getCheckboxValue(dateModalFlexibile)
+  if (moveDate != '') {
+    iconDate.style.color = colorSuccess
+  } else {
+    iconDate.style.color = colorError
+  }
+  dateModal.style.display = 'none'
+  checkAllFieldsHaveData()
+  sizeField.focus()
+  sizeField.click()
+})
+
+sizeModalSubmit.addEventListener('click', function (e) {
+  e.preventDefault()
+
+  sizeCategory = getRadioValue(sizeModalCategoryRadio)
+  sizeHouse = getRadioValue(sizeModalHouseRadio)
+  sizeFootage = sizeModalFootage.value
+  sizeFootageUnit = getRadioValue(sizeModalFootageUnitRadio)
+  if (sizeFootageUnit === 'square feet') {
+    sizeFootageUnit = 'imperial'
+  } else if (sizeFootageUnit === 'square meters') {
+    sizeFootageUnit = 'metric'
+  } else {
+    sizeFootageUnit = 'imperial'
+  }
+
+  if (localMove === false) {
+    if (sizeHouse === '' || sizeCategory === '') {
+      sizeModalError.style.display = 'block'
+      return
+    } else {
+      sizeModalError.style.display = 'none'
+    }
+  } else {
+    if (sizeFootage === '' || sizeFootageUnit === '' || sizeCategory === '') {
+      sizeModalError.style.display = 'block'
+      return
+    } else {
+      sizeModalError.style.display = 'none'
+    }
+  }
+
+  sizeField.value = sizeCategory
+
+  sizePets = getCheckboxValue(sizeModalPets)
+  sizeStorage = getCheckboxValue(sizeModalStorage)
+  sizeVehicle = getCheckboxValue(sizeModalVehicle)
+  if (sizeVehicle) {
+    if (sizeModalVehicleDetails.value !== '') {
+      sizeVehicleDetails = sizeModalVehicleDetails.value
+    } else {
+      sizeVehicleDetails = ''
+      sizeModalError.style.display = 'block'
+      return
+    }
+  } else {
+    sizeVehicleDetails = ''
+  }
+  iconSize.style.color = colorSuccess
+  sizeModal.style.display = 'none'
+  document.body.style.overflow = 'auto'
+  checkAllFieldsHaveData()
+})
+
+sizeModalVehicle.addEventListener('click', function (e) {
+  e.stopPropagation()
+  let isVehicleChecked = getCheckboxValue(sizeModalVehicle)
+  if (isVehicleChecked) {
+    sizeModalVehicleDetails.style.display = 'none'
+  } else {
+    sizeModalVehicleDetails.style.display = 'block'
+  }
+})
+
+function getCheckboxValue(elem) {
+  for (const parentElement of elem.children) {
+    const childElementWithClass = parentElement.classList.contains(
+      'w--redirected-checked'
+    )
+
+    if (childElementWithClass) {
+      return true
+    }
+  }
+  return false
+}
+
+function getRadioValue(elem) {
+  for (const parentElement of elem) {
+    const childElementWithClass = parentElement.querySelector(
+      '.w--redirected-checked'
+    )
+
+    if (childElementWithClass) {
+      return parentElement.getElementsByTagName('span')[0].textContent
+    }
+  }
+  return ''
+}
+
+let fromFieldGPlaces = new google.maps.places.Autocomplete(fromField)
+let toFieldGPlaces = new google.maps.places.Autocomplete(toField)
+
+dateField.setAttribute('readonly', '')
+dateField.style.cursor = 'pointer'
+
+// dateField.addEventListener('click', function () {
+//   if (dateSelectWrapHidden) {
+//     dateSelectWrap.classList.add('widget-js-dateSelectWrap-show')
+//     dateSelectWrap.classList.remove('widget-js-dateSelectWrap-hide')
+//     dateSelectWrapHidden = false
+//     if (!isInViewport(dateSelectWrap)) {
+//       dateSelectWrap.scrollIntoView({
+//         behavior: 'smooth',
+//         block: 'end'
+//       })
+//     }
+//   } else {
+//     dateSelectWrap.classList.add('widget-js-dateSelectWrap-hide')
+//     dateSelectWrap.classList.remove('widget-js-dateSelectWrap-show')
+//     dateSelectWrapHidden = true
+//   }
+// })
+
+flatpickr(dateFieldHidden, {
+  minDate: new Date(),
+  maxDate: new Date().fp_incr(999),
+  dateFormat: 'm/d/Y',
+  inline: true
+})
+
+google.maps.event.addListener(
+  fromFieldGPlaces,
+  'place_changed',
+  async function () {
+    fromZip = ''
+    fromCountry = ''
+    fromCoords = []
+    originId = ''
+    errorWrap.style.display = 'none'
+    fromField.style.color = '#000'
+    let place = fromFieldGPlaces.getPlace()
+    for (var i = 0; i < place.address_components.length; i += 1) {
+      var addressObj = place.address_components[i]
+      for (var j = 0; j < addressObj.types.length; j += 1) {
+        if (addressObj.types[j] === 'postal_code') {
+          fromZip = addressObj.long_name
+          localStorage.currentResidenceZip = addressObj.long_name
+          originResidenceZip = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'country') {
+          fromCountry = addressObj.short_name
+          localStorage.movingFromCountry = addressObj.short_name
+          originResidenceCountryCode = addressObj.short_name
+        }
+        if (addressObj.types[j] === 'locality') {
+          localStorage.currentResidenceCity = addressObj.long_name
+          originResidenceCity = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'administrative_area_level_1') {
+          localStorage.currentResidenceState = addressObj.long_name
+          localStorage.currentResidenceStateCode = addressObj.short_name
+          originResidenceStateCode = addressObj.short_name
+          originResidenceState = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'route') {
+          localStorage.currentResidenceAddress = addressObj.long_name
+          originResidenceStreetAddress = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'street_number') {
+          localStorage.currentResidenceStreetNumber = addressObj.long_name
+          originResidenceStreetNumber = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'subpremise') {
+          localStorage.currentResidenceApartmentUnit = addressObj.long_name
+          originApartmentUnit = addressObj.long_name
+        }
+      }
+    }
+    originId = place.place_id
+    fromCoords = place.geometry.location
+
+    if (fromZip === '' && fromCountry === 'US') {
+      errorFromFieldWrap.style.display = 'block'
+      errorFromFieldText.innerHTML =
+        'We need your Zip code to proceed, please add a specific FROM address or Zip code.'
+      fromField.focus()
+      fromField.style.color = '#808080'
+      errorIconFrom.style.display = 'block'
+    } else {
+      fromAddress = place.formatted_address
+      errorFromFieldWrap.style.display = 'none'
+      errorIconFrom.style.display = 'none'
+      toField.focus()
+      iconFrom.style.color = '#3E9268'
+      fromField.style.color = '#000'
+    }
+    await calculateDistance()
+    checkAllFieldsHaveData()
+  }
+)
+
+google.maps.event.addListener(
+  toFieldGPlaces,
+  'place_changed',
+  async function () {
+    toCoords = []
+    let place = toFieldGPlaces.getPlace()
+    toAddress = place.formatted_address
+    toCoords = place.geometry.location
+    for (var i = 0; i < place.address_components.length; i += 1) {
+      var addressObj = place.address_components[i]
+      for (var j = 0; j < addressObj.types.length; j += 1) {
+        if (addressObj.types[j] === 'country') {
+          localStorage.movingToCountry = addressObj.short_name
+          destinationResidenceCountryCode = addressObj.short_name
+        }
+        if (addressObj.types[j] === 'locality') {
+          localStorage.destinationResidenceCity = addressObj.long_name
+          destinationResidenceCity = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'administrative_area_level_1') {
+          localStorage.destinationResidenceState = addressObj.long_name
+          localStorage.destinationResidenceStateCode = addressObj.short_name
+          destinationResidenceStateCode = addressObj.short_name
+          destinationResidenceState = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'postal_code') {
+          localStorage.destinationResidenceZip = addressObj.long_name
+          destinationResidenceZip = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'route') {
+          localStorage.destinationResidenceAddress = addressObj.long_name
+          destinationResidenceStreetAddress = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'street_number') {
+          localStorage.destinationResidenceStreetNumber = addressObj.long_name
+          destinationResidenceStreetNumber = addressObj.long_name
+        }
+        if (addressObj.types[j] === 'subpremise') {
+          localStorage.destinationResidenceApartmentUnit = addressObj.long_name
+          destinationApartmentUnit = addressObj.long_name
+        }
+      }
+    }
+    dateField.focus()
+    dateField.click()
+    iconTo.style.color = '#3E9268'
+    toField.style.color = '#000'
+    await calculateDistance()
+    checkAllFieldsHaveData()
+  }
+)
+
+// DISTANCE CALCULATOR
+async function calculateDistance() {
+  if (fromCoords === null || toCoords === null) {
+    return
+  }
+  return new Promise((resolve, reject) => {
+    const service = new google.maps.DistanceMatrixService()
+    service.getDistanceMatrix(
+      {
+        origins: [fromCoords],
+        destinations: [toCoords],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL
+      },
+      (response, status) => {
+        if (status === 'OK') {
+          distance = response.rows[0].elements[0].distance.text
+          if (distance.includes('ft')) {
+            distance = 1
+          } else {
+            distance = parseInt(distance.replace(/,/g, ''))
+            if (distance < 1) {
+              distance = 1
+            }
+          }
+          console.log('Distance: ' + distance)
+          if (distance <= 50) {
+            localMove = true
+          } else {
+            localMove = false
+          }
+        } else {
+          goBtn.style.cursor = 'not-allowed'
+          goBtn.style.backgroundColor = colorDisabled
+          errorWrap.style.display = 'block'
+          errorText.innerHTML = 'Something went wrong. Please try again latter.'
+          reject(new Error('Distance calculation failed'))
+        }
+      }
+    )
+  })
+}
+// DISTANCE CALCULATOR
+
+fromField.oninput = function () {
+  if (fromField.value === '') {
+    iconFrom.style.color = colorError
+    fromAddress = ''
+  }
+  if (fromField.value != fromAddress) {
+    fromAddress = ''
+    iconFrom.style.color = colorError
+  }
+  checkAllFieldsHaveData()
+}
+
+fromField.onblur = function () {
+  setTimeout(function () {
+    if (fromAddress === '' && errorFromFieldWrap.style.display !== 'block') {
+      errorFromFieldWrap.style.display = 'block'
+      errorIconFrom.style.display = 'block'
+      errorFromFieldText.innerHTML =
+        'Please select from list when you start typing.'
+      // fromField.focus()
+      fromField.style.color = colorDisabled
+    } else if (
+      errorFromFieldText.innerHTML ===
+      'Please select from list when you start typing.'
+    ) {
+      errorFromFieldWrap.style.display = 'none'
+      errorIconFrom.style.display = 'none'
+      fromField.style.color = colorBlack
+      calculateDistance()
+      checkAllFieldsHaveData()
+    }
+  }, 500)
+}
+
+toField.onblur = function () {
+  setTimeout(function () {
+    if (toAddress === '') {
+      errorToFieldWrap.style.display = 'block'
+      errorIconTo.style.display = 'block'
+      errorToFieldText.innerHTML =
+        'Please select from list when you start typing.'
+      // toField.focus()
+      toField.style.color = colorDisabled
+    } else {
+      errorToFieldWrap.style.display = 'none'
+      errorIconTo.style.display = 'none'
+      toField.style.color = colorBlack
+      calculateDistance()
+      checkAllFieldsHaveData()
+    }
+  }, 500)
+}
+
+toField.oninput = function () {
+  if (toField.value === '') {
+    iconTo.style.color = colorError
+    toAddress = ''
+  }
+  if (toField.value != fromAddress) {
+    toAddress = ''
+    iconTo.style.color = colorError
+  }
+  checkAllFieldsHaveData()
+}
+
+function checkAllFieldsHaveData() {
+  if (localMove === true) {
+    if (
+      fromAddress &&
+      toAddress &&
+      moveDate &&
+      fromField.value != '' &&
+      sizeCategory &&
+      sizeFootage &&
+      sizeFootageUnit
+    ) {
+      allFieldsHaveData = true
+      goBtn.style.cursor = 'pointer'
+      goBtn.style.backgroundColor = colorPrimary
+    } else {
+      allFieldsHaveData = false
+      goBtn.style.cursor = 'not-allowed'
+      goBtn.style.backgroundColor = colorDisabled
+    }
+  } else {
+    if (
+      fromAddress &&
+      toAddress &&
+      moveDate &&
+      fromField.value != '' &&
+      sizeHouse &&
+      sizeCategory
+    ) {
+      allFieldsHaveData = true
+      goBtn.style.cursor = 'pointer'
+      goBtn.style.backgroundColor = colorPrimary
+    } else {
+      allFieldsHaveData = false
+      goBtn.style.cursor = 'not-allowed'
+      goBtn.style.backgroundColor = colorDisabled
+    }
+  }
+}
+
+// iconFromWrap.addEventListener('click', function () {
+//   fromField.focus()
+// })
+// iconToWrap.addEventListener('click', function () {
+//   toField.focus()
+// })
+// iconDateWrap.addEventListener('click', function () {
+//   dateField.click()
+// })
+
+goBtn.addEventListener('click', function (e) {
+  e.preventDefault()
+  if (allFieldsHaveData) {
+    if (localMove === true) {
+      sizeVehicleDetails = ''
+      finalUrl =
+        'https://stage-journey.shyftmoving.com/user-info/' +
+        '?origin=' +
+        encodeURIComponent(fromAddress) +
+        '&destination=' +
+        encodeURIComponent(toAddress) +
+        '&date=' +
+        encodeURIComponent(moveDate) +
+        '&flexibleDate=' +
+        encodeURIComponent(moveDateFlexible) +
+        '&leadSource=shyftmoving' +
+        '&homeSize=' +
+        encodeURIComponent(sizeFootage) +
+        '&homeSizeUnit=' +
+        encodeURIComponent(sizeFootageUnit) +
+        '&pets=' +
+        encodeURIComponent(sizePets) +
+        '&storage=' +
+        encodeURIComponent(sizeStorage) +
+        '&vehicleDetails=' +
+        encodeURIComponent(sizeVehicleDetails) +
+        '&homeCategory=' +
+        encodeURIComponent(sizeCategory) +
+        '&distance=' +
+        encodeURIComponent(distance)
+      // '&originId=' +
+      // encodeURIComponent(originId)
+
+      if (originResidenceCountryCode != '') {
+        finalUrl +=
+          '&originResidenceCountryCode=' +
+          encodeURIComponent(originResidenceCountryCode)
+      }
+      if (originResidenceCity != '') {
+        finalUrl +=
+          '&originResidenceCity=' + encodeURIComponent(originResidenceCity)
+      }
+      if (originResidenceStateCode != '') {
+        finalUrl +=
+          '&originResidenceStateCode=' +
+          encodeURIComponent(originResidenceStateCode)
+      }
+      if (originResidenceState != '') {
+        finalUrl +=
+          '&originResidenceState=' + encodeURIComponent(originResidenceState)
+      }
+      if (originResidenceZip != '') {
+        finalUrl +=
+          '&originResidenceZip=' + encodeURIComponent(originResidenceZip)
+      }
+      if (originResidenceStreetAddress != '') {
+        finalUrl +=
+          '&originResidenceStreetAddress=' +
+          encodeURIComponent(originResidenceStreetAddress)
+      }
+      if (originResidenceStreetNumber != '') {
+        finalUrl +=
+          '&originResidenceStreetNumber=' +
+          encodeURIComponent(originResidenceStreetNumber)
+      }
+      if (originApartmentUnit != '') {
+        finalUrl +=
+          '&originApartmentUnit=' + encodeURIComponent(originApartmentUnit)
+      }
+
+      if (destinationResidenceCountryCode != '') {
+        finalUrl +=
+          '&destinationResidenceCountryCode=' +
+          encodeURIComponent(destinationResidenceCountryCode)
+      }
+      if (destinationResidenceCity != '') {
+        finalUrl +=
+          '&destinationResidenceCity=' +
+          encodeURIComponent(destinationResidenceCity)
+      }
+      if (destinationResidenceStateCode != '') {
+        finalUrl +=
+          '&destinationResidenceStateCode=' +
+          encodeURIComponent(destinationResidenceStateCode)
+      }
+      if (destinationResidenceState != '') {
+        finalUrl +=
+          '&destinationResidenceState=' +
+          encodeURIComponent(destinationResidenceState)
+      }
+      if (destinationResidenceZip != '') {
+        finalUrl +=
+          '&destinationResidenceZip=' +
+          encodeURIComponent(destinationResidenceZip)
+      }
+      if (destinationResidenceStreetAddress != '') {
+        finalUrl +=
+          '&destinationResidenceStreetAddress=' +
+          encodeURIComponent(destinationResidenceStreetAddress)
+      }
+      if (destinationResidenceStreetNumber != '') {
+        finalUrl +=
+          '&destinationResidenceStreetNumber=' +
+          encodeURIComponent(destinationResidenceStreetNumber)
+      }
+      if (destinationApartmentUnit != '') {
+        finalUrl +=
+          '&destinationApartmentUnit=' +
+          encodeURIComponent(destinationApartmentUnit)
+      }
+
+      window.location.href = finalUrl
+    } else {
+      toLocalStorage()
+      window.location.href = '/get-quote'
+    }
+  } else {
+    goBtn.style.cursor = 'not-allowed'
+    goBtn.style.backgroundColor = colorDisabled
+    errorWrap.style.display = 'block'
+    errorText.innerHTML = 'Please fill all the fields.'
+  }
+})
+
+function toLocalStorage() {
+  localStorage.movingFrom = fromAddress
+  // localStorage.movingFromLat = this.movingFromLat
+  // localStorage.movingFromLng = this.movingFromLng
+  localStorage.movingTo = toAddress
+  // localStorage.movingToLat = this.movingToLat
+  // localStorage.movingToLng = this.movingToLng
+  localStorage.movingDate = moveDate
+  localStorage.movingDateFlexible = moveDateFlexible
+  localStorage.movingSize = JSON.stringify(this.movingSize) //JSON.parse to get data
+  let movingSizeData = {
+    moveType: sizeHouse,
+    moveObjects: sizeCategory,
+    moveVehicle: sizeVehicleDetails,
+    movePets: sizePets,
+    moveStorage: sizeStorage
+  }
+
+  localStorage.movingSize = JSON.stringify(movingSizeData)
+}
+
+function isInViewport(el) {
+  const rect = el.getBoundingClientRect()
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  )
+}
