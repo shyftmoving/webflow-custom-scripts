@@ -148,7 +148,11 @@ dateField.addEventListener('click', function () {
 })
 
 sizeField.addEventListener('click', function () {
-  if (fromAddress === '' || toAddress === '' || fromZip === '') {
+  if (
+    fromAddress === '' ||
+    toAddress === '' ||
+    (fromZip === '' && fromCountry === 'US')
+  ) {
     errorWrap.style.display = 'block'
     errorText.innerHTML =
       'Please fill in the "Moving from" and "Moving to" fields first.'
@@ -398,8 +402,8 @@ google.maps.event.addListener(
       errorFromFieldWrap.style.display = 'none'
       errorIconFrom.style.display = 'none'
       toField.focus()
-      iconFrom.style.color = '#3E9268'
-      fromField.style.color = '#000'
+      iconFrom.style.color = colorSuccess
+      fromField.style.color = colorBlack
     }
     await calculateDistance()
     checkAllFieldsHaveData()
@@ -451,8 +455,8 @@ google.maps.event.addListener(
     }
     dateField.focus()
     dateField.click()
-    iconTo.style.color = '#3E9268'
-    toField.style.color = '#000'
+    iconTo.style.color = colorSuccess
+    toField.style.color = colorBlack
     await calculateDistance()
     checkAllFieldsHaveData()
   }
@@ -487,7 +491,9 @@ async function calculateDistance() {
           console.log('Distance: ' + distance)
 
           if (distance <= 50) {
-            localMove = true
+            // localMove = true
+            // LOCAL MOVE TURNED OFF
+            localMove = false
           } else {
             localMove = false
           }

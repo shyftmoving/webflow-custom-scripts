@@ -148,7 +148,11 @@ dateField.addEventListener('click', function () {
 })
 
 sizeField.addEventListener('click', function () {
-  if (fromAddress === '' || toAddress === '' || fromZip === '') {
+  if (
+    fromAddress === '' ||
+    toAddress === '' ||
+    (fromZip === '' && fromCountry === 'US')
+  ) {
     errorWrap.style.display = 'block'
     errorText.innerHTML =
       'Please fill in the "Moving from" and "Moving to" fields first.'
@@ -485,7 +489,9 @@ async function calculateDistance() {
           }
           console.log('Distance: ' + distance)
           if (distance <= 50) {
-            localMove = true
+            // localMove = true
+            // LOCAL MOVE TURNED OFF
+            localMove = false
           } else {
             localMove = false
           }
