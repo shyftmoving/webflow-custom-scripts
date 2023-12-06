@@ -74,6 +74,7 @@ const labelSize = document.getElementById('phx2-form-field-label-size')
 
 const formContainer = document.getElementById('widget-v2-wrap')
 formContainer.style.display = 'none'
+console.log('no form')
 
 let fromAddress = ''
 let fromZip = ''
