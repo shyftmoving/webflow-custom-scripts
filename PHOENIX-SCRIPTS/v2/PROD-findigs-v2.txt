@@ -72,6 +72,9 @@ const labelTo = document.getElementById('phx2-form-field-label-from')
 const labelDate = document.getElementById('phx2-form-field-label-date')
 const labelSize = document.getElementById('phx2-form-field-label-size')
 
+document.getElementById('widget-v2-wrap').style.display = 'none'
+console.log('no form')
+
 let fromAddress = ''
 let fromZip = ''
 let fromCountry = ''
