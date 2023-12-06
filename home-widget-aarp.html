@@ -694,6 +694,7 @@
         </svg>
       </div>
       <input
+        disabled
         v-model="movingFrom"
         @input="dataComplete"
         type="text"
@@ -728,6 +729,7 @@
         </svg>
       </div>
       <input
+        disabled
         v-model="movingTo"
         @input="dataComplete"
         type="text"
@@ -759,6 +761,7 @@
         </svg>
       </div>
       <input
+        disabled
         v-model="movingDate"
         @click="showDateModalHandler"
         type="text"
@@ -786,6 +789,7 @@
         </div>
         <div class="home-widget__moving-date--modal-inner">
           <v-date-picker
+            disabled
             v-model="movingDate"
             :model-config="modelConfig"
             mode="date"
@@ -797,15 +801,16 @@
             <label class="b-contain">
               <span>Flexible move dates</span>
               <input
+                disabled
                 @click="movingDateFlexible = !movingDateFlexible"
                 type="checkbox"
               />
               <div class="b-input"></div>
             </label>
           </div>
-          <div @click="endDateModal" class="home-widget__modal-btn">
-            Confirm
-          </div>
+<!--          <div @click="endDateModal" class="home-widget__modal-btn">-->
+<!--            Confirm-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -867,6 +872,7 @@
             <ul class="move-size__selector--wrapper">
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveType"
                   type="radio"
                   name="moveType"
@@ -877,6 +883,7 @@
               </li>
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveType"
                   type="radio"
                   name="moveType"
@@ -894,6 +901,7 @@
             <ul class="move-size__selector--wrapper">
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="boxes"
@@ -904,6 +912,7 @@
               </li>
               <li v-if="movingSize.moveType == 'Apartment'">
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="studio"
@@ -914,6 +923,7 @@
               </li>
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="1bedroom"
@@ -924,6 +934,7 @@
               </li>
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="2bedroom"
@@ -934,6 +945,7 @@
               </li>
               <li>
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="3bedroom"
@@ -944,6 +956,7 @@
               </li>
               <li li v-if="movingSize.moveType == 'House'">
                 <input
+                  disabled
                   v-model="movingSize.moveObjects"
                   type="radio"
                   id="4bedroom"
@@ -958,6 +971,7 @@
             <label class="b-contain">
               <span>I’m moving with my pets</span>
               <input
+                disabled
                 v-model="movingSize.movePets"
                 value="true"
                 type="checkbox"
@@ -967,6 +981,7 @@
             <label class="b-contain">
               <span>I need storage</span>
               <input
+                disabled
                 v-model="movingSize.moveStorage"
                 value="true"
                 type="checkbox"
@@ -983,6 +998,7 @@
             <label class="b-contain">
               <span>I’m moving my vehicle</span>
               <input
+                disabled
                 @click="movingVehicle = !movingVehicle; movingSize.moveVehicle = ''"
                 value="true"
                 type="checkbox"
@@ -990,6 +1006,7 @@
               <div class="b-input"></div>
             </label>
             <input
+              disabled
               v-if="movingVehicle"
               v-model="movingSize.moveVehicle"
               type="text"
@@ -998,7 +1015,7 @@
             />
           </div>
         </div>
-        <div @click="endSizeModal" class="home-widget__modal-btn">Confirm</div>
+<!--        <div @click="endSizeModal" class="home-widget__modal-btn">Confirm</div>-->
         <div style="min-height: 24px; margin-top: 12px">
           <p v-show="sizeModalCompleteError" class="modalSizeModalErrorMsg">
             Please fill all required data!
@@ -1009,11 +1026,12 @@
     <!-- Modal END-->
   </div>
   <div class="home-widget__moving-go--wrapper">
-    <div
-      @click="goToQuote"
-      class="home-widget__moving-go--button"
-      :class="{'home-widget__moving-go--button-complete': completed}"
-    >
+<!--    <div-->
+<!--      @click="goToQuote"-->
+<!--      class="home-widget__moving-go&#45;&#45;button"-->
+<!--      :class="{'home-widget__moving-go&#45;&#45;button-complete': completed}"-->
+<!--    >-->
+    <div class="home-widget__moving-go--button">
       <span class="get-quote-text">Get Free Quotes Now &#10095;</span>
     </div>
   </div>
@@ -1089,7 +1107,7 @@
           this.movingSize.moveType &&
           this.movingSize.moveObjects
         ) {
-          return (this.completed = true)
+          return
         }
       },
       endDateModal: function () {
