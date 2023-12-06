@@ -72,10 +72,8 @@ const labelTo = document.getElementById('phx2-form-field-label-from')
 const labelDate = document.getElementById('phx2-form-field-label-date')
 const labelSize = document.getElementById('phx2-form-field-label-size')
 
-const inputs = document.querySelectorAll(input)
-inputs.forEach((input) => {
-  input.setAttribute('disabled', 'true')
-})
+const formContainer = document.getElementById('widget-v2-wrap')
+formContainer.style.display = 'none'
 
 let fromAddress = ''
 let fromZip = ''
