@@ -72,8 +72,7 @@ const labelTo = document.getElementById('phx2-form-field-label-from')
 const labelDate = document.getElementById('phx2-form-field-label-date')
 const labelSize = document.getElementById('phx2-form-field-label-size')
 
-const formContainer = document.getElementById('widget-v2-wrap')
-formContainer.style.display = 'none'
+document.getElementById('widget-v2-wrap').style.display = 'none'
 console.log('no form')
 
 let fromAddress = ''
